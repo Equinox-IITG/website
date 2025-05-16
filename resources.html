@@ -315,11 +315,12 @@
         /* Upcoming card styles */
         .upcoming-card {
             position: relative;
-            height: 220px;
+            height: 260px;
             overflow: hidden;
-            background: linear-gradient(to bottom, rgba(15, 15, 30, 0.7), rgba(0, 0, 0, 0.8));
-            border: 1px solid rgba(253, 207, 88, 0.3);
-            transition: all 0.5s ease;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
         
         .upcoming-default {
@@ -341,7 +342,6 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: rgba(253, 207, 88, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -382,14 +382,6 @@
         
         .upcoming-date {
             color: #77b5fe;
-        }
-        
-        .upcoming-button {
-            background: rgba(253, 207, 88, 0.2);
-            padding: 5px 10px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-top: 5px;
         }
         
         /* The hover effect */
@@ -597,7 +589,7 @@
                         <h3 class="resource-title">Relativity Visualized</h3>
                         <p class="resource-author">By Lewis C. Epstein</p>
                         <p class="resource-description">This book brilliantly simplifies Einstein's complex theories through intuitive diagrams and thought experiments, making relativity accessible to non-physicists.</p>
-                        <a href="resources\GR\Spacetime and Geometry.pdf" class="resource-link">Visit Booke</a>
+                        <a href="resources\GR\Relativity Visualized.pdf" class="resource-link">Visit Book</a>
                     </div>
                     
                     <div class="resource-card">
@@ -605,7 +597,7 @@
                         <h3 class="resource-title">Gravitation: Foundation and Frontiers</h3>
                         <p class="resource-author">By T. Padmanabhan </p>
                         <p class="resource-description">It expertly bridges classical theories and gravitational physics, offering rigorous mathematical treatment for advanced students and researchers.</p>
-                        <a href="#" class="resource-link">View Book</a>
+                        <a href="resources\GR\Gravitation Foundations and Frontiers.pdf" class="resource-link">View Book</a>
                     </div>
                     
                     <div class="resource-card upcoming-card">
@@ -620,11 +612,10 @@
                         
                         <!-- Hover state content -->
                         <div class="upcoming-details">
-                            <div class="resource-type upcoming-date">Launching June 2025</div>
-                            <h3 class="resource-title">Cosmic Horizons: Exploring Einstein's Universe</h3>
+                            <div class="resource-type upcoming-date">Launching July 2025</div>
+                            <h3 class="resource-title">General Relativity - Explained Intutively</h3>
                             <p class="resource-author">By Equinox Astronomy</p>
-                            <p class="resource-description">An immersive journey through general relativity, featuring stunning animations and expert interviews exploring black holes, gravitational waves, and the geometry of spacetime.</p>
-                            <a href="#" class="resource-link upcoming-button">Get Notified</a>
+                            <p class="resource-description">A journey through general relativity, featuring beautiful little animations and fun activities, exploring the geometry of spacetime and blackholes.</p>
                         </div>
                     </div>
                 </div>
@@ -641,23 +632,23 @@
                     <h2 class="category-title">Quantum Mechanics</h2>
                 </div>
                 
-                <p class="category-description">Delve into the mysterious quantum realm that governs the behavior of matter and energy at the smallest scales. These resources will help you understand the fundamental principles and strange phenomena of quantum physics.</p>
+                <p class="category-description">Delve into the quantum realm that governs the behavior of matter and energy at the smallest scales. These resources will help you understand the fundamental principles and strange phenomena of quantum physics.</p>
                 
                 <div class="resources-grid">
                     <div class="resource-card">
                         <div class="resource-type">Book</div>
-                        <h3 class="resource-title">Quantum Mechanics: The Theoretical Minimum</h3>
-                        <p class="resource-author">By Leonard Susskind & Art Friedman</p>
-                        <p class="resource-description">A clear and accessible introduction to quantum mechanics that requires minimal prior knowledge while still covering the essential mathematics.</p>
-                        <a href="#" class="resource-link">View Details</a>
+                        <h3 class="resource-title">Quantum Mechanics: Concepts & Applications</h3>
+                        <p class="resource-author">By Nouredine Zettili</p>
+                        <p class="resource-description">Zettili masterfully demystifies quantum mechanics through rigorous mathematics, insightful examples, and comprehensive problem sets that build intuitive understanding of abstract concepts.</p>
+                        <a href="resources\GR\Zettili.pdf" class="resource-link">View Book</a>
                     </div>
                     
                     <div class="resource-card">
                         <div class="resource-type">Video Course</div>
-                        <h3 class="resource-title">Introduction to Quantum Mechanics</h3>
-                        <p class="resource-author">MIT OpenCourseWare</p>
-                        <p class="resource-description">Professor Barton Zwiebach's comprehensive lecture series covering quantum principles, wave functions, and applications.</p>
-                        <a href="https://ocw.mit.edu/courses/physics/8-04-quantum-physics-i-spring-2016/" class="resource-link">Access Course</a>
+                        <h3 class="resource-title">Core - Quantum Mechanics</h3>
+                        <p class="resource-author">NPTEL</p>
+                        <p class="resource-description">Prof. Balakrishnan's quantum mechanics lectures blend mathematical rigor with intuitive explanations, making complex quantum concepts accessible through engaging visual demonstrations and clear derivations.</p>
+                        <a href="https://www.youtube.com/playlist?list=PL0F530F3BAF8C6FCC" class="resource-link">Access Course</a>
                     </div>
                     
                     <div class="resource-card">
@@ -674,6 +665,14 @@
                         <p class="resource-author">PhET Interactive Simulations</p>
                         <p class="resource-description">Visualize and experiment with quantum wave behavior, interference patterns, and the double-slit experiment.</p>
                         <a href="https://phet.colorado.edu/en/simulation/quantum-wave-interference" class="resource-link">Try Simulation</a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-type">Book</div>
+                        <h3 class="resource-title">Principles of Quantum Mechanics</h3>
+                        <p class="resource-author">By R. Shankar</p>
+                        <p class="resource-description">This book elegantly builds quantum theory from first principles, offering mathematical depth and physical intuition through clear exposition and illuminating examples.</p>
+                        <a href="resources\GR\R Shankar.pdf" class="resource-link">View Book</a>
                     </div>
                 </div>
             </div>
@@ -693,35 +692,35 @@
                 
                 <div class="resources-grid">
                     <div class="resource-card">
-                        <div class="resource-type">Book</div>
-                        <h3 class="resource-title">Essential Radio Astronomy</h3>
-                        <p class="resource-author">By James J. Condon & Scott M. Ransom</p>
-                        <p class="resource-description">A comprehensive guide to the theory and practice of radio astronomy, covering both the physics and observational techniques.</p>
-                        <a href="#" class="resource-link">View Details</a>
+                        <div class="resource-type">Document</div>
+                        <h3 class="resource-title">Radio Astronomy</h3>
+                        <p class="resource-author">By I.I.T Bombay</p>
+                        <p class="resource-description">A comprehensive guide to the theory of radio astronomy, covering both the physics and working of observational telescopes.</p>
+                        <a href="resources\GR\Radio Astronomy.pdf" class="resource-link">View PDF</a>
                     </div>
                     
                     <div class="resource-card">
-                        <div class="resource-type">Online Course</div>
-                        <h3 class="resource-title">Radio Astronomy: Observing the Invisible Universe</h3>
-                        <p class="resource-author">The Great Courses</p>
-                        <p class="resource-description">Professor Felix J. Lockman guides you through the science, technology, and discoveries of radio astronomy.</p>
-                        <a href="#" class="resource-link">Access Course</a>
+                        <div class="resource-type">Blog</div>
+                        <h3 class="resource-title">Why study Radio Astronomy?</h3>
+                        <p class="resource-author">Universe Today</p>
+                        <p class="resource-description">This Universe Today blog explores radio astronomy's crucial role in detecting cosmic phenomena invisible to optical telescopes and its potential for discovering extraterrestrial life signals.</p>
+                        <a href="https://www.universetoday.com/articles/radio-astronomy-why-study-it-what-can-it-teach-us-about-finding-life-beyond-earth" class="resource-link">Read Blog</a>
                     </div>
                     
                     <div class="resource-card">
-                        <div class="resource-type">Project</div>
-                        <h3 class="resource-title">Radio JOVE</h3>
-                        <p class="resource-author">NASA</p>
+                        <div class="resource-type">Document</div>
+                        <h3 class="resource-title">Radiation & its use in Astrophysics</h3>
+                        <p class="resource-author">By I.I.T Bombay</p>
                         <p class="resource-description">Build your own radio telescope to observe radio emissions from Jupiter, the Sun, and our galaxy. Includes complete instructions and educational materials.</p>
-                        <a href="https://radiojove.gsfc.nasa.gov/" class="resource-link">Explore Project</a>
+                        <a href="resources\GR\Radiation & its use in Astrophysics.pdf" class="resource-link">View PDF</a>
                     </div>
                     
                     <div class="resource-card">
-                        <div class="resource-type">Website</div>
+                        <div class="resource-type">Blog</div>
                         <h3 class="resource-title">National Radio Astronomy Observatory</h3>
                         <p class="resource-author">NRAO</p>
                         <p class="resource-description">Educational resources, technical information, and public outreach materials from a world-leading radio astronomy facility.</p>
-                        <a href="https://public.nrao.edu/" class="resource-link">Visit Website</a>
+                        <a href="https://public.nrao.edu/" class="resource-link">Read Blog</a>
                     </div>
                 </div>
             </div>
