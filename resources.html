@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - Equinox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #000000, #0a0a2a, #000000);
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        #stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: twinkle 2s infinite alternate;
+        }
+        
+        .star:nth-child(3n) {
+            background-color: #fff;
+        }
+        
+        .star:nth-child(3n+1) {
+            background-color: #77b5fe; /* Light blue stars */
+        }
+        
+        .star:nth-child(3n+2) {
+            background-color: #fdcf58; /* Gold/yellow stars */
+        }
+
+        @keyframes twinkle {
+            from { opacity: 0.4; }
+            to { opacity: 0.2; }
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            position: relative;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li {
+            margin: 0.5rem 1rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #777778;
+        }
+
+        nav ul li a.active {
+            color: #fdcf58;
+        }
+
+        nav ul li a.active:hover {
+            color: #ae8e3c;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            position: relative;
+            right: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+        }
+
+        /* Main content styles */
+        .main-content {
+            width: 100%;
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .page-title p {
+            font-size: 1rem;
+            color: #d4d4d4;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #ffffff, #7a7a7a, transparent);
+            margin: 1.5rem auto;
+        }
+
+        /* Topics filter */
+        .topics-filter {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .filter-btn.active {
+            background: rgba(253, 207, 88, 0.3);
+            border-color: #fdcf58;
+            color: #fdcf58;
+        }
+
+        /* Resources sections */
+        .resources-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .resource-category {
+            position: relative;
+            background: rgba(10, 10, 42, 0.4);
+            border-radius: 10px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .resource-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .corner {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            z-index: 10;
+        }
+
+        .corner-top-left {
+            top: 10px;
+            left: 10px;
+            border: 1px solid #c9c8cb;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .corner-top-right {
+            top: 10px;
+            right: 10px;
+            border: 1px solid #c9c8cb;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .corner-bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border: 1px solid #c9c8cb;
+            border-right: none;
+            border-top: none;
+        }
+
+        .corner-bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border: 1px solid #c9c8cb;
+            border-left: none;
+            border-top: none;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .category-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            opacity: 0.8;
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            color: #fdcf58;
+        }
+
+        .category-description {
+            margin-bottom: 25px;
+            color: #d4d4d4;
+            line-height: 1.6;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .resource-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Upcoming card styles */
+        .upcoming-card {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            background: linear-gradient(to bottom, rgba(15, 15, 30, 0.7), rgba(0, 0, 0, 0.8));
+            border: 1px solid rgba(253, 207, 88, 0.3);
+            transition: all 0.5s ease;
+        }
+        
+        .upcoming-default {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            transition: opacity 0.5s ease;
+            z-index: 2;
+        }
+        
+        .upcoming-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(253, 207, 88, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .upcoming-icon i {
+            color: #fdcf58;
+            font-size: 1.5rem;
+        }
+        
+        .upcoming-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fdcf58;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+        .upcoming-hint {
+            font-size: 0.9rem;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .upcoming-details {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            background: rgba(10, 10, 42, 0.95);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .upcoming-date {
+            color: #77b5fe;
+        }
+        
+        .upcoming-button {
+            background: rgba(253, 207, 88, 0.2);
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        /* The hover effect */
+        .upcoming-card:hover .upcoming-default {
+            opacity: 0;
+            z-index: 1;
+        }
+        
+        .upcoming-card:hover .upcoming-details {
+            opacity: 1;
+            z-index: 2;
+        }
+        
+        .resource-type {
+            font-size: 0.8rem;
+            color: #fdcf58;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .resource-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .resource-author {
+            font-size: 0.9rem;
+            color: #a9a9a9;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .resource-description {
+            font-size: 0.9rem;
+            color: #d4d4d4;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .resource-link {
+            display: inline-block;
+            color: #77b5fe;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .resource-link:hover {
+            color: #fdcf58;
+            text-decoration: underline;
+        }
+
+        footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0,0,0,0.7);
+            margin-top: 50px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .social-icons a {
+            color: #717171;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+        }
+
+        .fa {
+            font-size: 1.5rem;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+
+            nav ul {
+                position: fixed;
+                flex-direction: column;
+                background-color: rgba(0,0,0,0.9);
+                width: 100%;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                padding-top: 60px;
+                align-items: center;
+                justify-content: flex-start;
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            nav ul li {
+                margin: 1.5rem 0;
+            }
+
+            nav ul li a {
+                font-size: 1.2rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-btn {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div id="stars-container"></div>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo"> <span class="logo-text">Equinox</span>
+        </div>
+        <nav>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#">Astronomy 101</a></li>
+                <li><a href="#" class="active">Resources</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#">Team</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="page-title">
+            <h1>Astronomy Resources</h1>
+            <div class="divider"></div>
+            <p>Explore our curated collection of resources covering various aspects of astronomy and astrophysics. Whether you're a beginner or an advanced enthusiast, find books, videos, websites, and tools to enhance your cosmic journey.</p>
+        </div>
+
+        <div class="topics-filter">
+            <button class="filter-btn active" data-filter="all">All Topics</button>
+            <button class="filter-btn" data-filter="relativity">General Relativity</button>
+            <button class="filter-btn" data-filter="quantum">Quantum Mechanics</button>
+            <button class="filter-btn" data-filter="radio">Radio Astronomy</button>
+            <button class="filter-btn" data-filter="spectroscopy">Spectroscopy</button>
+            <button class="filter-btn" data-filter="simulation">Simulations</button>
+            <button class="filter-btn" data-filter="observation">Observational</button>
+            <button class="filter-btn" data-filter="cosmology">Cosmology</button>
+        </div>
+
+        <div class="resources-container">
+            <!-- General Relativity Resources -->
+            <div class="resource-category" data-category="relativity">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                
+                <div class="category-header">
+                    <h2 class="category-title">General Relativity</h2>
+                </div>
+                
+                <p class="category-description">Explore Einstein's revolutionary theory that describes gravity as a geometric property of space and time. These resources cover the mathematics, physical implications, and experimental tests of general relativity.</p>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-type">Book</div>
+                        <h3 class="resource-title">Spacetime and Geometry: An Introduction to General Relativity</h3>
+                        <p class="resource-author">By Sean Carroll</p>
+                        <p class="resource-description">A comprehensive introduction to Einstein's geometric theory of gravity that balances mathematical rigor with physical insight.</p>
+                        <a href="#" class="resource-link">View Details</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Video Series</div>
+                        <h3 class="resource-title">PBS Space Time: General Relativity</h3>
+                        <p class="resource-author">PBS Digital Studios</p>
+                        <p class="resource-description">In-depth explanations of relativity concepts like spacetime curvature, gravitational waves, and black holes with stunning visualizations.</p>
+                        <a href="https://www.youtube.com/playlist?list=PLsPUh22kYmNCLrXgf8e6nC_xEzxdx4nmY" class="resource-link">Watch on YouTube</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Website</div>
+                        <h3 class="resource-title">Einstein Online</h3>
+                        <p class="resource-author">Max Planck Institute for Gravitational Physics</p>
+                        <p class="resource-description">Accessible explanations of relativity concepts from basic to advanced levels, with interactive illustrations and examples.</p>
+                        <a href="https://www.einstein-online.info/" class="resource-link">Visit Website</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Book</div>
+                        <h3 class="resource-title">A First Course in General Relativity</h3>
+                        <p class="resource-author">By Bernard Schutz</p>
+                        <p class="resource-description">A student-friendly introduction to the mathematics and physics of Einstein's theory, with clear explanations and numerous exercises.</p>
+                        <a href="#" class="resource-link">View Details</a>
+                    </div>
+                    
+                    <div class="resource-card upcoming-card">
+                        <!-- Default state content -->
+                        <div class="upcoming-default">
+                            <div class="upcoming-icon">
+                                <i class="fa fa-play"></i>
+                            </div>
+                            <div class="upcoming-title">Upcoming Video Series</div>
+                            <div class="upcoming-hint">Hover to learn more</div>
+                        </div>
+                        
+                        <!-- Hover state content -->
+                        <div class="upcoming-details">
+                            <div class="resource-type upcoming-date">Launching June 2025</div>
+                            <h3 class="resource-title">Cosmic Horizons: Exploring Einstein's Universe</h3>
+                            <p class="resource-author">By Equinox Astronomy</p>
+                            <p class="resource-description">An immersive journey through general relativity, featuring stunning animations and expert interviews exploring black holes, gravitational waves, and the geometry of spacetime.</p>
+                            <a href="#" class="resource-link upcoming-button">Get Notified</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Quantum Mechanics Resources -->
+            <div class="resource-category" data-category="quantum">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                
+                <div class="category-header">
+                    <h2 class="category-title">Quantum Mechanics</h2>
+                </div>
+                
+                <p class="category-description">Delve into the mysterious quantum realm that governs the behavior of matter and energy at the smallest scales. These resources will help you understand the fundamental principles and strange phenomena of quantum physics.</p>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-type">Book</div>
+                        <h3 class="resource-title">Quantum Mechanics: The Theoretical Minimum</h3>
+                        <p class="resource-author">By Leonard Susskind & Art Friedman</p>
+                        <p class="resource-description">A clear and accessible introduction to quantum mechanics that requires minimal prior knowledge while still covering the essential mathematics.</p>
+                        <a href="#" class="resource-link">View Details</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Video Course</div>
+                        <h3 class="resource-title">Introduction to Quantum Mechanics</h3>
+                        <p class="resource-author">MIT OpenCourseWare</p>
+                        <p class="resource-description">Professor Barton Zwiebach's comprehensive lecture series covering quantum principles, wave functions, and applications.</p>
+                        <a href="https://ocw.mit.edu/courses/physics/8-04-quantum-physics-i-spring-2016/" class="resource-link">Access Course</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Blog</div>
+                        <h3 class="resource-title">Quantum Frontiers</h3>
+                        <p class="resource-author">Caltech Institute for Quantum Information and Matter</p>
+                        <p class="resource-description">Blog featuring insights from leading quantum physicists about cutting-edge research and fundamental concepts.</p>
+                        <a href="https://quantumfrontiers.com/" class="resource-link">Read Blog</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Interactive Tool</div>
+                        <h3 class="resource-title">Quantum Wave Interference</h3>
+                        <p class="resource-author">PhET Interactive Simulations</p>
+                        <p class="resource-description">Visualize and experiment with quantum wave behavior, interference patterns, and the double-slit experiment.</p>
+                        <a href="https://phet.colorado.edu/en/simulation/quantum-wave-interference" class="resource-link">Try Simulation</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Radio Astronomy Resources -->
+            <div class="resource-category" data-category="radio">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                
+                <div class="category-header">
+                    <h2 class="category-title">Radio Astronomy</h2>
+                </div>
+                
+                <p class="category-description">Learn about the techniques and tools astronomers use to observe the invisible universe through radio waves. From pulsars to the cosmic microwave background, radio astronomy reveals cosmic wonders invisible to optical telescopes.</p>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-type">Book</div>
+                        <h3 class="resource-title">Essential Radio Astronomy</h3>
+                        <p class="resource-author">By James J. Condon & Scott M. Ransom</p>
+                        <p class="resource-description">A comprehensive guide to the theory and practice of radio astronomy, covering both the physics and observational techniques.</p>
+                        <a href="#" class="resource-link">View Details</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Online Course</div>
+                        <h3 class="resource-title">Radio Astronomy: Observing the Invisible Universe</h3>
+                        <p class="resource-author">The Great Courses</p>
+                        <p class="resource-description">Professor Felix J. Lockman guides you through the science, technology, and discoveries of radio astronomy.</p>
+                        <a href="#" class="resource-link">Access Course</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Project</div>
+                        <h3 class="resource-title">Radio JOVE</h3>
+                        <p class="resource-author">NASA</p>
+                        <p class="resource-description">Build your own radio telescope to observe radio emissions from Jupiter, the Sun, and our galaxy. Includes complete instructions and educational materials.</p>
+                        <a href="https://radiojove.gsfc.nasa.gov/" class="resource-link">Explore Project</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Website</div>
+                        <h3 class="resource-title">National Radio Astronomy Observatory</h3>
+                        <p class="resource-author">NRAO</p>
+                        <p class="resource-description">Educational resources, technical information, and public outreach materials from a world-leading radio astronomy facility.</p>
+                        <a href="https://public.nrao.edu/" class="resource-link">Visit Website</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Spectroscopy Resources -->
+            <div class="resource-category" data-category="spectroscopy">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                
+                <div class="category-header">
+                    <h2 class="category-title">Spectroscopy</h2>
+                </div>
+                
+                <p class="category-description">Discover how astronomers analyze light to determine the composition, temperature, and motion of distant cosmic objects. Spectroscopy is one of the most powerful tools in an astronomer's toolkit.</p>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-type">Book</div>
+                        <h3 class="resource-title">Introduction to Astronomical Spectroscopy</h3>
+                        <p class="resource-author">By Immo Appenzeller</p>
+                        <p class="resource-description">A comprehensive guide covering the principles of spectroscopy and its applications in modern astronomy.</p>
+                        <a href="#" class="resource-link">View Details</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Tutorial</div>
+                        <h3 class="resource-title">Spectroscopy for Amateur Astronomers</h3>
+                        <p class="resource-author">Sky & Telescope</p>
+                        <p class="resource-description">Step-by-step guide to getting started with spectroscopy using amateur equipment, from setup to analysis.</p>
+                        <a href="#" class="resource-link">Read Tutorial</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Video Series</div>
+                        <h3 class="resource-title">Understanding Astronomical Spectra</h3>
+                        <p class="resource-author">The Cosmic Companion</p>
+                        <p class="resource-description">Clear explanations of emission, absorption, and continuous spectra, and how they reveal the secrets of stars and galaxies.</p>
+                        <a href="#" class="resource-link">Watch Series</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Software</div>
+                        <h3 class="resource-title">RSpec</h3>
+                        <p class="resource-author">Field Tested Systems</p>
+                        <p class="resource-description">User-friendly software for capturing, processing, and analyzing astronomical spectra with your telescope and camera.</p>
+                        <a href="https://www.rspec-astro.com/" class="resource-link">Explore Software</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Simulation Resources -->
+            <div class="resource-category" data-category="simulation">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                
+                <div class="category-header">
+                    <h2 class="category-title">Astronomical Simulations</h2>
+                </div>
+                
+                <p class="category-description">Explore the universe through digital simulations that model everything from planetary motions to galaxy formation. These computational tools help visualize complex astronomical phenomena and test theoretical models.</p>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-type">Software</div>
+                        <h3 class="resource-title">Stellarium</h3>
+                        <p class="resource-author">Stellarium Development Team</p>
+                        <p class="resource-description">Open-source planetarium software that shows a realistic sky in 3D, just like what you see with the naked eye, binoculars, or a telescope.</p>
+                        <a href="https://stellarium.org/" class="resource-link">Download Software</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Web App</div>
+                        <h3 class="resource-title">Universe Sandbox</h3>
+                        <p class="resource-author">Giant Army</p>
+                        <p class="resource-description">Physics-based space simulator that lets you create, destroy, and interact with the universe on an unimaginable scale.</p>
+                        <a href="https://universesandbox.com/" class="resource-link">Explore App</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Course</div>
+                        <h3 class="resource-title">Computational Astrophysics</h3>
+                        <p class="resource-author">Coursera - University of Tokyo</p>
+                        <p class="resource-description">Learn how to simulate astrophysical phenomena using computational methods, from basic N-body problems to complex fluid dynamics.</p>
+                        <a href="#" class="resource-link">Join Course</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">GitHub Repository</div>
+                        <h3 class="resource-title">AstroSim</h3>
+                        <p class="resource-author">Open Astronomy</p>
+                        <p class="resource-description">Collection of open-source codes for various astronomical simulations, from orbital mechanics to stellar evolution.</p>
+                        <a href="#" class="resource-link">View Repository</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Observational Astronomy Resources -->
+            <div class="resource-category" data-category="observation">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                
+                <div class="category-header">
+                    <h2 class="category-title">Observational Astronomy</h2>
+                </div>
+                
+                <p class="category-description">Resources for visual astronomy enthusiasts, from beginner stargazers to advanced amateur astronomers. Learn how to observe celestial objects and document your observations.</p>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-type">Book</div>
+                        <h3 class="resource-title">Turn Left at Orion</h3>
+                        <p class="resource-author">By Guy Consolmagno & Dan M. Davis</p>
+                        <p class="resource-description">The essential guidebook for backyard astronomers using small telescopes to find hundreds of celestial objects.</p>
+                        <a href="#" class="resource-link">View Details</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">App</div>
+                        <h3 class="resource-title">SkySafari</h3>
+                        <p class="resource-author">Simulation Curriculum</p>
+                        <p class="resource-description">Powerful planetarium app that shows you what's visible in the night sky from your location with detailed information on thousands of objects.</p>
+                        <a href="https://skysafariastronomy.com/" class="resource-link">Download App</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Website</div>
+                        <h3 class="resource-title">Astronomy Picture of the Day</h3>
+                        <p class="resource-author">NASA</p>
+                        <p class="resource-description">Each day a different image or photograph of our universe is featured, along with a brief explanation written by a professional astronomer.</p>
+                        <a href="https://apod.nasa.gov/apod/" class="resource-link">Visit Website</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Video Series</div>
+                        <h3 class="resource-title">Backyard Astronomy</h3>
+                        <p class="resource-author">Astro Backyard</p>
+                        <p class="resource-description">Tutorials on astrophotography, telescope setup, and observing techniques for amateur astronomers with various skill levels.</p>
+                        <a href="https://www.youtube.com/c/AstroBackyard" class="resource-link">Watch on YouTube</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Cosmology Resources -->
+            <div class="resource-category" data-category="cosmology">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                
+                <div class="category-header">
+                    <h2 class="category-title">Cosmology</h2>
+                </div>
+                
+                <p class="category-description">Explore the origin, evolution, and ultimate fate of the universe. Cosmology combines observations with theoretical physics to understand the largest scales of space and time.</p>
+                
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-type">Book</div>
+                        <h3 class="resource-title">The First Three Minutes</h3>
+                        <p class="resource-author">By Steven Weinberg</p>
+                        <p class="resource-description">A classic account of the Big Bang theory and the earliest moments of our universe, written by a Nobel Prize-winning physicist.</p>
+                        <a href="#" class="resource-link">View Details</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Video Course</div>
+                        <h3 class="resource-title">Introduction to Cosmology</h3>
+                        <p class="resource-author">World Science U</p>
+                        <p class="resource-description">Professor Brian Greene guides you through the fundamentals of modern cosmology, from the Big Bang to dark energy.</p>
+                        <a href="https://www.worldscienceu.com/" class="resource-link">Join Course</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Website</div>
+                        <h3 class="resource-title">Cosmology 101</h3>
+                        <p class="resource-author">NASA WMAP Mission</p>
+                        <p class="resource-description">Clear explanations of basic cosmological concepts including the expansion of the universe, cosmic microwave background, and dark matter.</p>
+                        <a href="https://map.gsfc.nasa.gov/universe/" class="resource-link">Explore Website</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-type">Podcast</div>
+                        <h3 class="resource-title">The Cosmic Savannah</h3>
+                        <p class="resource-author">Dr. Jacinta Delhaize & Dr. Daniel Cunnama</p>
+                        <p class="resource-description">Conversations with leading cosmologists about their research, discoveries, and the big questions about our universe.</p>
+                        <a href="https://thecosmicsavannah.com/" class="resource-link">Listen to Podcast</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/equinox.iitg/"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/equinoxiitg/"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@equinox7889"><i class="fa fa-youtube-play"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Function to generate a random number within a range
+        function getRandom(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // Get the stars container
+        const starsContainer = document.getElementById('stars-container');
+
+        // Function to create a star element with random properties
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+
+            // Random size for the star
+            const size = getRandom(1, 3) + 'px';
+            star.style.width = size;
+            star.style.height = size;
+
+            // Random position within the viewport
+            star.style.left = getRandom(0, window.innerWidth) + 'px';
+            star.style.top = getRandom(0, window.innerHeight) + 'px';
+
+            // Random opacity with a higher base
+            star.style.opacity = getRandom(0.3, 0.8);
+
+            // Slightly randomized animation delay for a more natural twinkle
+            star.style.animationDelay = getRandom(0, 1) + 's';
+
+            return star;
+        }
+
+        // Function to populate stars
+        function populateStars() {
+            // Clear existing stars
+            starsContainer.innerHTML = '';
+            
+            // Number of stars to create - based on viewport size
+            const numStars = Math.floor((window.innerWidth * window.innerHeight) / 1000);
+            
+            // Add the stars to the container
+            for (let i = 0; i < numStars; i++) {
+                starsContainer.appendChild(createStar());
+            }
+        }
+
+        // Initial population of stars
+        populateStars();
+
+        // Repopulate stars when window is resized
+        window.addEventListener('resize', populateStars);
+
+        // Mobile menu toggle functionality
+        const hamburger = document.getElementById('hamburger-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when a nav item is clicked
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const resourceCategories = document.querySelectorAll('.resource-category');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Get the filter value
+                const filterValue = button.getAttribute('data-filter');
+                
+                // Show/hide resource categories based on filter
+                resourceCategories.forEach(category => {
+                    if (filterValue === 'all' || category.getAttribute('data-category') === filterValue) {
+                        category.style.display = 'block';
+                    } else {
+                        category.style.display = 'none';
+                    }
+                });
+            });
+        });
+    
+        // Add this to the existing script section to ensure hover works on mobile
+        document.querySelector('.upcoming-card').addEventListener('touchstart', function() {
+            this.querySelector('.upcoming-default').style.opacity = 0;
+            this.querySelector('.upcoming-default').style.zIndex = 1;
+            this.querySelector('.upcoming-details').style.opacity = 1;
+            this.querySelector('.upcoming-details').style.zIndex = 2;
+        });
+    </script>
+</body>
+</html>

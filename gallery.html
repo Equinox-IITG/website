@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Equinox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #000000, #0a0a2a, #000000);
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: twinkle 2s infinite alternate;
+        }
+        
+        .star:nth-child(3n) {
+            background-color: #fff;
+        }
+        
+        .star:nth-child(3n+1) {
+            background-color: #77b5fe; /* Light blue stars */
+        }
+        
+        .star:nth-child(3n+2) {
+            background-color: #fdcf58; /* Gold/yellow stars */
+        }
+
+        @keyframes twinkle {
+            from { opacity: 0.4; }
+            to { opacity: 0.2; }
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            position: relative;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li {
+            margin: 0.5rem 1rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #777778;
+        }
+
+        nav ul li a.active {
+            color: #fdcf58
+        }
+        
+        nav ul li a.active:hover {
+            color: #ae8e3c;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            position: relative;
+            right: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+        }
+
+        /* Gallery Specific Styles */
+        .gallery-container {
+            padding: 120px 5% 100px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .gallery-header p {
+            font-size: 1.1rem;
+            color: #d4d4d4;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            margin: 1.5rem auto;
+        }
+
+        /* Filter buttons */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 300px;
+            background-color: rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .gallery-caption h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .gallery-caption p {
+            font-size: 0.9rem;
+            color: #d4d4d4;
+        }
+
+        .gallery-caption .date {
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 0.5rem;
+        }
+
+        /* Load more button */
+        .load-more {
+            display: block;
+            width: 200px;
+            margin: 0 auto;
+            padding: 12px 0;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            text-align: center;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .load-more:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Lightbox Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow: hidden;
+        }
+
+        .modal-content {
+            position: relative;
+            margin: auto;
+            padding: 0;
+            width: 90%;
+            max-width: 1200px;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            z-index: 1002;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #bbb;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 30px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-caption {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            color: white;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .social-icons a {
+            color: #717171;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+        }
+
+        .fa {
+            font-size: 1.5rem;
+        }
+
+        /* for responsive webpage */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+
+            nav ul {
+                position: fixed;
+                flex-direction: column;
+                background-color: rgba(0,0,0,0.9);
+                width: 100%;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                padding-top: 60px;
+                align-items: center;
+                justify-content: flex-start;
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            nav ul li {
+                margin: 1.5rem 0;
+            }
+
+            nav ul li a {
+                font-size: 1.2rem;
+            }
+
+            .gallery-container {
+                padding: 100px 15px 80px;
+            }
+
+            .gallery-header h1 {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .gallery-item {
+                height: 250px;
+            }
+
+            .prev, .next {
+                font-size: 20px;
+                padding: 10px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div id="stars-container"></div>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo"> <span class="logo-text">Equinox</span>
+        </div>
+        <nav>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#">Astronomy 101</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#" class="active">Gallery</a></li>
+                <li><a href="#">Team</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="gallery-container">
+        <div class="gallery-header">
+            <h1>Our Cosmic Gallery</h1>
+            <div class="divider"></div>
+            <p>Explore the universe through our lens. A collection of celestial wonders captured during our observing sessions, workshops, and club events at IIT Guwahati.</p>
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="observing">Observing Sessions</button>
+            <button class="filter-btn" data-filter="events">Events</button>
+            <button class="filter-btn" data-filter="astrophotography">Astrophotography</button>
+        </div>
+
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Gallery items will be populated by JavaScript -->
+        </div>
+
+        <button class="load-more" id="load-more">Load More</button>
+    </div>
+
+    <!-- Modal/Lightbox for gallery images -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+        <div class="modal-content">
+            <img class="modal-img" id="modal-img">
+            <div class="modal-caption" id="modal-caption"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/equinox.iitg/"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/equinoxiitg/"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@equinox7889"><i class="fa fa-youtube-play"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Function to generate a random number within a range
+        function getRandom(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // Get the stars container
+        const starsContainer = document.getElementById('stars-container');
+
+        // Function to create a star element with random properties
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+
+            // Random size for the star
+            const size = getRandom(1, 3) + 'px';
+            star.style.width = size;
+            star.style.height = size;
+
+            // Random position within the viewport
+            star.style.left = getRandom(0, window.innerWidth) + 'px';
+            star.style.top = getRandom(0, window.innerHeight) + 'px';
+
+            // Random opacity with a higher base
+            star.style.opacity = getRandom(0.3, 0.8);
+
+            // Slightly randomized animation delay for a more natural twinkle
+            star.style.animationDelay = getRandom(0, 1) + 's';
+
+            return star;
+        }
+
+        // Function to populate stars
+        function populateStars() {
+            // Clear existing stars
+            starsContainer.innerHTML = '';
+            
+            // Number of stars to create - based on viewport size
+            const numStars = Math.floor((window.innerWidth * window.innerHeight) / 1000);
+            
+            // Add the stars to the container
+            for (let i = 0; i < numStars; i++) {
+                starsContainer.appendChild(createStar());
+            }
+        }
+
+        // Initial population of stars
+        populateStars();
+
+        // Repopulate stars when window is resized
+        window.addEventListener('resize', populateStars);
+
+        // Mobile menu toggle functionality
+        const hamburger = document.getElementById('hamburger-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when a nav item is clicked
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Gallery data - in a real implementation, this could come from a database or API
+        const galleryData = [
+            {
+                id: 1,
+                title: "Moon Up Close",
+                description: "Captured during our night sky observing session at campus rooftop",
+                category: "observing",
+                date: "August 25, 2024",
+                imgSrc: "gallery_images/os2.jpeg",
+                alt: "Moon1"
+            },
+            {
+                id: 2,
+                title: "Telescope Assembly",
+                description: "Students learning how to set up and calibrate telescopes",
+                category: "observing",
+                date: "February 10, 2025",
+                imgSrc: "gallery_images/os5.jpeg", 
+                alt: "Students with telescopes during workshop"
+            },
+            {
+                id: 3,
+                title: "Capturing our Night Sky",
+                description: "Time lapse of our night sky taken by a club member",
+                category: "astrophotography",
+                date: "February 21, 2024",
+                imgSrc: "gallery_images/ap2.jpeg",
+                alt: "Time lapse"
+            },
+            {
+                id: 4,
+                title: "The Striped King",
+                description: "Jupiter and its moons observed during prime visibility period",
+                category: "observing",
+                date: "November 5, 2023",
+                imgSrc: "gallery_images/os3.png",
+                alt: "Jupiter"
+            },
+            {
+                id: 5,
+                title: "Shani",
+                description: "Seen during an open for all observation session",
+                category: "observing",
+                date: "January 25, 2025",
+                imgSrc: "gallery_images/os6.jpeg",
+                alt: "Saturn"
+            },
+            {
+                id: 6,
+                title: "Sun Kissed Moon",
+                description: "An amazing photograph taken using just a pair of binoculars and a phone",
+                category: "astrophotography",
+                date: "August 20, 2024",
+                imgSrc: "gallery_images/ap1.jpeg",
+                alt: "Moon2"
+            },
+            {
+                id: 7,
+                title: "Just Another Picture",
+                description: "Captured during our night sky observing session at campus rooftop",
+                category: "observing",
+                date: "August 25, 2024",
+                imgSrc: "gallery_images/os1.jpeg",
+                alt: "Moon3"
+            },
+            {
+                id: 8,
+                title: "LIGO Workshop",
+                description: "Understanding Gravitational Waves and future career prospects",
+                category: "events",
+                date: "April 6, 2025",
+                imgSrc: "gallery_images/gl1.jpg",
+                alt: "Students learning astrophotography techniques"
+            },
+            {
+                id: 9,
+                title: "Solar Observation",
+                description: "Safely observing the Sun using solar filters",
+                category: "observing",
+                date: "August 16, 2024",
+                imgSrc: "gallery_images/os4.jpeg",
+                alt: "Solar observation setup"
+            },
+            {
+                id: 10,
+                title: "Moon Bride",
+                description: "Clouds acting as a viel for the moon",
+                category: "astrophotography",
+                date: "May 10, 2024",
+                imgSrc: "gallery_images/ap3.jpeg",
+                alt: "Moon4"
+            },
+            {
+                id: 11,
+                title: "Equinox Planetarium Event",
+                description: "An unforgettable live solar spot viewing event at the Guwahati Planetarium during the solar maxima period",
+                category: "events",
+                date: "August 16, 2024",
+                imgSrc: "gallery_images/gl2.jpg",
+                alt: "Sun spots"
+            },
+            {
+                id: 12,
+                title: "Career in ISRO",
+                description: "Creating tools to study the spectral signatures of stars",
+                category: "events",
+                date: "April 10, 2024",
+                imgSrc: "/api/placeholder/600/400",
+                alt: "ISRO"
+            }
+        ];
+
+        // Items per page for lazy loading
+        const itemsPerPage = 6;
+        let currentPage = 1;
+        let currentFilter = 'all';
+
+        // Function to create gallery item
+        function createGalleryItem(item) {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = `gallery-item ${item.category}`;
+            galleryItem.setAttribute('data-id', item.id);
+            
+            galleryItem.innerHTML = `
+                <img src="${item.imgSrc}" alt="${item.alt}">
+                <div class="gallery-caption">
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                    <p class="date">${item.date}</p>
+                </div>
+            `;
+            
+            galleryItem.addEventListener('click', () => openModal(item.id));
+            return galleryItem;
+        }
+
+        // Function to load gallery items
+        function loadGalleryItems() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            let filteredData = galleryData;
+            
+            if (currentFilter !== 'all') {
+                filteredData = galleryData.filter(item => item.category === currentFilter);
+            }
+            
+            // Clear gallery
+            galleryGrid.innerHTML = '';
+            
+            // Calculate range for current page
+            const startIndex = 0;
+            const endIndex = currentPage * itemsPerPage;
+            const itemsToShow = filteredData.slice(startIndex, endIndex);
+            
+            // Add items to gallery
+            itemsToShow.forEach(item => {
+                galleryGrid.appendChild(createGalleryItem(item));
+            });
+            
+            // Hide/show load more button
+            const loadMoreBtn = document.getElementById('load-more');
+            if (endIndex >= filteredData.length) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'block';
+            }
+        }
+
+        // Initial load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadGalleryItems();
+            
+            // Filter buttons event listeners
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    btn.classList.add('active');
+                    
+                    // Update filter and reset page
+                    currentFilter = btn.getAttribute('data-filter');
+                    currentPage = 1;
+                    loadGalleryItems();
+                });
+            });
+            
+            // Load more button event listener
+            document.getElementById('load-more').addEventListener('click', () => {
+                currentPage++;
+                loadGalleryItems();
+            });
+        });
+
+        // Lightbox functionality
+        let currentImageIndex = 0;
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modal-img');
+        const captionText = document.getElementById('modal-caption');
+        const closeBtn = document.getElementsByClassName('close')[0];
+        const prevBtn = document.getElementsByClassName('prev')[0];
+        const nextBtn = document.getElementsByClassName('next')[0];
+
+        function openModal(id) {
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Find the image in our data
+            const image = galleryData.find(item => item.id === id);
+            if (!image) return;
+            
+            // Find index for navigation
+            currentImageIndex = galleryData.findIndex(item => item.id === id);
+            updateModalContent();
+        }
+
+        function updateModalContent() {
+            const image = galleryData[currentImageIndex];
+            modalImg.src = image.imgSrc;
+            captionText.innerHTML = `<h3>${image.title}</h3><p>${image.description}</p><p class="date">${image.date}</p>`;
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function navigateImage(direction) {
+            let filteredData = galleryData;
+            if (currentFilter !== 'all') {
+                filteredData = galleryData.filter(item => item.category === currentFilter);
+            }
+            
+            if (direction === 'next') {
+                currentImageIndex = (currentImageIndex + 1) % filteredData.length;
+            } else {
+                currentImageIndex = (currentImageIndex - 1 + filteredData.length) % filteredData.length;
+            }
+            
+            updateModalContent();
+        }
+
+        // Modal event listeners
+        closeBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        prevBtn.addEventListener('click', () => navigateImage('prev'));
+        nextBtn.addEventListener('click', () => navigateImage('next'));
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === 'block') {
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowLeft') navigateImage('prev');
+                if (e.key === 'ArrowRight') navigateImage('next');
+            }
+        });
+    </script>
+</body>
+</html>

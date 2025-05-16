@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team - Equinox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background:#000000;
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
+            padding-bottom: 80px; /* Space for footer */
+            overflow-x: hidden;
+        }
+
+        #stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: twinkle 2s infinite alternate;
+        }
+        
+        .star:nth-child(3n) {
+            background-color: #fff;
+        }
+        
+        .star:nth-child(3n+1) {
+            background-color: #77b5fe; /* Light blue stars */
+        }
+        
+        .star:nth-child(3n+2) {
+            background-color: #fdcf58; /* Gold/yellow stars */
+        }
+
+        @keyframes twinkle {
+            from { opacity: 0.4; }
+            to { opacity: 0.2; }
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            position: relative;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li {
+            margin: 0.5rem 1rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #777778;
+        }
+
+        nav ul li a.active {
+            color: #fdcf58;
+        }
+        
+        nav ul li a.active:hover {
+            color: #ae8e3c;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            position: relative;
+            right: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;;
+            background-color: #fff;
+            border-radius: 3px;
+        }
+
+        .team-hero {
+            text-align: center;
+            padding: 120px 0 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .team-hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: #d4d4d4;
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+
+        .divider {
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
+            margin: 1.5rem auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team-member {
+            background: rgba(42, 42, 61, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(119, 181, 254, 0.7), transparent);
+        }
+
+        .member-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.9);
+        }
+
+        .member-info {
+            padding: 20px;
+            position: relative;
+        }
+
+        .member-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .member-role {
+            color: #77b5fe;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .member-info p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #d4d4d4;
+        }
+
+        .corner {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            z-index: 2;
+        }
+
+        .corner-top-left {
+            top: 10px;
+            left: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .corner-top-right {
+            top: 10px;
+            right: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .corner-bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .corner-bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .social-icons a {
+            color: #717171;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+        }
+
+        .fa {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+
+            nav ul {
+                position: fixed;
+                flex-direction: column;
+                background-color: rgba(0,0,0,0.9);
+                width: 100%;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                padding-top: 60px;
+                align-items: center;
+                justify-content: flex-start;
+                transform: translateY(-100%);
+                opacity: 0;
+                z-index: 1000;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            nav ul li {
+                margin: 1.5rem 0;
+            }
+
+            nav ul li a {
+                font-size: 1.2rem;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .member-image {
+                height: 240px;
+            }
+
+            .team-hero h1 {
+                font-size: 2rem;
+            }
+
+            .team-hero p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div id="stars-container"></div>
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo"> <span class="logo-text">Equinox</span>
+        </div>
+        <nav>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="nav-menu">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#">Astronomy 101</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#" class="active">Team</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="team-hero">
+        <h1>Our Stellar Team</h1>
+        <div class="divider"></div>
+        <p>Meet the dedicated astronomers, researchers, and enthusiasts who make up Equinox - I.I.T Guwahati's Astronomy Club. Together, we're exploring the cosmos and sharing our passion for the universe.</p>
+    </section>
+
+    <section class="team-grid">
+        <!-- Team Member 1 -->
+        <div class="team-member">
+            <img src="team_images\debasis.jpg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Debasis Patnaik</h3>
+                <div class="member-role">Club Secretary</div>
+                <p>Astrophysics enthusiast specializing in radio astronomy. Leading Equinox through celestial explorations since 2023.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 2 -->
+        <div class="team-member">
+            <img src="team_images\kirhen.jpg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Kirhen Bhagavath S</h3>
+                <div class="member-role">Overall Co-ordinator</div>
+                <p>Deep space imaging expert with a focus on nebulae. Coordinates our stargazing events and workshop curriculum.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 3 -->
+        <div class="team-member">
+            <img src="/api/placeholder/400/400" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Sahastransh Mandhana</h3>
+                <div class="member-role">Theoretical Head</div>
+                <p>Telescope technician and equipment specialist. Develops custom tools for the club's observational projects.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 4 -->
+        <div class="team-member">
+            <img src="team_images\pratyush.jpg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Pratyush Kumar Swain </h3>
+                <div class="member-role">Projects Head</div>
+                <p>Planetary science enthusiast who masterfully organizes our astronomy nights and public outreach programs.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 5 -->
+        <div class="team-member">
+            <img src="team_images\vismay.png" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Vismay K Nair</h3>
+                <div class="member-role">Design Head</div>
+                <p>Specializes in exoplanet research and data analysis. Oversees all club research initiatives and collaborations.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 6 -->
+        <div class="team-member">
+            <img src="team_images\ayusha.jpeg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Ayush Agarwal</h3>
+                <div class="member-role">Core Team Member</div>
+                <p>Science communication expert bridging astronomy to the wider campus community through engaging programs.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 7 -->
+        <div class="team-member">
+            <img src="team_images\ayushk.jpg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Ayush Kumar</h3>
+                <div class="member-role">Core Team Member</div>
+                <p>Maintains our observatory equipment and leads practical astronomy sessions for beginners.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 8 -->
+        <div class="team-member">
+            <img src="team_images\anushka.png" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Anushka Sharma</h3>
+                <div class="member-role">Core Team Member</div>
+                <p>Blending art and astronomy through stunning visualizations and club branding initiatives.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 9 -->
+        <div class="team-member">
+            <img src="team_images\bhavesh.jpg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Bhavesh Chamaria </h3>
+                <div class="member-role">Core Team Member</div>
+                <p>Ensures smooth club operations while pursuing her interest in stellar evolution and variable stars.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 10 -->
+        <div class="team-member">
+            <img src="team_images\geeta.jpg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Geeta Meena</h3>
+                <div class="member-role">Core Team Member</div>
+                <p>Creates and maintains our digital presence while studying computational astrophysics.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 11 -->
+        <div class="team-member">
+            <img src="team_images\pratyushb.jpg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Pratyush Bhaiya</h3>
+                <div class="member-role">Ex - Secretary</div>
+                <p>Develops educational programs about space science and guides members through telescope building workshops.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 12 -->
+        <div class="team-member">
+            <img src="team_images\amit.jpg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Amit Singh</h3>
+                <div class="member-role">Ex - Overall Coordinator</div>
+                <p>Managing our astronomy newsletter and scientific content while researching galactic structures.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 13 -->
+        <div class="team-member">
+            <img src="team_images\ananth.jpg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Ananth Bhaiya</h3>
+                <div class="member-role">Ex - Theoretical Head</div>
+                <p>Captures stunning celestial imagery and teaches photography techniques to club members.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 14 -->
+        <div class="team-member">
+            <img src="team_images\om.jpg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Om Dubey</h3>
+                <div class="member-role">Ex - Core Team Member</div>
+                <p>Introduces new students to astronomy and helps integrate fresh perspectives into our cosmic community.</p>
+            </div>
+        </div>
+
+        <!-- Team Member 15 -->
+        <div class="team-member">
+            <img src="team_images\tanuj.jpg" alt="Team Member" class="member-image">
+            <div class="member-info">
+                <div class="corner corner-top-left"></div>
+                <div class="corner corner-top-right"></div>
+                <div class="corner corner-bottom-left"></div>
+                <div class="corner corner-bottom-right"></div>
+                <h3>Tanuj Bhaiya</h3>
+                <div class="member-role">Ex - Observational Head</div>
+                <p>Introduces new students to astronomy and helps integrate fresh perspectives into our cosmic community.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/equinox.iitg/"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/equinoxiitg/"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@equinox7889"><i class="fa fa-youtube-play"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Function to generate a random number within a range
+        function getRandom(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // Get the stars container
+        const starsContainer = document.getElementById('stars-container');
+
+        // Function to create a star element with random properties
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+
+            // Random size for the star
+            const size = getRandom(1, 3) + 'px';
+            star.style.width = size;
+            star.style.height = size;
+
+            // Random position within the viewport
+            star.style.left = getRandom(0, window.innerWidth) + 'px';
+            star.style.top = getRandom(0, window.innerHeight) + 'px';
+
+            // Random opacity with a higher base
+            star.style.opacity = getRandom(0.3, 0.8);
+
+            // Slightly randomized animation delay for a more natural twinkle
+            star.style.animationDelay = getRandom(0, 1) + 's';
+
+            return star;
+        }
+
+        // Function to populate stars
+        function populateStars() {
+            // Clear existing stars
+            starsContainer.innerHTML = '';
+            
+            // Number of stars to create - based on viewport size
+            const numStars = Math.floor((window.innerWidth * window.innerHeight) / 1000);
+            
+            // Add the stars to the container
+            for (let i = 0; i < numStars; i++) {
+                starsContainer.appendChild(createStar());
+            }
+        }
+
+        // Initial population of stars
+        populateStars();
+
+        // Repopulate stars when window is resized
+        window.addEventListener('resize', populateStars);
+
+        // Mobile menu toggle functionality
+        const hamburger = document.getElementById('hamburger-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when a nav item is clicked
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
