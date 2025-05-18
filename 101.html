@@ -461,6 +461,58 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* Add the following CSS to the existing styles section */
+
+        .day-activities-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .day-activity-card {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #fdcf58;
+        }
+
+        .day-title {
+            color: #fdcf58;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .activity-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .activity-list li {
+            color: #d4d4d4;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .activity-list li:before {
+            content: "•";
+            color: #fdcf58;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .coming-soon-message {
+            text-align: center;
+            padding: 40px 20px;
+            color: #d4d4d4;
+            font-style: italic;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -495,7 +547,7 @@
 
     <section class="course-structure">
         <h2 class="structure-heading">How is the course structured?</h2>
-        <p class="structure-info">This 4-week course takes you from basic astronomical concepts to advanced topics. The course is structured as follows:</p>
+        <p class="structure-info">This 7-week course takes you from basic astronomical concepts to advanced topics. The course is structured as follows:</p>
         
         <div class="weeks-container">
             <!-- Week 1 -->
@@ -506,7 +558,7 @@
                     <div class="week-topic">Dark Matter</div>
                     <div class="week-topic">Dark Energy</div>
                 </div>
-                <p class="week-description">This week explore cosmic evolution from Big Bang to dark energy while building Python skills with pandas, numpy, matplotlib, and seaborn to visualize and analyze astronomical datasets</p>
+                <p class="week-description">This week covers the basics of our solar system, fundamental celestial mechanics, and essential observational tools and techniques. You'll learn about planets, moons, and the motion of celestial bodies.</p>
             </div>
             
             <!-- Week 2 -->
@@ -517,7 +569,7 @@
                     <div class="week-topic">Stellar Evolution</div>
                     <div class="week-topic">Linear Regression</div>
                 </div>
-                <p class="week-description">This week discover stellar classification and life cycles while learning machine learning fundamentals, including algorithms, training models, and evaluating performance using astronomical data as practical examples.</p>
+                <p class="week-description">This week familiarizes you with stars, their classification, and stellar evolution. You'll learn about the life cycle of stars, from formation to various end states including white dwarfs, neutron stars, and black holes.</p>
             </div>
             
             <!-- Week 3 -->
@@ -528,7 +580,7 @@
                     <div class="week-topic">Spectroscopy</div>
                     <div class="week-topic">Observational Tools</div>
                 </div>
-                <p class="week-description">This week investigate multi-wavelength astronomy and modern observational techniques while mastering regression models to predict stellar properties, galaxy distances, and other continuous astronomical variables.</p>
+                <p class="week-description">This week covers galaxies, their formation and types, along with exoplanets and deep space objects like nebulae and star clusters. You'll learn how astronomers discover and characterize planets outside our solar system.</p>
             </div>
             
             <!-- Week 4 -->
@@ -539,7 +591,7 @@
                     <div class="week-topic">Distinguishing Celestial Objects</div>
                     <div class="week-topic">Classification Models</div>
                 </div>
-                <p class="week-description">This week learn to distinguish celestial objects while implementing classification algorithms to categorize stars, galaxies, and exoplanets based on their spectral signatures and observable characteristics.</p>
+                <p class="week-description">This week covers cosmology and the large-scale structure of the universe. You'll explore mysteries like dark matter, dark energy, and the expanding universe. The Big Bang theory and the fate of the universe will be discussed.</p>
             </div>
             
             <!-- Week 5 -->
@@ -576,9 +628,8 @@
             <div class="content-main">
                 <div class="tab-header" id="tab-header">
                     <div class="content-tab active" data-tab="contents">Contents</div>
-                    <div class="content-tab" data-tab="task1">Task 1</div>
-                    <div class="content-tab" data-tab="task2">Task 2</div>
-                    <div class="content-tab" data-tab="task3">Task 3</div>
+                    <div class="content-tab" data-tab="task1">Theoretical</div>
+                    <div class="content-tab" data-tab="task2">Computational</div>
                 </div>
                 
                 <div class="tab-content" id="tab-content">
@@ -616,202 +667,864 @@
             <a href="#"><i class="fa fa-instagram"></i></a>
             <a href="#"><i class="fa fa-youtube-play"></i></a>
         </div>
-        <p class="footer-text">© 2025 Equinox Astronomy. All rights reserved.</p>
     </footer>
 
     <script>
         // Function to generate a random number within a range
-        function getRandom(min, max) {
-            return Math.random() * (max - min) + min;
-        }
-
-        // Get the stars container
-        const starsContainer = document.getElementById('stars-container');
-
-        // Function to create a star element with random properties
-        function createStar() {
-            const star = document.createElement('div');
-            star.classList.add('star');
-
-            // Random size for the star
-            const size = getRandom(1, 3) + 'px';
-            star.style.width = size;
-            star.style.height = size;
-
-            // Random position within the viewport
-            star.style.left = getRandom(0, window.innerWidth) + 'px';
-            star.style.top = getRandom(0, window.innerHeight) + 'px';
-
-            // Random opacity with a higher base
-            star.style.opacity = getRandom(0.3, 0.8);
-
-            // Slightly randomized animation delay for a more natural twinkle
-            star.style.animationDelay = getRandom(0, 1) + 's';
-
-            return star;
-        }
-
-        // Function to populate stars
-        function populateStars() {
-            // Clear existing stars
-            starsContainer.innerHTML = '';
-            
-            // Number of stars to create - based on viewport size
-            const numStars = Math.floor((window.innerWidth * window.innerHeight) / 1000);
-            
-            // Add the stars to the container
-            for (let i = 0; i < numStars; i++) {
-                starsContainer.appendChild(createStar());
+            function getRandom(min, max) {
+                return Math.random() * (max - min) + min;
             }
-        }
 
-        // Initial population of stars
-        populateStars();
+            // Get the stars container
+            const starsContainer = document.getElementById('stars-container');
 
-        // Repopulate stars when window is resized
-        window.addEventListener('resize', populateStars);
+            // Function to create a star element with random properties
+            function createStar() {
+                const star = document.createElement('div');
+                star.classList.add('star');
 
-        // Course content data for all weeks
-        const weekData = {
-            "Week 1": {
-                title: "Introduction to our Solar System",
-                description: "Welcome to the first week of Astronomy 101! This week we'll explore our cosmic neighborhood.",
-                tasks: [
-                    {
-                        title: "Lecture Materials",
-                        content: "• Introduction to the Solar System<br>• Planetary Motion and Kepler's Laws<br>• Inner vs Outer Planets<br>• Dwarf Planets and Small Bodies"
-                    },
-                    {
-                        title: "Reading Assignment",
-                        content: "• Chapter 1-3 in \"Foundations of Astronomy\"<br>• Article: \"Recent Discoveries in the Kuiper Belt\"<br>• NASA's Solar System Exploration Website"
-                    },
-                    {
-                        title: "Observation Activity",
-                        content: "Identify major planets visible this week. Use the provided star chart to locate Jupiter and Saturn in the night sky. Document your observations with sketches or photographs."
-                    }
-                ]
-            },
-            "Week 2": {
-                title: "Stars and Stellar Evolution",
-                description: "This week we dive into the fascinating world of stars - their formation, life cycles, and ultimate fates.",
-                tasks: [
-                    {
-                        title: "Lecture Materials",
-                        content: "• Types of Stars and Classification<br>• Hertzsprung-Russell Diagram<br>• Star Formation and Main Sequence<br>• Giant Stars, White Dwarfs, and Supernovae"
-                    },
-                    {
-                        title: "Reading Assignment",
-                        content: "• Chapter 4-6 in \"Foundations of Astronomy\"<br>• Article: \"Recent Advances in Stellar Nucleosynthesis\"<br>• Video: \"Life Cycle of Stars\" - Equinox Lecture Series"
-                    },
-                    {
-                        title: "Practical Exercise",
-                        content: "Use the provided stellar data to plot stars on an H-R diagram. Identify the main sequence, giants, and white dwarfs. Calculate the approximate age of the star cluster."
-                    }
-                ]
-            },
-            "Week 3": {
-                title: "Galaxies and Deep Space Objects",
-                description: "This week we journey beyond our Milky Way to explore the diverse galaxy types and structures in our universe.",
-                tasks: [
-                    {
-                        title: "Lecture Materials",
-                        content: "• Galaxy Classification and Morphology<br>• The Milky Way Structure<br>• Active Galactic Nuclei and Quasars<br>• Galaxy Evolution and Mergers"
-                    },
-                    {
-                        title: "Reading Assignment",
-                        content: "• Chapter 7-9 in \"Foundations of Astronomy\"<br>• Research Paper: \"Dark Matter Distribution in Spiral Galaxies\"<br>• Virtual Tour: Hubble Deep Field Images"
-                    },
-                    {
-                        title: "Group Project",
-                        content: "In teams of 3-4, select a galaxy type and prepare a presentation on its characteristics, notable examples, and current research. Include at least 5 high-quality images with proper citations."
-                    }
-                ]
-            },
-            "Week 4": {
-                title: "Cosmology and the Universe",
-                description: "This week explores the biggest questions in astronomy - the origin, evolution, and ultimate fate of our universe.",
-                tasks: [
-                    {
-                        title: "Lecture Materials",
-                        content: "• The Big Bang Theory<br>• Cosmic Microwave Background<br>• Dark Matter and Dark Energy<br>• The Expanding Universe and Hubble's Law"
-                    },
-                    {
-                        title: "Reading Assignment",
-                        content: "• Chapter 10-12 in \"Foundations of Astronomy\"<br>• Article: \"JWST's New Insights into Cosmic Inflation\"<br>• Interactive Module: Cosmic Timeline Explorer"
-                    },
-                    {
-                        title: "Research Activity",
-                        content: "Write a 1000-word essay on one of the following topics: Dark Matter Detection Methods, Evidence for the Big Bang, or The Fate of the Universe. Include at least 5 scholarly references."
-                    }
-                ]
-            },
-            "Week 5": {
-                title: "The Future of Astronomy",
-                description: "In our final week, we'll look ahead to upcoming missions, technologies, and the biggest unsolved questions in astronomy.",
-                tasks: [
-                    {
-                        title: "Lecture Materials",
-                        content: "• Next Generation Observatories<br>• Gravitational Wave Astronomy<br>• Interstellar Travel Concepts<br>• Unsolved Problems in Astrophysics"
-                    },
-                    {
-                        title: "Reading Assignment",
-                        content: "• Chapter 17-18 in \"Foundations of Astronomy\"<br>• Article: \"The Next Decade in Astronomy\"<br>• Interactive Timeline: Future Space Missions"
-                    },
-                    {
-                        title: "Final Project Submission",
-                        content: "Submit your course project and prepare a 10-minute presentation for the class. Projects should demonstrate application of concepts from at least three different course modules."
-                    }
-                ]
-            },
-            "Additional Materials": {
-                title: "Supplementary Resources",
-                description: "Explore these additional resources to deepen your understanding of astronomy beyond the core curriculum.",
-                tasks: [
-                    {
-                        title: "Advanced Readings",
-                        content: "• \"Black Holes and Time Warps\" by Kip Thorne<br>• \"Cosmos\" by Carl Sagan<br>• \"A Brief History of Time\" by Stephen Hawking<br>• \"The Elegant Universe\" by Brian Greene"
-                    },
-                    {
-                        title: "Digital Resources",
-                        content: "• Stellarium (Free planetarium software)<br>• NASA's Eyes on the Solar System<br>• WorldWide Telescope<br>• Aladin Sky Atlas"
-                    },
-                    {
-                        title: "Recommended Organizations",
-                        content: "• International Astronomical Union<br>• SETI Institute<br>• The Planetary Society<br>• Local astronomy clubs and observatories"
-                    }
-                ]
+                // Random size for the star
+                const size = getRandom(1, 3) + 'px';
+                star.style.width = size;
+                star.style.height = size;
+
+                // Random position within the viewport
+                star.style.left = getRandom(0, window.innerWidth) + 'px';
+                star.style.top = getRandom(0, window.innerHeight) + 'px';
+
+                // Random opacity with a higher base
+                star.style.opacity = getRandom(0.3, 0.8);
+
+                // Slightly randomized animation delay for a more natural twinkle
+                star.style.animationDelay = getRandom(0, 1) + 's';
+
+                return star;
             }
-        };
 
-        // Mobile menu toggle functionality
-        const hamburger = document.getElementById('hamburger-menu');
-        const navMenu = document.getElementById('nav-menu');
+            // Function to populate stars
+            function populateStars() {
+                // Clear existing stars
+                starsContainer.innerHTML = '';
+                
+                // Number of stars to create - based on viewport size
+                const numStars = Math.floor((window.innerWidth * window.innerHeight) / 1000);
+                
+                // Add the stars to the container
+                for (let i = 0; i < numStars; i++) {
+                    starsContainer.appendChild(createStar());
+                }
+            }
 
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+            // Initial population of stars
+            populateStars();
 
-        // Close menu when a nav item is clicked
-        const navLinks = document.querySelectorAll('nav ul li a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
+            // Repopulate stars when window is resized
+            window.addEventListener('resize', populateStars);
+
+            // Course content data for all weeks
+            const weekData = {
+                "Week 1": {
+                    title: "Introduction to our Solar System",
+                    description: "Welcome to the first week of Astronomy 101! This week we'll explore our cosmic neighborhood.",
+                    tasks: [
+                        {
+                            title: "Lecture Materials",
+                            content: "• Introduction to the Solar System<br>• Planetary Motion and Kepler's Laws<br>• Inner vs Outer Planets<br>• Dwarf Planets and Small Bodies"
+                        },
+                        {
+                            title: "Reading Assignment",
+                            content: "• Chapter 1-3 in \"Foundations of Astronomy\"<br>• Article: \"Recent Discoveries in the Kuiper Belt\"<br>• NASA's Solar System Exploration Website"
+                        },
+                        {
+                            title: "Observation Activity",
+                            content: "Identify major planets visible this week. Use the provided star chart to locate Jupiter and Saturn in the night sky. Document your observations with sketches or photographs."
+                        }
+                    ],
+                    theoretical: [
+                        {
+                            day: "Day 1",
+                            title: "Introduction to Celestial Mechanics",
+                            activities: [
+                                "Review fundamental concepts of gravity and orbital motion",
+                                "Study Newton's laws of motion and their applications in astronomy",
+                                "Explore the historical development of our understanding of planetary motion"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "The Inner Solar System",
+                            activities: [
+                                "Examine the terrestrial planets: Mercury, Venus, Earth, and Mars",
+                                "Compare and contrast physical properties of inner planets",
+                                "Analyze the concept of habitable zones around stars"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "The Outer Solar System",
+                            activities: [
+                                "Study the gas giants: Jupiter, Saturn, Uranus, and Neptune",
+                                "Explore their moon systems and ring structures",
+                                "Discuss the role of these planets in protecting Earth from impacts"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Dwarf Planets and Small Bodies",
+                            activities: [
+                                "Investigate Pluto, Ceres, Eris, and other dwarf planets",
+                                "Study asteroids, comets, and Kuiper Belt objects",
+                                "Discuss recent missions to these objects and their findings"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "Solar System Formation Theory",
+                            activities: [
+                                "Examine the nebular hypothesis and modern theories",
+                                "Study evidence from meteorites and planetary composition",
+                                "Discuss implications for exoplanetary systems"
+                            ]
+                        }
+                    ],
+                    computational: [
+                        {
+                            day: "Day 1",
+                            title: "Orbital Mechanics Simulation",
+                            activities: [
+                                "Set up basic computational environment for astronomical calculations",
+                                "Model simple two-body gravitational interactions",
+                                "Visualize orbital paths using provided software tools"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "Planetary Data Analysis",
+                            activities: [
+                                "Work with NASA planetary datasets",
+                                "Calculate planetary densities and escape velocities",
+                                "Create comparative charts of planetary properties"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "Kepler's Laws Applications",
+                            activities: [
+                                "Write algorithms to apply Kepler's laws",
+                                "Calculate orbital periods and velocities",
+                                "Analyze real observational data of planetary motions"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Astronomical Observation Planning",
+                            activities: [
+                                "Use planetarium software to plan observations",
+                                "Calculate optimal viewing times based on planetary positions",
+                                "Process and enhance planetary observation images"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "Solar System Visualization Project",
+                            activities: [
+                                "Create a scale model of the solar system",
+                                "Program an interactive visualization of planetary motions",
+                                "Implement a simulation of the day/night cycle on different planets"
+                            ]
+                        }
+                    ]
+                },
+                "Week 2": {
+                    title: "Stars and Stellar Evolution",
+                    description: "This week we dive into the fascinating world of stars - their formation, life cycles, and ultimate fates.",
+                    tasks: [
+                        {
+                            title: "Lecture Materials",
+                            content: "• Types of Stars and Classification<br>• Hertzsprung-Russell Diagram<br>• Star Formation and Main Sequence<br>• Giant Stars, White Dwarfs, and Supernovae"
+                        },
+                        {
+                            title: "Reading Assignment",
+                            content: "• Chapter 4-6 in \"Foundations of Astronomy\"<br>• Article: \"Recent Advances in Stellar Nucleosynthesis\"<br>• Video: \"Life Cycle of Stars\" - Equinox Lecture Series"
+                        },
+                        {
+                            title: "Practical Exercise",
+                            content: "Use the provided stellar data to plot stars on an H-R diagram. Identify the main sequence, giants, and white dwarfs. Calculate the approximate age of the star cluster."
+                        }
+                    ],
+                    theoretical: [
+                        {
+                            day: "Day 1",
+                            title: "Star Formation and Classification",
+                            activities: [
+                                "Study the process of star formation from molecular clouds",
+                                "Explore the stellar classification system and spectral types",
+                                "Examine how we determine stellar compositions"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "Main Sequence Stars",
+                            activities: [
+                                "Review nuclear fusion processes in stellar cores",
+                                "Analyze the mass-luminosity relationship",
+                                "Study stellar stability and hydrostatic equilibrium"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "Post-Main Sequence Evolution",
+                            activities: [
+                                "Explore red giants and horizontal branch stars",
+                                "Study helium flash and carbon fusion processes",
+                                "Examine planetary nebulae formation"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Stellar End States",
+                            activities: [
+                                "Analyze white dwarf formation and characteristics",
+                                "Study neutron stars and pulsars",
+                                "Examine black hole physics and event horizons"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "Supernovae and Stellar Nucleosynthesis",
+                            activities: [
+                                "Explore different types of supernovae",
+                                "Study heavy element formation in stellar explosions",
+                                "Examine the role of supernovae in galactic evolution"
+                            ]
+                        }
+                    ],
+                    computational: [
+                        {
+                            day: "Day 1",
+                            title: "Hertzsprung-Russell Diagram Analysis",
+                            activities: [
+                                "Work with stellar catalog data",
+                                "Create algorithms to plot and analyze H-R diagrams",
+                                "Identify different stellar populations from data"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "Stellar Evolution Modeling",
+                            activities: [
+                                "Use stellar evolution code to model star lifecycles",
+                                "Simulate main sequence evolution for different masses",
+                                "Analyze and visualize results of evolutionary models"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "Binary Star System Analysis",
+                            activities: [
+                                "Model gravitational interactions in binary systems",
+                                "Calculate orbital parameters from observational data",
+                                "Simulate mass transfer in close binary systems"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Spectroscopic Data Processing",
+                            activities: [
+                                "Work with stellar spectra datasets",
+                                "Develop algorithms to identify absorption lines",
+                                "Calculate radial velocities and metallicities"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "Stellar Population Synthesis",
+                            activities: [
+                                "Simulate star cluster evolution over time",
+                                "Create models of star formation history",
+                                "Visualize cluster evolution on H-R diagrams"
+                            ]
+                        }
+                    ]
+                },
+                "Week 3": {
+                    title: "Galaxies and Deep Space Objects",
+                    description: "This week we journey beyond our Milky Way to explore the diverse galaxy types and structures in our universe.",
+                    tasks: [
+                        {
+                            title: "Lecture Materials",
+                            content: "• Galaxy Classification and Morphology<br>• The Milky Way Structure<br>• Active Galactic Nuclei and Quasars<br>• Galaxy Evolution and Mergers"
+                        },
+                        {
+                            title: "Reading Assignment",
+                            content: "• Chapter 7-9 in \"Foundations of Astronomy\"<br>• Research Paper: \"Dark Matter Distribution in Spiral Galaxies\"<br>• Virtual Tour: Hubble Deep Field Images"
+                        },
+                        {
+                            title: "Group Project",
+                            content: "In teams of 3-4, select a galaxy type and prepare a presentation on its characteristics, notable examples, and current research. Include at least 5 high-quality images with proper citations."
+                        }
+                    ],
+                    theoretical: [
+                        {
+                            day: "Day 1",
+                            title: "Galaxy Classification and Morphology",
+                            activities: [
+                                "Study the Hubble sequence of galaxy types",
+                                "Examine spiral, elliptical, and irregular galaxies",
+                                "Explore barred spiral and lenticular structures"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "The Milky Way Galaxy",
+                            activities: [
+                                "Examine the structure of our home galaxy",
+                                "Study stellar populations and distributions",
+                                "Explore the galactic center and supermassive black hole"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "Active Galactic Nuclei",
+                            activities: [
+                                "Study quasars, blazars, and Seyfert galaxies",
+                                "Examine accretion disks and relativistic jets",
+                                "Explore the unified model of AGN"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Galaxy Evolution and Interactions",
+                            activities: [
+                                "Study galaxy formation theories",
+                                "Examine galaxy mergers and their effects",
+                                "Explore galactic cannibalism and tidal disruption"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "Galaxy Clusters and Large-Scale Structure",
+                            activities: [
+                                "Study galaxy groups and clusters",
+                                "Examine intracluster medium and dark matter halos",
+                                "Explore cosmic filaments and voids"
+                            ]
+                        }
+                    ],
+                    computational: [
+                        {
+                            day: "Day 1",
+                            title: "Galaxy Classification Algorithms",
+                            activities: [
+                                "Process galaxy image datasets",
+                                "Implement basic image recognition for galaxy classification",
+                                "Analyze galaxy morphology parameters"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "Galactic Rotation Curve Analysis",
+                            activities: [
+                                "Work with rotation curve data",
+                                "Model dark matter distribution in galaxies",
+                                "Simulate galaxy rotation with different mass distributions"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "Galaxy Merger Simulations",
+                            activities: [
+                                "Use N-body simulation tools",
+                                "Model galaxy interactions and mergers",
+                                "Analyze results and compare to observed merger systems"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Large Dataset Analysis Techniques",
+                            activities: [
+                                "Work with galaxy survey catalogs",
+                                "Implement statistical methods for large data analysis",
+                                "Create visualizations of galaxy distributions"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "Galaxy Evolution Modeling",
+                            activities: [
+                                "Use semi-analytic models for galaxy evolution",
+                                "Simulate star formation histories in different galaxy types",
+                                "Model chemical evolution across cosmic time"
+                            ]
+                        }
+                    ]
+                },
+                "Week 4": {
+                    title: "Cosmology and the Universe",
+                    description: "This week explores the biggest questions in astronomy - the origin, evolution, and ultimate fate of our universe.",
+                    tasks: [
+                        {
+                            title: "Lecture Materials",
+                            content: "• The Big Bang Theory<br>• Cosmic Microwave Background<br>• Dark Matter and Dark Energy<br>• The Expanding Universe and Hubble's Law"
+                        },
+                        {
+                            title: "Reading Assignment",
+                            content: "• Chapter 10-12 in \"Foundations of Astronomy\"<br>• Article: \"JWST's New Insights into Cosmic Inflation\"<br>• Interactive Module: Cosmic Timeline Explorer"
+                        },
+                        {
+                            title: "Research Activity",
+                            content: "Write a 1000-word essay on one of the following topics: Dark Matter Detection Methods, Evidence for the Big Bang, or The Fate of the Universe. Include at least 5 scholarly references."
+                        }
+                    ],
+                    theoretical: [
+                        {
+                            day: "Day 1",
+                            title: "The Big Bang Theory",
+                            activities: [
+                                "Study the evidence for the Big Bang",
+                                "Examine cosmic inflation theories",
+                                "Explore nucleosynthesis in the early universe"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "Cosmic Microwave Background",
+                            activities: [
+                                "Study the CMB discovery and significance",
+                                "Examine temperature fluctuations and anisotropies",
+                                "Explore what the CMB tells us about the early universe"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "Dark Matter",
+                            activities: [
+                                "Review evidence for dark matter existence",
+                                "Study leading dark matter particle candidates",
+                                "Examine detection methods and experiments"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Dark Energy and Cosmic Acceleration",
+                            activities: [
+                                "Study evidence for cosmic acceleration",
+                                "Examine dark energy models and the cosmological constant",
+                                "Explore implications for the fate of the universe"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "The Fate of the Universe",
+                            activities: [
+                                "Compare Big Freeze, Big Crunch, and Big Rip scenarios",
+                                "Study current cosmological parameter measurements",
+                                "Explore multiverse theories and implications"
+                            ]
+                        }
+                    ],
+                    computational: [
+                        {
+                            day: "Day 1",
+                            title: "Hubble's Law and Distance Calculations",
+                            activities: [
+                                "Work with galaxy redshift data",
+                                "Calculate Hubble constant from observational data",
+                                "Create distance vs. velocity plots"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "Cosmic Microwave Background Analysis",
+                            activities: [
+                                "Process CMB map data",
+                                "Analyze temperature fluctuation patterns",
+                                "Calculate power spectrum of CMB anisotropies"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "Cosmological Parameter Estimation",
+                            activities: [
+                                "Work with cosmological models",
+                                "Implement MCMC methods for parameter constraints",
+                                "Visualize confidence intervals for cosmological parameters"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Structure Formation Simulations",
+                            activities: [
+                                "Run simplified structure formation codes",
+                                "Model the growth of cosmic structures over time",
+                                "Analyze the effects of dark matter on structure formation"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "Universe Evolution Modeling",
+                            activities: [
+                                "Implement Friedmann equations for universe expansion",
+                                "Simulate different cosmological models",
+                                "Create visualizations of potential universe futures"
+                            ]
+                        }
+                    ]
+                },
+                "Week 5": {
+                    title: "The Future of Astronomy",
+                    description: "In our final week, we'll look ahead to upcoming missions, technologies, and the biggest unsolved questions in astronomy.",
+                    tasks: [
+                        {
+                            title: "Lecture Materials",
+                            content: "• Next Generation Observatories<br>• Gravitational Wave Astronomy<br>• Interstellar Travel Concepts<br>• Unsolved Problems in Astrophysics"
+                        },
+                        {
+                            title: "Reading Assignment",
+                            content: "• Chapter 17-18 in \"Foundations of Astronomy\"<br>• Article: \"The Next Decade in Astronomy\"<br>• Interactive Timeline: Future Space Missions"
+                        },
+                        {
+                            title: "Final Project Submission",
+                            content: "Submit your course project and prepare a 10-minute presentation for the class. Projects should demonstrate application of concepts from at least three different course modules."
+                        }
+                    ],
+                    theoretical: [
+                        {
+                            day: "Day 1",
+                            title: "Advanced Observational Technologies",
+                            activities: [
+                                "Study next-generation telescope designs",
+                                "Explore multi-messenger astronomy concepts",
+                                "Examine future space-based observatories"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "Gravitational Wave Astronomy",
+                            activities: [
+                                "Review the theory of gravitational waves",
+                                "Study LIGO/VIRGO detections and implications",
+                                "Explore future gravitational wave observatories"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "Exoplanets and Astrobiology",
+                            activities: [
+                                "Study methods for detecting biosignatures",
+                                "Examine habitable zone concepts and limitations",
+                                "Explore plans for characterizing exoplanet atmospheres"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Interstellar Travel Concepts",
+                            activities: [
+                                "Study propulsion methods for interstellar journeys",
+                                "Examine relativistic effects on space travel",
+                                "Explore concepts for generation ships and sleeper vessels"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "Unsolved Problems in Astrophysics",
+                            activities: [
+                                "Review major open questions in modern astrophysics",
+                                "Discuss approaches to solving these problems",
+                                "Explore potential paradigm shifts in our understanding"
+                            ]
+                        }
+                    ],
+                    computational: [
+                        {
+                            day: "Day 1",
+                            title: "Machine Learning in Astronomy",
+                            activities: [
+                                "Implement basic ML algorithms for astronomical data",
+                                "Train models to identify celestial objects",
+                                "Explore automated discovery systems"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "Gravitational Wave Signal Processing",
+                            activities: [
+                                "Work with LIGO data",
+                                "Implement signal processing algorithms",
+                                "Model expected signals from different cosmic events"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "Exoplanet Transit Analysis",
+                            activities: [
+                                "Process light curve data for exoplanet detection",
+                                "Calculate planetary parameters from transit data",
+                                "Model atmospheric spectroscopy techniques"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Interstellar Mission Planning Tools",
+                            activities: [
+                                "Calculate relativistic effects for interstellar journeys",
+                                "Model radiation shielding requirements",
+                                "Optimize trajectories for interstellar probes"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "Final Computational Project",
+                            activities: [
+                                "Integrate multiple computational astronomy techniques",
+                                "Create a comprehensive astronomical data analysis tool",
+                                "Present results through effective data visualization"
+                            ]
+                        }
+                    ]
+                },
+                "Additional Materials": {
+                    title: "Supplementary Resources",
+                    description: "Explore these additional resources to deepen your understanding of astronomy beyond the core curriculum.",
+                    tasks: [
+                        {
+                            title: "Advanced Readings",
+                            content: "• \"Black Holes and Time Warps\" by Kip Thorne<br>• \"Cosmos\" by Carl Sagan<br>• \"A Brief History of Time\" by Stephen Hawking<br>• \"The Elegant Universe\" by Brian Greene"
+                        },
+                        {
+                            title: "Digital Resources",
+                            content: "• Stellarium (Free planetarium software)<br>• NASA's Eyes on the Solar System<br>• WorldWide Telescope<br>• Aladin Sky Atlas"
+                        },
+                        {
+                            title: "Recommended Organizations",
+                            content: "• International Astronomical Union<br>• SETI Institute<br>• The Planetary Society<br>• Local astronomy clubs and observatories"
+                        }
+                    ],
+                    theoretical: [
+                        {
+                            day: "Day 1",
+                            title: "Advanced Cosmology Topics",
+                            activities: [
+                                "Study quantum gravity theories",
+                                "Explore multiverse hypotheses",
+                                "Examine the anthropic principle in cosmology"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "Astrophysical Relativity",
+                            activities: [
+                                "Study advanced concepts in general relativity",
+                                "Explore relativistic jets and accretion disks",
+                                "Examine frame-dragging and other exotic effects"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "Advanced Stellar Physics",
+                            activities: [
+                                "Study detailed stellar atmospheres models",
+                                "Explore asteroseismology techniques",
+                                "Examine radiation transport in stellar interiors"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Galactic Dynamics",
+                            activities: [
+                                "Study advanced topics in galaxy formation",
+                                "Explore galactic magnetic fields",
+                                "Examine cosmic ray acceleration mechanisms"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "Philosophy of Cosmology",
+                            activities: [
+                                "Study philosophical implications of modern cosmology",
+                                "Explore the nature of time and entropy in the universe",
+                                "Examine the relationship between physics and metaphysics"
+                            ]
+                        }
+                    ],
+                    computational: [
+                        {
+                            day: "Day 1",
+                            title: "Advanced Numerical Methods",
+                            activities: [
+                                "Study adaptive mesh refinement techniques",
+                                "Implement parallel computing for astrophysical simulations",
+                                "Explore GPU acceleration for complex models"
+                            ]
+                        },
+                        {
+                            day: "Day 2",
+                            title: "Advanced Statistical Methods",
+                            activities: [
+                                "Implement Bayesian inference techniques",
+                                "Study MCMC methods for parameter estimation",
+                                "Explore machine learning applications in astronomy"
+                            ]
+                        },
+                        {
+                            day: "Day 3",
+                            title: "High-Performance Computing",
+                            activities: [
+                                "Learn cluster computing techniques",
+                                "Implement distributed processing for large datasets",
+                                "Explore cloud computing resources for astronomy"
+                            ]
+                        },
+                        {
+                            day: "Day 4",
+                            title: "Scientific Visualization",
+                            activities: [
+                                "Study advanced 3D visualization techniques",
+                                "Implement interactive astronomical visualizations",
+                                "Explore virtual reality applications in astronomy education"
+                            ]
+                        },
+                        {
+                            day: "Day 5",
+                            title: "Research Computing Skills",
+                            activities: [
+                                "Learn reproducible research practices",
+                                "Study version control for scientific computing",
+                                "Explore open science frameworks and data sharing"
+                            ]
+                        }
+                    ]
+                }
+            };
+
+            // Mobile menu toggle functionality
+            const hamburger = document.getElementById('hamburger-menu');
+            const navMenu = document.getElementById('nav-menu');
+
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
             });
-        });
 
-        // Week navigation functionality
-        const weekNavItems = document.querySelectorAll('.week-nav-item');
-        const tabContent = document.getElementById('tab-content');
-        const tabItems = document.querySelectorAll('.content-tab');
-        let currentWeek = "Week 1";
-        let currentTab = "contents";
+            // Close menu when a nav item is clicked
+            const navLinks = document.querySelectorAll('nav ul li a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Week navigation functionality
+            const weekNavItems = document.querySelectorAll('.week-nav-item');
+            const tabContent = document.getElementById('tab-content');
+            const tabItems = document.querySelectorAll('.content-tab');
+            let currentWeek = "Week 1";
+            let currentTab = "contents";
+
+            // Function to update content based on selected week and tab
+            function updateContent() {
+                const week = weekData[currentWeek];
+                
+                if (currentTab === "contents") {
+                    tabContent.innerHTML = `
+                        <h3>${week.title}</h3>
+                        <p>${week.description}</p>
+                        
+                        <div class="task-items">
+                            <div class="task-item">
+                                <h3>${week.tasks[0].title}</h3>
+                                <p>${week.tasks[0].content}</p>
+                            </div>
+                            <div class="task-item">
+                                <h3>${week.tasks[1].title}</h3>
+                                <p>${week.tasks[1].content}</p>
+                            </div>
+                            <div class="task-item">
+                                <h3>${week.tasks[2].title}</h3>
+                                <p>${week.tasks[2].content}</p>
+                            </div>
+                        </div>
+                    `;
+                } else if (currentTab === "task1") {
+                    // Theoretical tab content
+                    let theoreticalContent = `
+                        <h3>Theoretical Activities for ${week.title}</h3>
+                        <p>Daily theoretical activities for understanding key astronomical concepts.</p>
+                        
+                        <div class="day-activities-container">
+                    `;
+                    
+                    // If the week has theoretical data, show it
+                    if (week.theoretical) {
+                        // Add each day's activities
+                        week.theoretical.forEach(day => {
+                            theoreticalContent += `
+                                <div class="day-activity-card">
+                                    <h4 class="day-title">${day.day}: ${day.title}</h4>
+                                    <ul class="activity-list">
+                                        ${day.activities.map(activity => `<li>${activity}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        // Show coming soon if no theoretical data
+                        theoreticalContent += `
+                            <div class="coming-soon-message">
+                                <p>Detailed day-wise activities coming soon...</p>
+                            </div>
+                        `;
+                    }
+                    
+                    theoreticalContent += `
+                        </div>
+                    `;
+                    
+                    tabContent.innerHTML = theoreticalContent;
+                } else if (currentTab === "task2") {
+                    // Computational tab content
+                    let computationalContent = `
+                        <h3>Computational Activities for ${week.title}</h3>
+                        <p>Daily computational exercises for applying astronomical concepts.</p>
+                        
+                        <div class="day-activities-container">
+                    `;
+                    
+                    // If the week has computational data, show it
+                    if (week.computational) {
+                        // Add each day's activities
+                        week.computational.forEach(day => {
+                            computationalContent += `
+                                <div class="day-activity-card">
+                                    <h4 class="day-title">${day.day}: ${day.title}</h4>
+                                    <ul class="activity-list">
+                                        ${day.activities.map(activity => `<li>${activity}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            `;
+                        });
+                    } else {
+                        // Show coming soon if no computational data
+                        computationalContent += `
+                            <div class="coming-soon-message">
+                                <p>Detailed day-wise activities coming soon...</p>
+                            </div>
+                        `;
+                    }
+                    
+                    computationalContent += `
+                        </div>
+                    `;
+                    
+                    tabContent.innerHTML = computationalContent;
+                }
+            }
 
         // Function to update content based on selected week and tab
         function updateContent() {
             const week = weekData[currentWeek];
             
+            // Show "Coming Soon" for all weeks except Additional Materials
             if (currentWeek !== "Additional Materials") {
-                // For weeks 2-5 that are not yet available
                 tabContent.innerHTML = `
                     <h3>${currentWeek}: ${week.title}</h3>
                     <p>Coming Soon...</p>
@@ -819,6 +1532,7 @@
                 return;
             }
 
+            // Only Additional Materials content will display normally
             if (currentTab === "contents") {
                 tabContent.innerHTML = `
                     <h3>${week.title}</h3>
@@ -840,7 +1554,7 @@
                     </div>
                 `;
             } else {
-                // Task tabs (task1, task2, task3)
+                // Task tabs (task1, task2)
                 const taskIndex = parseInt(currentTab.replace('task', '')) - 1;
                 const task = week.tasks[taskIndex];
                 
@@ -867,52 +1581,49 @@
             }
         }
 
-        // Initialize week navigation
-        weekNavItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Remove active class from all items
-                weekNavItems.forEach(navItem => navItem.classList.remove('active'));
-                
-                // Add active class to clicked item
-                item.classList.add('active');
-                
-                // Update current week
-                currentWeek = item.dataset.week;
-                
-                // Reset to contents tab when changing weeks
-                currentTab = "contents";
-                tabItems.forEach(tab => {
-                    if (tab.dataset.tab === "contents") {
-                        tab.classList.add('active');
-                    } else {
-                        tab.classList.remove('active');
-                    }
+            // Initialize week navigation
+            weekNavItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Remove active class from all items
+                    weekNavItems.forEach(navItem => navItem.classList.remove('active'));
+                    
+                    // Add active class to clicked item
+                    item.classList.add('active');
+                    
+                    // Update current week
+                    currentWeek = item.dataset.week;
+                    
+                    // Reset to contents tab when changing weeks
+                    currentTab = "contents";
+                    tabItems.forEach(tab => {
+                        if (tab.dataset.tab === "contents") {
+                            tab.classList.add('active');
+                        } else {
+                            tab.classList.remove('active');
+                        }
+                    });
+                    
+                    // Update content
+                    updateContent();
                 });
-                
-                // Update content
-                updateContent();
             });
-        });
 
-        // Initialize tab navigation
-        tabItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Remove active class from all tabs
-                tabItems.forEach(tab => tab.classList.remove('active'));
-                
-                // Add active class to clicked tab
-                item.classList.add('active');
-                
-                // Update current tab
-                currentTab = item.dataset.tab;
-                
-                // Update content
-                updateContent();
+            // Initialize tab navigation
+            tabItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    tabItems.forEach(tab => tab.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    item.classList.add('active');
+                    
+                    // Update current tab
+                    currentTab = item.dataset.tab;
+                    
+                    // Update content
+                    updateContent();
+                });
             });
-        });
-
-        // Initialize with Week 1 Contents
-        updateContent();
     </script>
 </body>
 </html>
