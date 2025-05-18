@@ -810,7 +810,7 @@
         function updateContent() {
             const week = weekData[currentWeek];
             
-            if (currentWeek !== "Week 1" && currentWeek !== "Additional Materials") {
+            if (currentWeek !== "Additional Materials") {
                 // For weeks 2-5 that are not yet available
                 tabContent.innerHTML = `
                     <h3>${currentWeek}: ${week.title}</h3>
