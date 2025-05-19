@@ -1525,7 +1525,7 @@
             const week = weekData[currentWeek];
             
             // Show "Coming Soon" for all weeks except Additional Materials
-            if (currentWeek !== "Additional Materials" && currentWeek !== "Week 1") {
+            if (currentWeek !== "Additional Materials") {
                 tabContent.innerHTML = `
                     <h3>${currentWeek}: ${week.title}</h3>
                     <p>Coming Soon...</p>
