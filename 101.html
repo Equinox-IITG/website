@@ -634,26 +634,27 @@
                 
                 <div class="tab-content" id="tab-content">
                     <!-- Content will be dynamically loaded here -->
-                    <h3>Week 1: Introduction to our Solar System</h3>
-                    <p>Welcome to the first week of Astronomy 101! This week we'll explore our cosmic neighborhood.</p>
+                    <h3>Week 1: The Universe's Story</h3>
+                    <p>Welcome to the first week of Astronomy 101! This week we'll explore from Big Bang to Today and learn Python.</p>
                     
                     <div class="task-items">
                         <div class="task-item">
                             <h3>Lecture Materials</h3>
-                            <p>• Introduction to the Solar System<br>
-                            • Planetary Motion and Kepler's Laws<br>
-                            • Inner vs Outer Planets<br>
-                            • Dwarf Planets and Small Bodies</p>
+                            <p>• The Big Bang & Early Universe<br>
+                            • Building the Cosmic Web<br>
+                            • Dark Matter<br>
+                            • Dark Energy</p>
                         </div>
                         <div class="task-item">
                             <h3>Reading Assignment</h3>
-                            <p>• Chapter 1-3 in "Foundations of Astronomy"<br>
-                            • Article: "Recent Discoveries in the Kuiper Belt"<br>
-                            • NASA's Solar System Exploration Website</p>
+                            <p>• "The First Three Minutes" on Astrobites<br>
+                            • NASA's "Universe 101: Big Bang Theory"<br>
+                            • "What is Dark Energy?" on Space.com<br>
+                            • "Dark Matter Explained" by NASA Science</p>
                         </div>
                         <div class="task-item">
-                            <h3>Observation Activity</h3>
-                            <p>Identify major planets visible this week. Use the provided star chart to locate Jupiter and Saturn in the night sky. Document your observations with sketches or photographs.</p>
+                            <h3>Computational Activity</h3>
+                            <p>Learn Python a programming language widely used in astronomy for data analysis, telescope control, image processing, and modeling celestial phenomena due to its simplicity and extensive scientific libraries.</p>
                         </div>
                     </div>
                 </div>
@@ -724,20 +725,20 @@
             // Course content data for all weeks
             const weekData = {
                 "Week 1": {
-                    title: "Introduction to our Solar System",
-                    description: "Welcome to the first week of Astronomy 101! This week we'll explore our cosmic neighborhood.",
+                    title: "The Universe's Story",
+                    description: "Welcome to the first week of Astronomy 101! This week we'll explore from Big Bang to Today and learn Python.",
                     tasks: [
                         {
                             title: "Lecture Materials",
-                            content: "• Introduction to the Solar System<br>• Planetary Motion and Kepler's Laws<br>• Inner vs Outer Planets<br>• Dwarf Planets and Small Bodies"
+                            content: "• The Big Bang & Early Universe<br>• Building the Cosmic Web<br>• Dark Matter<br>• Dark Energy"
                         },
                         {
                             title: "Reading Assignment",
-                            content: "• Chapter 1-3 in \"Foundations of Astronomy\"<br>• Article: \"Recent Discoveries in the Kuiper Belt\"<br>• NASA's Solar System Exploration Website"
+                            content: "• \"The First Three Minutes\" on Astrobites<br>• NASA's \"Universe 101: Big Bang Theory\"<br>• \"What is Dark Energy?\" on Space.com<br>• \"Dark Matter Explained\" by NASA Science"
                         },
                         {
-                            title: "Observation Activity",
-                            content: "Identify major planets visible this week. Use the provided star chart to locate Jupiter and Saturn in the night sky. Document your observations with sketches or photographs."
+                            title: "Computational Activity",
+                            content: "Learn Python a programming language widely used in astronomy for data analysis, telescope control, image processing, and modeling celestial phenomena due to its simplicity and extensive scientific libraries."
                         }
                     ],
                     theoretical: [
@@ -1524,7 +1525,7 @@
             const week = weekData[currentWeek];
             
             // Show "Coming Soon" for all weeks except Additional Materials
-            if (currentWeek !== "Additional Materials") {
+            if (currentWeek !== "Additional Materials" && currentWeek !== "Week 1") {
                 tabContent.innerHTML = `
                     <h3>${currentWeek}: ${week.title}</h3>
                     <p>Coming Soon...</p>
