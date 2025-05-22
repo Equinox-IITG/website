@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -194,6 +195,9 @@
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 400px; /* Fixed height for consistent alignment */
         }
 
         .project-card:hover {
@@ -205,6 +209,7 @@
             height: 200px;
             overflow: hidden;
             position: relative;
+            flex-shrink: 0; /* Prevent image from shrinking */
         }
 
         .project-image img {
@@ -247,6 +252,9 @@
 
         .project-content {
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; /* Allow content to grow and fill remaining space */
         }
 
         .project-title {
@@ -261,15 +269,14 @@
             line-height: 1.6;
             color: #d4d4d4;
             margin-bottom: 20px;
-            height: 85px;
-            overflow: hidden;
+            flex-grow: 1; /* Allow description to take up available space */
         }
 
         .project-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 10px;
+            margin-top: auto; /* Push to bottom of the flex container */
             padding-top: 15px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -437,6 +444,10 @@
             .page-title h1 {
                 font-size: 2rem;
             }
+
+            .project-card {
+                height: auto; /* Allow flexible height on mobile */
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -445,7 +456,7 @@
     <div id="stars-container"></div>
     <header>
         <div class="logo-container">
-            <img src="sup_images\logo.png" alt="Logo" class="logo"> <span class="logo-text">Equinox</span>
+            <img src="/api/placeholder/40/40" alt="Logo" class="logo"> <span class="logo-text">Equinox</span>
         </div>
         <nav>
             <div class="hamburger" id="hamburger-menu">
