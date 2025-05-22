@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +62,6 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            padding: 1rem 0;
             background-color: rgba(0,0,0,0.7);
             display: flex;
             justify-content: space-between;
@@ -82,6 +82,7 @@
             border-radius: 50%;
             overflow: hidden;
             margin-right: 10px;
+            background: #333;
         }
 
         .logo-text {
@@ -141,7 +142,7 @@
         .hamburger span {
             display: block;
             height: 3px;
-            width: 100%;;
+            width: 100%;
             background-color: #fff;
             border-radius: 3px;
         }
@@ -178,8 +179,8 @@
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
@@ -195,11 +196,12 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             backdrop-filter: blur(5px);
+            text-align: center;
         }
 
         .team-member:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
         }
 
         .team-member::before {
@@ -214,69 +216,34 @@
 
         .member-image {
             width: 100%;
-            height: 280px;
+            height: 220px;
             object-fit: cover;
             display: block;
             filter: brightness(0.9);
+            transition: filter 0.3s ease;
+        }
+
+        .team-member:hover .member-image {
+            filter: brightness(1);
         }
 
         .member-info {
-            padding: 20px;
+            padding: 20px 15px;
             position: relative;
         }
 
         .member-info h3 {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
             color: #fff;
+            font-weight: 600;
         }
 
         .member-role {
             color: #77b5fe;
             font-size: 0.9rem;
-            margin-bottom: 12px;
             font-style: italic;
-        }
-
-        .member-info p {
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: #d4d4d4;
-        }
-
-        .corner {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            z-index: 2;
-        }
-
-        .corner-top-left {
-            top: 10px;
-            left: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            border-left: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .corner-top-right {
-            top: 10px;
-            right: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            border-right: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .corner-bottom-left {
-            bottom: 10px;
-            left: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            border-left: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .corner-bottom-right {
-            bottom: 10px;
-            right: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 500;
         }
 
         footer {
@@ -345,13 +312,13 @@
             }
 
             .team-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
                 gap: 20px;
                 padding: 15px;
             }
 
             .member-image {
-                height: 240px;
+                height: 180px;
             }
 
             .team-hero h1 {
@@ -365,7 +332,24 @@
 
         @media (max-width: 480px) {
             .team-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .member-image {
+                height: 150px;
+            }
+
+            .member-info {
+                padding: 15px 10px;
+            }
+
+            .member-info h3 {
+                font-size: 1rem;
+            }
+
+            .member-role {
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -377,7 +361,7 @@
         <div class="logo-container">
             <img src="sup_images\logo.png" alt="Logo" class="logo"> <span class="logo-text">Equinox</span>
         </div>
-        <nav>
+        <nav>            
             <div class="hamburger" id="hamburger-menu">
                 <span></span>
                 <span></span>
@@ -403,211 +387,136 @@
     <section class="team-grid">
         <!-- Team Member 1 -->
         <div class="team-member">
-            <img src="team_images\debasis.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\debasis.jpg" alt="Debasis Patnaik" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Debasis Patnaik</h3>
                 <div class="member-role">Club Secretary</div>
-                <p>Astrophysics enthusiast specializing in radio astronomy. Leading Equinox through celestial explorations since 2023.</p>
             </div>
         </div>
 
         <!-- Team Member 2 -->
         <div class="team-member">
-            <img src="team_images\kirhen.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\kirhen.jpg" alt="Kirhen Bhagavath S" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Kirhen Bhagavath S</h3>
                 <div class="member-role">Overall Co-ordinator</div>
-                <p>Deep space imaging expert with a focus on nebulae. Coordinates our stargazing events and workshop curriculum.</p>
             </div>
         </div>
 
         <!-- Team Member 3 -->
         <div class="team-member">
-            <img src="team_images\sahas.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\sahas.jpg" alt="Sahastransh Mandhana" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Sahastransh Mandhana</h3>
                 <div class="member-role">Theoretical Head</div>
-                <p>Telescope technician and equipment specialist. Develops custom tools for the club's observational projects.</p>
             </div>
         </div>
 
         <!-- Team Member 4 -->
         <div class="team-member">
-            <img src="team_images\pratyush.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\pratyush.jpg" alt="Pratyush Kumar Swain" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
-                <h3>Pratyush Kumar Swain </h3>
+                <h3>Pratyush Kumar Swain</h3>
                 <div class="member-role">Projects Head</div>
-                <p>Planetary science enthusiast who masterfully organizes our astronomy nights and public outreach programs.</p>
             </div>
         </div>
 
         <!-- Team Member 5 -->
         <div class="team-member">
-            <img src="team_images\vismay.png" alt="Team Member" class="member-image">
+            <img src="team_images\vismay.png" alt="Vismay K Nair" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Vismay K Nair</h3>
                 <div class="member-role">Design Head</div>
-                <p>Specializes in exoplanet research and data analysis. Oversees all club research initiatives and collaborations.</p>
             </div>
         </div>
 
         <!-- Team Member 6 -->
         <div class="team-member">
-            <img src="team_images\ayusha.jpeg" alt="Team Member" class="member-image">
+            <img src="team_images\ayusha.jpeg" alt="Ayush Agarwal" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Ayush Agarwal</h3>
                 <div class="member-role">Core Team Member</div>
-                <p>Science communication expert bridging astronomy to the wider campus community through engaging programs.</p>
             </div>
         </div>
 
         <!-- Team Member 7 -->
         <div class="team-member">
-            <img src="team_images\ayushk.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\ayushk.jpg" alt="Ayush Kumar" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Ayush Kumar</h3>
                 <div class="member-role">Core Team Member</div>
-                <p>Maintains our observatory equipment and leads practical astronomy sessions for beginners.</p>
             </div>
         </div>
 
         <!-- Team Member 8 -->
         <div class="team-member">
-            <img src="team_images\anushka.png" alt="Team Member" class="member-image">
+            <img src="team_images\anushka.png" alt="Anushka Sharma" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Anushka Sharma</h3>
                 <div class="member-role">Core Team Member</div>
-                <p>Blending art and astronomy through stunning visualizations and club branding initiatives.</p>
             </div>
         </div>
 
         <!-- Team Member 9 -->
         <div class="team-member">
-            <img src="team_images\bhavesh.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\bhavesh.jpg" alt="Bhavesh Chamaria" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
-                <h3>Bhavesh Chamaria </h3>
+                <h3>Bhavesh Chamaria</h3>
                 <div class="member-role">Core Team Member</div>
-                <p>Ensures smooth club operations while pursuing her interest in stellar evolution and variable stars.</p>
             </div>
         </div>
 
         <!-- Team Member 10 -->
         <div class="team-member">
-            <img src="team_images\geeta.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\geeta.jpg" alt="Geeta Meena" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Geeta Meena</h3>
                 <div class="member-role">Core Team Member</div>
-                <p>Creates and maintains our digital presence while studying computational astrophysics.</p>
             </div>
         </div>
 
         <!-- Team Member 11 -->
         <div class="team-member">
-            <img src="team_images\pratyushb.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\pratyushb.jpg" alt="Pratyush Bhaiya" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Pratyush Bhaiya</h3>
                 <div class="member-role">Ex - Secretary</div>
-                <p>Develops educational programs about space science and guides members through telescope building workshops.</p>
             </div>
         </div>
 
         <!-- Team Member 12 -->
         <div class="team-member">
-            <img src="team_images\amit.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\amit.jpg" alt="Amit Singh" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Amit Singh</h3>
                 <div class="member-role">Ex - Overall Coordinator</div>
-                <p>Managing our astronomy newsletter and scientific content while researching galactic structures.</p>
             </div>
         </div>
 
         <!-- Team Member 13 -->
         <div class="team-member">
-            <img src="team_images\ananth.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\ananth.jpg" alt="Ananth Bhaiya" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Ananth Bhaiya</h3>
                 <div class="member-role">Ex - Theoretical Head</div>
-                <p>Captures stunning celestial imagery and teaches photography techniques to club members.</p>
             </div>
         </div>
 
         <!-- Team Member 14 -->
         <div class="team-member">
-            <img src="team_images\om.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\om.jpg" alt="Om Dubey" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Om Dubey</h3>
                 <div class="member-role">Ex - Core Team Member</div>
-                <p>Introduces new students to astronomy and helps integrate fresh perspectives into our cosmic community.</p>
             </div>
         </div>
 
         <!-- Team Member 15 -->
         <div class="team-member">
-            <img src="team_images\tanuj.jpg" alt="Team Member" class="member-image">
+            <img src="team_images\tanuj.jpg" alt="Tanuj Bhaiya" class="member-image">
             <div class="member-info">
-                <div class="corner corner-top-left"></div>
-                <div class="corner corner-top-right"></div>
-                <div class="corner corner-bottom-left"></div>
-                <div class="corner corner-bottom-right"></div>
                 <h3>Tanuj Bhaiya</h3>
                 <div class="member-role">Ex - Observational Head</div>
-                <p>Introduces new students to astronomy and helps integrate fresh perspectives into our cosmic community.</p>
             </div>
         </div>
     </section>
