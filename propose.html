@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* General Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif; /* Changed font */
+            font-family: 'Arial', sans-serif;
         }
 
         body {
@@ -355,108 +354,59 @@
             margin-top: 30px;
             box-shadow: 0 5px 20px rgba(70, 200, 100, 0.4);
         }
-
-        /* Guidelines Section */
-        .guidelines {
-            background: rgba(0, 0, 0, 0.4); /* Slightly darker, more transparent */
-            border: 1px solid rgba(139, 184, 255, 0.2); /* Softer blue border */
-            border-radius: 15px; /* More rounded */
-            padding: 35px; /* More padding */
-            margin-bottom: 50px; /* More space */
-            box-shadow: inset 0 0 10px rgba(139, 184, 255, 0.1); /* Inner glow */
-        }
-
-        .guidelines h3 {
-            font-family: 'Playfair Display', serif; /* Elegant font for heading */
-            color: #8bb8ff; /* Blue heading */
-            margin-bottom: 20px;
-            font-size: 1.8rem; /* Larger heading */
-            text-align: center;
-            letter-spacing: 1px;
-        }
-
-        .guidelines ul {
-            list-style: none;
-            padding-left: 0;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .guidelines li {
-            color: #C0C0C0;
-            margin-bottom: 12px; /* More space between list items */
-            padding-left: 30px; /* More room for star icon */
-            position: relative;
-            font-size: 1.05rem; /* Larger list item text */
-        }
-
-        .guidelines li::before {
-            content: "★";
-            position: absolute;
-            left: 0;
-            color: #FFDDAA; /* Golden star */
-            font-size: 1.2em;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
+        
         /* Footer */
         footer {
             position: relative;
+            bottom: 0;
             width: 100%;
-            padding: 2rem 0; /* More padding */
+            padding: 1.5rem 0;
             display: flex;
             justify-content: center;
-            background-color: rgba(0,0,0,0.8); /* Slightly more opaque */
-            margin-top: 60px; /* More space above footer */
+            background-color: rgba(0,0,0,0.7);
+            margin-top: 50px;
             z-index: 1;
-            border-top: 1px solid rgba(255,255,255,0.05); /* Subtle top border */
         }
 
         .social-icons {
             display: flex;
-            gap: 2.5rem; /* Larger gap */
+            gap: 2rem;
         }
 
         .social-icons a {
-            color: #707070; /* Softer grey */
-            font-size: 1.3rem; /* Larger icon */
-            transition: color 0.3s ease, transform 0.2s ease;
+            color: #717171;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
         }
 
         .social-icons a:hover {
-            color: #E0E0E0; /* Brighter on hover */
-            transform: translateY(-3px) scale(1.1);
+            color: #fff;
         }
 
         .fa {
-            font-size: 1.8rem; /* Larger icon size */
+            font-size: 1.5rem;
         }
 
         /* Responsive styles */
         @media (max-width: 768px) {
-            header {
-                padding: 1rem 20px;
-            }
-
             .hamburger {
                 display: flex;
+                z-index: 1001;
             }
 
             nav ul {
                 position: fixed;
                 flex-direction: column;
-                background-color: rgba(0,0,0,0.95); /* Even darker fullscreen menu */
+                background-color: rgba(0,0,0,0.9);
                 width: 100%;
                 height: 100vh;
                 top: 0;
                 left: 0;
-                padding-top: 80px; /* More space for logo/header */
+                padding-top: 60px;
                 align-items: center;
                 justify-content: flex-start;
                 transform: translateY(-100%);
                 opacity: 0;
-                z-index: 999; /* Below hamburger but above content */
             }
 
             nav ul.active {
@@ -465,11 +415,11 @@
             }
 
             nav ul li {
-                margin: 2rem 0; /* More space in mobile menu */
+                margin: 1.5rem 0;
             }
 
             nav ul li a {
-                font-size: 1.5rem; /* Larger font for mobile links */
+                font-size: 1.2rem;
             }
 
             main {
@@ -534,17 +484,6 @@
             <h1>Propose a Project</h1>
             <div class="divider"></div>
             <p>Share your astronomical vision with us. Whether it's groundbreaking research, engaging public outreach, or innovative technological development, we're excited to explore the cosmos together. Your ideas can help illuminate the path forward in astronomy.</p>
-        </section>
-
-        <section class="guidelines">
-            <h3>Project Proposal Guidelines</h3>
-            <ul>
-                <li>Projects should directly align with the core themes of **astronomy, astrophysics, or broader space sciences**.</li>
-                <li>Ensure the project is **feasible** given typical resources and a realistic timeline.</li>
-                <li>Clearly articulate your project's **objectives** and anticipated **outcomes**.</li>
-                <li>Specify any required **equipment, software, datasets, or collaborative expertise**.</li>
-                <li>Projects with **educational and public outreach** components are highly encouraged and will receive priority.</li>
-            </ul>
         </section>
 
         <section class="form-container">
