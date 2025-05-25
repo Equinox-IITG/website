@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propose a Project - Equinox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #000000, #0a0a2a, #000000);
+            color: #fff;
+            position: relative;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: twinkle 2s infinite alternate;
+        }
+        
+        .star:nth-child(3n) {
+            background-color: #fff;
+        }
+        
+        .star:nth-child(3n+1) {
+            background-color: #77b5fe;
+        }
+        
+        .star:nth-child(3n+2) {
+            background-color: #fdcf58;
+        }
+
+        @keyframes twinkle {
+            from { opacity: 0.4; }
+            to { opacity: 0.2; }
+        }
+
+        @keyframes shootingStar {
+            0% {
+                transform: translateX(-100vw) translateY(100vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw) translateY(-100vh);
+                opacity: 0;
+            }
+        }
+
+        .shooting-star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(45deg, #fff, #77b5fe);
+            border-radius: 50%;
+            animation: shootingStar 3s linear infinite;
+            box-shadow: 0 0 10px #77b5fe, 0 0 20px #77b5fe, 0 0 30px #77b5fe;
+        }
+
+        .shooting-star:nth-child(odd) {
+            animation-delay: 2s;
+            animation-duration: 4s;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            position: relative;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li {
+            margin: 0.5rem 1rem;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #777778;
+        }
+
+        nav ul li a.active {
+            color: #fdcf58;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+        }
+
+        main {
+            padding: 100px 5% 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .page-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .page-title .divider {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fdcf58, transparent);
+            margin: 0 auto 20px;
+        }
+
+        .page-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #d4d4d4;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(10, 10, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #fdcf58;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #fdcf58;
+            box-shadow: 0 0 10px rgba(253, 207, 88, 0.3);
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        select option {
+            background: #0a0a2a;
+            color: #fff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.2);
+            accent-color: #fdcf58;
+        }
+
+        .checkbox-item label {
+            margin-bottom: 0;
+            text-transform: none;
+            font-weight: normal;
+            color: #d4d4d4;
+            cursor: pointer;
+        }
+
+        .submit-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #fdcf58, #f3903f);
+            color: #000;
+            text-decoration: none;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(253, 207, 88, 0.4);
+            background: linear-gradient(45deg, #f3903f, #fdcf58);
+        }
+
+        .success-message {
+            display: none;
+            background: linear-gradient(45deg, #50fa7b, #44d162);
+            color: #000;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .guidelines {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(119, 181, 254, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .guidelines h3 {
+            color: #77b5fe;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .guidelines ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .guidelines li {
+            color: #d4d4d4;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .guidelines li::before {
+            content: "★";
+            position: absolute;
+            left: 0;
+            color: #fdcf58;
+        }
+
+        footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: center;
+            background-color: rgba(0,0,0,0.7);
+            margin-top: 50px;
+            z-index: 1;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .social-icons a {
+            color: #717171;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+        }
+
+        .fa {
+            font-size: 1.5rem;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+
+            nav ul {
+                position: fixed;
+                flex-direction: column;
+                background-color: rgba(0,0,0,0.9);
+                width: 100%;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                padding-top: 60px;
+                align-items: center;
+                justify-content: flex-start;
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            nav ul li {
+                margin: 1.5rem 0;
+            }
+
+            nav ul li a {
+                font-size: 1.2rem;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div id="stars-container"></div>
+    
+    <header>
+        <div class="logo-container">
+            <img src="/api/placeholder/40/40" alt="Logo" class="logo">
+            <span class="logo-text">Equinox</span>
+        </div>
+        <nav>
+            <div class="hamburger" id="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="101.html">Astronomy 101</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="team.html">Team</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-title">
+            <h1>Propose a Project</h1>
+            <div class="divider"></div>
+            <p>Share your astronomical vision with us. Whether it's research, outreach, or innovation, we're excited to explore the cosmos together.</p>
+        </section>
+
+        <section class="guidelines">
+            <h3>Project Proposal Guidelines</h3>
+            <ul>
+                <li>Projects should align with astronomy, astrophysics, or space science themes</li>
+                <li>Consider feasibility with available resources and timeline</li>
+                <li>Include clear objectives and expected outcomes</li>
+                <li>Specify any equipment, software, or collaboration needs</li>
+                <li>Educational and outreach projects are highly encouraged</li>
+            </ul>
+        </section>
+
+        <section class="form-container">
+            <form id="project-proposal-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="proposer-name">Your Name *</label>
+                        <input type="text" id="proposer-name" name="proposer-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="affiliation">Affiliation</label>
+                        <input type="text" id="affiliation" name="affiliation" placeholder="University, Department, Year">
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">Experience Level</label>
+                        <select id="experience" name="experience">
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="expert">Expert</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="project-title">Project Title *</label>
+                    <input type="text" id="project-title" name="project-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="project-type">Project Type *</label>
+                    <select id="project-type" name="project-type" required>
+                        <option value="">Select project type</option>
+                        <option value="research">Research Project</option>
+                        <option value="observation">Observational Study</option>
+                        <option value="data-analysis">Data Analysis</option>
+                        <option value="outreach">Public Outreach</option>
+                        <option value="education">Educational Initiative</option>
+                        <option value="workshop">Workshop/Event</option>
+                        <option value="competition">Competition</option>
+                        <option value="collaboration">Inter-institutional Collaboration</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Project Description *</label>
+                    <textarea id="description" name="description" placeholder="Provide a detailed description of your project idea, including objectives, methodology, and expected outcomes..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="duration">Expected Duration</label>
+                    <select id="duration" name="duration">
+                        <option value="1-month">1 Month</option>
+                        <option value="2-3-months">2-3 Months</option>
+                        <option value="semester">One Semester</option>
+                        <option value="academic-year">Academic Year</option>
+                        <option value="ongoing">Ongoing</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="resources">Required Resources</label>
+                    <textarea id="resources" name="resources" placeholder="List any equipment, software, funding, or facilities needed..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Areas of Interest</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="planetary" name="interests" value="planetary">
+                            <label for="planetary">Planetary Science</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="stellar" name="interests" value="stellar">
+                            <label for="stellar">Stellar Astronomy</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="galactic" name="interests" value="galactic">
+                            <label for="galactic">Galactic Astronomy</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="extragalactic" name="interests" value="extragalactic">
+                            <label for="extragalactic">Extragalactic</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="cosmology" name="interests" value="cosmology">
+                            <label for="cosmology">Cosmology</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="astrobiology" name="interests" value="astrobiology">
+                            <label for="astrobiology">Astrobiology</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="instrumentation" name="interests" value="instrumentation">
+                            <label for="instrumentation">Instrumentation</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="data-science" name="interests" value="data-science">
+                            <label for="data-science">Data Science</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="collaboration">Collaboration Preferences</label>
+                    <textarea id="collaboration" name="collaboration" placeholder="Are you looking for collaborators? What skills or expertise would be helpful?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="additional-info">Additional Information</label>
+                    <textarea id="additional-info" name="additional-info" placeholder="Any other details you'd like to share about your project proposal..."></textarea>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit" class="submit-btn">Submit Proposal</button>
+                </div>
+
+                <div class="success-message" id="success-message">
+                    <p>🌟 Your project proposal has been successfully submitted! We'll review it and get back to you soon.</p>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/equinox.iitg/"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/equinoxiitg/"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@equinox7889"><i class="fa fa-youtube-play"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Stars animation
+        function getRandom(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        const starsContainer = document.getElementById('stars-container');
+
+        function createStar() {
+            const star = document.createElement('div');
+            star.classList.add('star');
+
+            const size = getRandom(1, 3) + 'px';
+            star.style.width = size;
+            star.style.height = size;
+
+            star.style.left = getRandom(0, window.innerWidth) + 'px';
+            star.style.top = getRandom(0, window.innerHeight) + 'px';
+
+            star.style.opacity = getRandom(0.3, 0.8);
+            star.style.animationDelay = getRandom(0, 1) + 's';
+
+            return star;
+        }
+
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.classList.add('shooting-star');
+            
+            star.style.left = getRandom(-100, window.innerWidth / 2) + 'px';
+            star.style.top = getRandom(window.innerHeight / 2, window.innerHeight) + 'px';
+            star.style.animationDelay = getRandom(0, 10) + 's';
+            
+            return star;
+        }
+
+        function populateStars() {
+            starsContainer.innerHTML = '';
+            
+            const numStars = Math.floor((window.innerWidth * window.innerHeight) / 1000);
+            
+            for (let i = 0; i < numStars; i++) {
+                starsContainer.appendChild(createStar());
+            }
+
+            // Add a few shooting stars
+            for (let i = 0; i < 3; i++) {
+                starsContainer.appendChild(createShootingStar());
+            }
+        }
+
+        populateStars();
+        window.addEventListener('resize', populateStars);
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Form submission
+        const form = document.getElementById('project-proposal-form');
+        const successMessage = document.getElementById('success-message');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate form submission
+            setTimeout(() => {
+                successMessage.style.display = 'block';
+                form.reset();
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }, 1000);
+        });
+
+        // Add some interactive effects
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+                this.parentElement.style.transition = 'transform 0.3s ease';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>
