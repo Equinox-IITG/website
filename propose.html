@@ -4,20 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Propose a Project - Equinox</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
+        /* General Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Montserrat', sans-serif; /* Changed font */
         }
 
         body {
-            background: linear-gradient(to bottom, #000000, #0a0a2a, #000000);
-            color: #fff;
+            background: linear-gradient(to bottom, #000000, #0A0A2A, #000000);
+            color: #fff; /* Slightly softer white */
             position: relative;
             min-height: 100vh;
             overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Star Background - More subtle, higher density */
+        #stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.8; /* Slightly less opaque */
         }
 
         #stars-container {
@@ -43,48 +60,16 @@
         }
         
         .star:nth-child(3n+1) {
-            background-color: #77b5fe;
+            background-color: #77b5fe; /* Light blue stars */
         }
         
         .star:nth-child(3n+2) {
-            background-color: #fdcf58;
+            background-color: #fdcf58; /* Gold/yellow stars */
         }
 
         @keyframes twinkle {
             from { opacity: 0.4; }
             to { opacity: 0.2; }
-        }
-
-        @keyframes shootingStar {
-            0% {
-                transform: translateX(-100vw) translateY(100vh);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(100vw) translateY(-100vh);
-                opacity: 0;
-            }
-        }
-
-        .shooting-star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: linear-gradient(45deg, #fff, #77b5fe);
-            border-radius: 50%;
-            animation: shootingStar 3s linear infinite;
-            box-shadow: 0 0 10px #77b5fe, 0 0 20px #77b5fe, 0 0 30px #77b5fe;
-        }
-
-        .shooting-star:nth-child(odd) {
-            animation-delay: 2s;
-            animation-duration: 4s;
         }
 
         header {
@@ -154,6 +139,10 @@
             color: #fdcf58;
         }
 
+        nav ul li a.active:hover {
+            color: #ae8e3c;
+        }
+
         .hamburger {
             display: none;
             flex-direction: column;
@@ -161,6 +150,8 @@
             width: 30px;
             height: 21px;
             cursor: pointer;
+            position: relative;
+            right: 0;
         }
 
         .hamburger span {
@@ -171,69 +162,84 @@
             border-radius: 3px;
         }
 
+        /* Hamburger animation */
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Main Content */
         main {
-            padding: 100px 5% 50px;
+            padding: 120px 5% 80px; /* More top padding */
             position: relative;
             z-index: 1;
         }
 
         .page-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px; /* More space below title */
             position: relative;
         }
 
         .page-title h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: #fff;
-            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif; /* Elegant font for titles */
+            font-size: 3.2rem; /* Larger title */
+            margin-bottom: 20px;
+            color: #FFDDAA; /* Golden title */
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255,215,0,0.3); /* Subtle glow */
         }
 
         .page-title .divider {
             width: 100px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, #fdcf58, transparent);
+            background: linear-gradient(90deg, transparent, #ffffff, transparent);
             margin: 0 auto 20px;
         }
 
         .page-title p {
-            max-width: 700px;
+            max-width: 800px; /* Wider paragraph */
             margin: 0 auto;
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #d4d4d4;
+            font-size: 1.1rem; /* Larger text */
+            line-height: 1.8; /* More comfortable line height */
+            color: #C0C0C0; /* Softer text color */
         }
 
+        /* Form Container */
         .form-container {
-            max-width: 800px;
+            max-width: 900px; /* Wider form */
             margin: 0 auto;
-            background: rgba(10, 10, 42, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 40px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            background: rgba(10, 10, 42, 0.85); /* Slightly more opaque background */
+            border: 1px solid rgba(139, 184, 255, 0.2); /* Softer blue border */
+            border-radius: 20px; /* More rounded corners */
+            padding: 50px; /* Increased padding */
+            backdrop-filter: blur(15px); /* More blur */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4); /* Deeper shadow */
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px; /* More space between groups */
         }
 
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 30px; /* Larger gap */
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #fdcf58;
-            font-weight: bold;
-            font-size: 0.9rem;
+            margin-bottom: 10px; /* More space below label */
+            color: #8bb8ff; /* Blue label */
+            font-weight: 600; /* Bolder label */
+            font-size: 1rem; /* Larger label font */
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
         }
 
         input[type="text"],
@@ -241,12 +247,12 @@
         select,
         textarea {
             width: 100%;
-            padding: 12px 15px;
-            background: rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1rem;
+            padding: 14px 18px; /* More padding */
+            background: rgba(0, 0, 0, 0.6); /* Darker input background */
+            border: 1px solid rgba(139, 184, 255, 0.3); /* Softer blue border */
+            border-radius: 10px; /* More rounded input fields */
+            color: #E0E0E0;
+            font-size: 1.05rem; /* Slightly larger input font */
             transition: all 0.3s ease;
         }
 
@@ -255,30 +261,35 @@
         select:focus,
         textarea:focus {
             outline: none;
-            border-color: #fdcf58;
-            box-shadow: 0 0 10px rgba(253, 207, 88, 0.3);
-            background: rgba(0, 0, 0, 0.7);
+            border-color: #FFDDAA; /* Golden focus border */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4); /* Golden glow on focus */
+            background: rgba(0, 0, 0, 0.8); /* Even darker on focus */
         }
 
         select {
             cursor: pointer;
+            appearance: none; /* Remove default arrow */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23E0E0E0%22%20d%3D%22M2%200L0%202h4zm0%205L0%203h4z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 8px 10px;
         }
 
         select option {
-            background: #0a0a2a;
-            color: #fff;
+            background: #05051A; /* Darker option background */
+            color: #E0E0E0;
         }
 
         textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 150px; /* Taller textarea */
         }
 
         .checkbox-group {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Wider columns */
+            gap: 20px; /* Larger gap */
+            margin-top: 15px;
         }
 
         .checkbox-item {
@@ -288,141 +299,164 @@
 
         .checkbox-item input[type="checkbox"] {
             width: auto;
-            margin-right: 10px;
-            transform: scale(1.2);
-            accent-color: #fdcf58;
+            margin-right: 12px;
+            transform: scale(1.3); /* Larger checkbox */
+            accent-color: #8bb8ff; /* Blue checkbox */
+            cursor: pointer;
         }
 
         .checkbox-item label {
             margin-bottom: 0;
             text-transform: none;
-            font-weight: normal;
-            color: #d4d4d4;
+            font-weight: 400; /* Regular font weight */
+            color: #C0C0C0;
             cursor: pointer;
         }
 
+        /* Submit Button */
         .submit-container {
             text-align: center;
-            margin-top: 40px;
+            margin-top: 50px; /* More space above button */
         }
 
         .submit-btn {
             display: inline-block;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, #fdcf58, #f3903f);
-            color: #000;
+            padding: 16px 45px; /* More padding */
+            background: linear-gradient(45deg, #FFDDAA, #F3903F); /* Golden gradient */
+            color: #222; /* Darker text for contrast */
             text-decoration: none;
             border: none;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1rem;
+            border-radius: 35px; /* More rounded */
+            font-weight: 700; /* Bolder text */
+            font-size: 1.15rem; /* Larger font */
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3); /* Initial shadow */
         }
 
         .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(253, 207, 88, 0.4);
-            background: linear-gradient(45deg, #f3903f, #fdcf58);
+            transform: translateY(-5px); /* Lift more */
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.6); /* Stronger glow */
+            background: linear-gradient(45deg, #F3903F, #FFDDAA); /* Reverse gradient on hover */
         }
 
+        /* Success Message */
         .success-message {
             display: none;
             background: linear-gradient(45deg, #50fa7b, #44d162);
             color: #000;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 25px; /* More padding */
+            border-radius: 12px; /* More rounded */
             text-align: center;
             font-weight: bold;
-            margin-top: 20px;
+            font-size: 1.1rem;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(70, 200, 100, 0.4);
         }
 
+        /* Guidelines Section */
         .guidelines {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(119, 181, 254, 0.3);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 40px;
+            background: rgba(0, 0, 0, 0.4); /* Slightly darker, more transparent */
+            border: 1px solid rgba(139, 184, 255, 0.2); /* Softer blue border */
+            border-radius: 15px; /* More rounded */
+            padding: 35px; /* More padding */
+            margin-bottom: 50px; /* More space */
+            box-shadow: inset 0 0 10px rgba(139, 184, 255, 0.1); /* Inner glow */
         }
 
         .guidelines h3 {
-            color: #77b5fe;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif; /* Elegant font for heading */
+            color: #8bb8ff; /* Blue heading */
+            margin-bottom: 20px;
+            font-size: 1.8rem; /* Larger heading */
+            text-align: center;
+            letter-spacing: 1px;
         }
 
         .guidelines ul {
             list-style: none;
             padding-left: 0;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .guidelines li {
-            color: #d4d4d4;
-            margin-bottom: 8px;
-            padding-left: 20px;
+            color: #C0C0C0;
+            margin-bottom: 12px; /* More space between list items */
+            padding-left: 30px; /* More room for star icon */
             position: relative;
+            font-size: 1.05rem; /* Larger list item text */
         }
 
         .guidelines li::before {
             content: "★";
             position: absolute;
             left: 0;
-            color: #fdcf58;
+            color: #FFDDAA; /* Golden star */
+            font-size: 1.2em;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
+        /* Footer */
         footer {
             position: relative;
-            bottom: 0;
             width: 100%;
-            padding: 1.5rem 0;
+            padding: 2rem 0; /* More padding */
             display: flex;
             justify-content: center;
-            background-color: rgba(0,0,0,0.7);
-            margin-top: 50px;
+            background-color: rgba(0,0,0,0.8); /* Slightly more opaque */
+            margin-top: 60px; /* More space above footer */
             z-index: 1;
+            border-top: 1px solid rgba(255,255,255,0.05); /* Subtle top border */
         }
 
         .social-icons {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem; /* Larger gap */
         }
 
         .social-icons a {
-            color: #717171;
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
+            color: #707070; /* Softer grey */
+            font-size: 1.3rem; /* Larger icon */
+            transition: color 0.3s ease, transform 0.2s ease;
         }
 
         .social-icons a:hover {
-            color: #fff;
+            color: #E0E0E0; /* Brighter on hover */
+            transform: translateY(-3px) scale(1.1);
         }
 
         .fa {
-            font-size: 1.5rem;
+            font-size: 1.8rem; /* Larger icon size */
         }
 
         /* Responsive styles */
         @media (max-width: 768px) {
+            header {
+                padding: 1rem 20px;
+            }
+
             .hamburger {
                 display: flex;
-                z-index: 1001;
             }
 
             nav ul {
                 position: fixed;
                 flex-direction: column;
-                background-color: rgba(0,0,0,0.9);
+                background-color: rgba(0,0,0,0.95); /* Even darker fullscreen menu */
                 width: 100%;
                 height: 100vh;
                 top: 0;
                 left: 0;
-                padding-top: 60px;
+                padding-top: 80px; /* More space for logo/header */
                 align-items: center;
                 justify-content: flex-start;
                 transform: translateY(-100%);
                 opacity: 0;
+                z-index: 999; /* Below hamburger but above content */
             }
 
             nav ul.active {
@@ -431,40 +465,52 @@
             }
 
             nav ul li {
-                margin: 1.5rem 0;
+                margin: 2rem 0; /* More space in mobile menu */
             }
 
             nav ul li a {
-                font-size: 1.2rem;
+                font-size: 1.5rem; /* Larger font for mobile links */
+            }
+
+            main {
+                padding: 100px 4% 60px;
+            }
+
+            .page-title h1 {
+                font-size: 2.5rem;
+            }
+            .page-title p {
+                font-size: 1rem;
             }
 
             .form-container {
-                padding: 30px 20px;
+                padding: 30px 25px;
             }
 
             .form-row {
                 grid-template-columns: 1fr;
-                gap: 0;
+                gap: 20px;
             }
 
             .checkbox-group {
                 grid-template-columns: 1fr;
             }
 
-            .page-title h1 {
-                font-size: 2rem;
+            .guidelines h3 {
+                font-size: 1.5rem;
+            }
+            .guidelines li {
+                font-size: 1rem;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div id="stars-container"></div>
     
     <header>
         <div class="logo-container">
-            <img src="/api/placeholder/40/40" alt="Logo" class="logo">
-            <span class="logo-text">Equinox</span>
+            <img src="sup_images\logo.png" alt="Logo" class="logo"> <span class="logo-text">Equinox</span>
         </div>
         <nav>
             <div class="hamburger" id="hamburger-menu">
@@ -487,17 +533,17 @@
         <section class="page-title">
             <h1>Propose a Project</h1>
             <div class="divider"></div>
-            <p>Share your astronomical vision with us. Whether it's research, outreach, or innovation, we're excited to explore the cosmos together.</p>
+            <p>Share your astronomical vision with us. Whether it's groundbreaking research, engaging public outreach, or innovative technological development, we're excited to explore the cosmos together. Your ideas can help illuminate the path forward in astronomy.</p>
         </section>
 
         <section class="guidelines">
             <h3>Project Proposal Guidelines</h3>
             <ul>
-                <li>Projects should align with astronomy, astrophysics, or space science themes</li>
-                <li>Consider feasibility with available resources and timeline</li>
-                <li>Include clear objectives and expected outcomes</li>
-                <li>Specify any equipment, software, or collaboration needs</li>
-                <li>Educational and outreach projects are highly encouraged</li>
+                <li>Projects should directly align with the core themes of **astronomy, astrophysics, or broader space sciences**.</li>
+                <li>Ensure the project is **feasible** given typical resources and a realistic timeline.</li>
+                <li>Clearly articulate your project's **objectives** and anticipated **outcomes**.</li>
+                <li>Specify any required **equipment, software, datasets, or collaborative expertise**.</li>
+                <li>Projects with **educational and public outreach** components are highly encouraged and will receive priority.</li>
             </ul>
         </section>
 
@@ -547,13 +593,13 @@
                         <option value="workshop">Workshop/Event</option>
                         <option value="competition">Competition</option>
                         <option value="collaboration">Inter-institutional Collaboration</option>
-                        <option value="other">Other</option>
+                        <option value="other">Other (Please specify in description)</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Project Description *</label>
-                    <textarea id="description" name="description" placeholder="Provide a detailed description of your project idea, including objectives, methodology, and expected outcomes..." required></textarea>
+                    <textarea id="description" name="description" placeholder="Provide a detailed description of your project idea, including specific objectives, proposed methodology, expected challenges, and anticipated outcomes. Be as thorough as possible."></textarea>
                 </div>
 
                 <div class="form-group">
@@ -563,13 +609,13 @@
                         <option value="2-3-months">2-3 Months</option>
                         <option value="semester">One Semester</option>
                         <option value="academic-year">Academic Year</option>
-                        <option value="ongoing">Ongoing</option>
+                        <option value="ongoing">Ongoing (e.g., long-term research)</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="resources">Required Resources</label>
-                    <textarea id="resources" name="resources" placeholder="List any equipment, software, funding, or facilities needed..."></textarea>
+                    <textarea id="resources" name="resources" placeholder="List any specific equipment (e.g., telescopes, cameras), software, computing resources, financial funding, or specialized facilities needed for your project."></textarea>
                 </div>
 
                 <div class="form-group">
@@ -589,7 +635,7 @@
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="extragalactic" name="interests" value="extragalactic">
-                            <label for="extragalactic">Extragalactic</label>
+                            <label for="extragalactic">Extragalactic Astronomy</label>
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="cosmology" name="interests" value="cosmology">
@@ -601,23 +647,27 @@
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="instrumentation" name="interests" value="instrumentation">
-                            <label for="instrumentation">Instrumentation</label>
+                            <label for="instrumentation">Ast. Instrumentation</label>
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" id="data-science" name="interests" value="data-science">
-                            <label for="data-science">Data Science</label>
+                            <label for="data-science">Ast. Data Science</label>
+                        </div>
+                         <div class="checkbox-item">
+                            <input type="checkbox" id="space-eng" name="interests" value="space-eng">
+                            <label for="space-eng">Space Engineering</label>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="collaboration">Collaboration Preferences</label>
-                    <textarea id="collaboration" name="collaboration" placeholder="Are you looking for collaborators? What skills or expertise would be helpful?"></textarea>
+                    <textarea id="collaboration" name="collaboration" placeholder="Are you actively seeking collaborators for this project? If so, what specific skills, expertise, or roles would be most beneficial to your team?"></textarea>
                 </div>
 
                 <div class="form-group">
                     <label for="additional-info">Additional Information</label>
-                    <textarea id="additional-info" name="additional-info" placeholder="Any other details you'd like to share about your project proposal..."></textarea>
+                    <textarea id="additional-info" name="additional-info" placeholder="Please include any other relevant details, supporting documents (if applicable, mention how you'll share them), or questions you have regarding your project proposal."></textarea>
                 </div>
 
                 <div class="submit-container">
@@ -625,7 +675,7 @@
                 </div>
 
                 <div class="success-message" id="success-message">
-                    <p>🌟 Your project proposal has been successfully submitted! We'll review it and get back to you soon.</p>
+                    <p>🌟 Your project proposal has been successfully submitted! We'll review it and get back to you soon. Thank you for helping us explore the universe!</p>
                 </div>
             </form>
         </section>
@@ -633,9 +683,9 @@
 
     <footer>
         <div class="social-icons">
-            <a href="https://www.facebook.com/equinox.iitg/"><i class="fa fa-facebook"></i></a>
-            <a href="https://www.instagram.com/equinoxiitg/"><i class="fa fa-instagram"></i></a>
-            <a href="https://www.youtube.com/@equinox7889"><i class="fa fa-youtube-play"></i></a>
+            <a href="https://www.facebook.com/equinox.iitg/" target="_blank" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+            <a href="https://www.instagram.com/equinoxiitg/" target="_blank" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@equinox7889" target="_blank" aria-label="YouTube"><i class="fa fa-youtube-play"></i></a>
         </div>
     </footer>
 
@@ -651,15 +701,15 @@
             const star = document.createElement('div');
             star.classList.add('star');
 
-            const size = getRandom(1, 3) + 'px';
+            const size = getRandom(1, 4) + 'px'; // Varied star sizes
             star.style.width = size;
             star.style.height = size;
 
             star.style.left = getRandom(0, window.innerWidth) + 'px';
             star.style.top = getRandom(0, window.innerHeight) + 'px';
 
-            star.style.opacity = getRandom(0.3, 0.8);
-            star.style.animationDelay = getRandom(0, 1) + 's';
+            star.style.opacity = getRandom(0.1, 0.5); // More subtle opacity
+            star.style.animationDelay = getRandom(0, 2) + 's'; // More varied delay
 
             return star;
         }
@@ -668,9 +718,10 @@
             const star = document.createElement('div');
             star.classList.add('shooting-star');
             
-            star.style.left = getRandom(-100, window.innerWidth / 2) + 'px';
-            star.style.top = getRandom(window.innerHeight / 2, window.innerHeight) + 'px';
-            star.style.animationDelay = getRandom(0, 10) + 's';
+            star.style.left = getRandom(-200, window.innerWidth + 200) + 'px'; // Start and end off-screen
+            star.style.top = getRandom(-200, window.innerHeight + 200) + 'px';
+            star.style.animationDelay = getRandom(0, 15) + 's'; // Longer, more random delays
+            star.style.animationDuration = getRandom(3, 8) + 's'; // Varied duration
             
             return star;
         }
@@ -678,14 +729,13 @@
         function populateStars() {
             starsContainer.innerHTML = '';
             
-            const numStars = Math.floor((window.innerWidth * window.innerHeight) / 1000);
+            const numStars = Math.floor((window.innerWidth * window.innerHeight) / 500); // Denser stars
             
             for (let i = 0; i < numStars; i++) {
                 starsContainer.appendChild(createStar());
             }
 
-            // Add a few shooting stars
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 5; i++) { // More shooting stars
                 starsContainer.appendChild(createShootingStar());
             }
         }
@@ -699,12 +749,14 @@
 
         hamburger.addEventListener('click', () => {
             navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active'); // Toggle hamburger animation class
         });
 
         const navLinks = document.querySelectorAll('nav ul li a');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
+                hamburger.classList.remove('active'); // Close hamburger animation
             });
         });
 
@@ -721,25 +773,36 @@
                 form.reset();
                 
                 // Scroll to success message
-                successMessage.scrollIntoView({ behavior: 'smooth' });
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' }); // Center scroll
                 
-                // Hide success message after 5 seconds
+                // Hide success message after 7 seconds
                 setTimeout(() => {
                     successMessage.style.display = 'none';
-                }, 5000);
+                }, 7000);
             }, 1000);
         });
 
-        // Add some interactive effects
+        // Add some interactive effects to form inputs (kept as is, good interaction)
         const inputs = document.querySelectorAll('input, select, textarea');
         inputs.forEach(input => {
             input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'translateY(-2px)';
+                this.parentElement.style.transform = 'translateY(-3px)'; // More pronounced lift
                 this.parentElement.style.transition = 'transform 0.3s ease';
             });
             
             input.addEventListener('blur', function() {
                 this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Highlight active navigation link
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentPath = window.location.pathname.split('/').pop();
+            navLinks.forEach(link => {
+                const linkPath = link.href.split('/').pop();
+                if (currentPath === linkPath || (currentPath === '' && linkPath === 'index.html')) {
+                    link.classList.add('active');
+                }
             });
         });
     </script>
