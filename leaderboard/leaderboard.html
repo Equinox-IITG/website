@@ -658,21 +658,28 @@
             });
         });
 
-        // Load leaderboard data from leaderboard.csv
+        // FIXED: Load leaderboard data from Excel file for GitHub Pages
         async function loadLeaderboardData() {
             try {
                 showLoading();
                 
-                // Try to read the file using window.fs.readFile API
-                const fileData = await window.fs.readFile('"C:\Users\Sahas\OneDrive\Desktop\Equinox Site\leaderboard.csv"');
+                // Try to fetch the Excel file from the server
+                const response = await fetch('leaderboard.xlsx');
                 
-                // Process the Excel file
-                const workbook = XLSX.read(fileData, { type: 'array' });
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                // Get the file as array buffer
+                const arrayBuffer = await response.arrayBuffer();
+                
+                // Process the Excel file using XLSX library
+                const workbook = XLSX.read(arrayBuffer, { type: 'array' });
                 const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
                 const jsonData = XLSX.utils.sheet_to_json(firstSheet);
                 
                 if (jsonData.length === 0) {
-                    showError('The leaderboard.csv file appears to be empty.');
+                    showError('The leaderboard.xlsx file appears to be empty.');
                     return;
                 }
                 
@@ -680,9 +687,39 @@
                 updateLastUpdated();
                 
             } catch (error) {
-                console.error('Error loading leaderboard.csv:', error);
-                showError('Could not load leaderboard.csv. Please make sure the file exists in the same directory.');
+                console.error('Error loading leaderboard:', error);
+                
+                // Fallback: Try to load CSV file instead
+                try {
+                    const csvResponse = await fetch('leaderboard.csv');
+                    if (csvResponse.ok) {
+                        const csvText = await csvResponse.text();
+                        const csvData = parseCSV(csvText);
+                        processLeaderboardData(csvData);
+                        updateLastUpdated();
+                        return;
+                    }
+                } catch (csvError) {
+                    console.error('CSV fallback also failed:', csvError);
+                }
+                
+                showError(`Could not load leaderboard data. Please make sure leaderboard.xlsx (or leaderboard.csv) is in the same directory. Error: ${error.message}`);
             }
+        }
+
+        // Helper function to parse CSV
+        function parseCSV(csvText) {
+            const lines = csvText.trim().split('\n');
+            const headers = lines[0].split(',').map(h => h.trim());
+            
+            return lines.slice(1).map(line => {
+                const values = line.split(',').map(v => v.trim());
+                const obj = {};
+                headers.forEach((header, index) => {
+                    obj[header] = values[index] || '';
+                });
+                return obj;
+            });
         }
 
         function processLeaderboardData(data) {
@@ -723,7 +760,7 @@
             const leaderboardContent = document.getElementById('leaderboard-content');
             
             if (data.length === 0) {
-                leaderboardContent.innerHTML = '<div class="no-data">No participant data found in leaderboard.csv</div>';
+                leaderboardContent.innerHTML = '<div class="no-data">No participant data found in the file</div>';
                 return;
             }
 
@@ -818,7 +855,7 @@
                     <i class="fa fa-exclamation-triangle" style="font-size: 3rem; color: #ff6b6b; margin-bottom: 1rem;"></i>
                     <div>${message}</div>
                     <div style="margin-top: 1rem; color: #888; font-size: 0.9rem;">
-                        Make sure leaderboard.csv is in the same directory as this HTML file
+                        Supported file formats: leaderboard.xlsx or leaderboard.csv
                     </div>
                 </div>
             `;
