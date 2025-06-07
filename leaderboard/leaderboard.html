@@ -658,13 +658,13 @@
             });
         });
 
-        // Load leaderboard data from leaderboard.xlsx
+        // Load leaderboard data from leaderboard.csv
         async function loadLeaderboardData() {
             try {
                 showLoading();
                 
                 // Try to read the file using window.fs.readFile API
-                const fileData = await window.fs.readFile('"C:\Users\Sahas\OneDrive\Desktop\Equinox Site\leaderboard.xlsx"');
+                const fileData = await window.fs.readFile('"C:\Users\Sahas\OneDrive\Desktop\Equinox Site\leaderboard.csv"');
                 
                 // Process the Excel file
                 const workbook = XLSX.read(fileData, { type: 'array' });
@@ -672,7 +672,7 @@
                 const jsonData = XLSX.utils.sheet_to_json(firstSheet);
                 
                 if (jsonData.length === 0) {
-                    showError('The leaderboard.xlsx file appears to be empty.');
+                    showError('The leaderboard.csv file appears to be empty.');
                     return;
                 }
                 
@@ -680,8 +680,8 @@
                 updateLastUpdated();
                 
             } catch (error) {
-                console.error('Error loading leaderboard.xlsx:', error);
-                showError('Could not load leaderboard.xlsx. Please make sure the file exists in the same directory.');
+                console.error('Error loading leaderboard.csv:', error);
+                showError('Could not load leaderboard.csv. Please make sure the file exists in the same directory.');
             }
         }
 
@@ -723,7 +723,7 @@
             const leaderboardContent = document.getElementById('leaderboard-content');
             
             if (data.length === 0) {
-                leaderboardContent.innerHTML = '<div class="no-data">No participant data found in leaderboard.xlsx</div>';
+                leaderboardContent.innerHTML = '<div class="no-data">No participant data found in leaderboard.csv</div>';
                 return;
             }
 
@@ -818,7 +818,7 @@
                     <i class="fa fa-exclamation-triangle" style="font-size: 3rem; color: #ff6b6b; margin-bottom: 1rem;"></i>
                     <div>${message}</div>
                     <div style="margin-top: 1rem; color: #888; font-size: 0.9rem;">
-                        Make sure leaderboard.xlsx is in the same directory as this HTML file
+                        Make sure leaderboard.csv is in the same directory as this HTML file
                     </div>
                 </div>
             `;
