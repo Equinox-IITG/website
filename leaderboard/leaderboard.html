@@ -50,7 +50,7 @@
             to { opacity: 0.2; }
         }
 
-        /* Header Styles */
+        /* Header */
         header {
             position: fixed;
             top: 0;
@@ -76,10 +76,6 @@
             border-radius: 50%;
             overflow: hidden;
             margin-right: 10px;
-            background: #fdcf58;
-            justify-content: center;
-            color: #000;
-            font-weight: bold;
         }
 
         .logo-text {
@@ -130,7 +126,7 @@
             border-radius: 3px;
         }
 
-        /* Page Title Section */
+        /* Page Title */
         .page-title {
             margin-top: 80px;
             padding: 2rem 5%;
@@ -155,32 +151,6 @@
             max-width: 800px;
             margin: 0 auto;
             color: #d4d4d4;
-        }
-
-        /* Control Section */
-        .control-section {
-            padding: 2rem 5%;
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .refresh-btn {
-            background: linear-gradient(45deg, #77b5fe, #4a90ff);
-            color: #fff;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .refresh-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(119, 181, 254, 0.3);
         }
 
         /* Leaderboard Section */
@@ -233,7 +203,7 @@
             margin-top: 0.5rem;
         }
 
-        /* Podium Section */
+        /* Podium */
         .podium-section {
             margin-bottom: 3rem;
         }
@@ -396,17 +366,9 @@
             font-size: 1.2rem;
         }
 
-        .loading {
-            color: #fdcf58;
-        }
-
-        .error {
-            color: #ff6b6b;
-        }
-
-        .no-data {
-            color: #d4d4d4;
-        }
+        .loading { color: #fdcf58; }
+        .error { color: #ff6b6b; }
+        .no-data { color: #d4d4d4; }
 
         .loading-spinner {
             display: inline-block;
@@ -528,7 +490,7 @@
     
     <header>
         <div class="logo-container">
-            <div class="logo">E</div>
+            <img src="sup_images\logo.png" alt="Logo" class="logo">
             <span class="logo-text">Equinox</span>
         </div>
         <nav>
@@ -544,7 +506,6 @@
                 <li><a href="resources.html">Resources</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="team.html">Team</a></li>
-                <li><a href="#" class="active">Leaderboard</a></li>
             </ul>
         </nav>
     </header>
@@ -553,12 +514,6 @@
         <h1>Astronomy 101 - Leaderboard</h1>
         <div class="divider"></div>
         <p>Track your progress in our cosmic journey and see how you rank among fellow astronomers!</p>
-    </section>
-
-    <section class="control-section">
-        <button class="refresh-btn" onclick="loadLeaderboardData()" title="Refresh Data">
-            <i class="fa fa-refresh"></i> Refresh Leaderboard
-        </button>
     </section>
 
     <section class="leaderboard-section">
@@ -583,9 +538,7 @@
 
         <div id="podium-section" class="podium-section" style="display: none;">
             <h2 class="section-title">🏆 Top Performers 🏆</h2>
-            <div class="podium-container" id="podium-container">
-                <!-- Podium will be populated by JavaScript -->
-            </div>
+            <div class="podium-container" id="podium-container"></div>
         </div>
 
         <div id="leaderboard-content">
@@ -609,15 +562,14 @@
     </footer>
 
     <script>
-        // Global variable to store current data
         let currentData = [];
 
         // Stars Generation
+        const starsContainer = document.getElementById('stars-container');
+
         function getRandom(min, max) {
             return Math.random() * (max - min) + min;
         }
-
-        const starsContainer = document.getElementById('stars-container');
 
         function createStar() {
             const star = document.createElement('div');
@@ -658,22 +610,15 @@
             });
         });
 
-        // FIXED: Load leaderboard data from Excel file for GitHub Pages
+        // Load leaderboard data
         async function loadLeaderboardData() {
             try {
                 showLoading();
                 
-                // Try to fetch the Excel file from the server
                 const response = await fetch('leaderboard.xlsx');
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
-                // Get the file as array buffer
                 const arrayBuffer = await response.arrayBuffer();
-                
-                // Process the Excel file using XLSX library
                 const workbook = XLSX.read(arrayBuffer, { type: 'array' });
                 const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
                 const jsonData = XLSX.utils.sheet_to_json(firstSheet);
@@ -689,7 +634,6 @@
             } catch (error) {
                 console.error('Error loading leaderboard:', error);
                 
-                // Fallback: Try to load CSV file instead
                 try {
                     const csvResponse = await fetch('leaderboard.csv');
                     if (csvResponse.ok) {
@@ -707,7 +651,6 @@
             }
         }
 
-        // Helper function to parse CSV
         function parseCSV(csvText) {
             const lines = csvText.trim().split('\n');
             const headers = lines[0].split(',').map(h => h.trim());
@@ -723,9 +666,7 @@
         }
 
         function processLeaderboardData(data) {
-            // Process and clean the data
             currentData = data.map((row, index) => {
-                // Handle different possible column names
                 const name = row.Name || row.name || row.Participant || row.participant || `Participant ${index + 1}`;
                 const week1 = parseFloat(row.Week1 || row.week1 || row['Week 1'] || 0) || 0;
                 const week2 = parseFloat(row.Week2 || row.week2 || row['Week 2'] || 0) || 0;
@@ -733,20 +674,10 @@
                 const week4 = parseFloat(row.Week4 || row.week4 || row['Week 4'] || 0) || 0;
                 const total = parseFloat(row.Total || row.total) || (week1 + week2 + week3 + week4);
                 
-                return {
-                    name: name,
-                    week1: week1,
-                    week2: week2,
-                    week3: week3,
-                    week4: week4,
-                    total: total
-                };
+                return { name, week1, week2, week3, week4, total };
             }).filter(row => row.name && row.name.trim() !== '');
 
-            // Sort by total score (descending)
             currentData.sort((a, b) => b.total - a.total);
-
-            // Add rank
             currentData.forEach((participant, index) => {
                 participant.rank = index + 1;
             });
@@ -807,7 +738,6 @@
             const averageScore = Math.round(totalScores / totalParticipants);
             const highestScore = Math.max(...data.map(p => p.total));
             
-            // Count completed weeks (weeks with scores > 0)
             let completedWeeks = 0;
             ['week1', 'week2', 'week3', 'week4'].forEach(week => {
                 if (data.some(p => p[week] > 0)) completedWeeks++;
@@ -860,7 +790,6 @@
                 </div>
             `;
             
-            // Hide stats and podium sections
             document.getElementById('stats-section').style.display = 'none';
             document.getElementById('podium-section').style.display = 'none';
         }
@@ -872,7 +801,6 @@
             document.getElementById('last-updated').style.display = 'block';
         }
 
-        // Auto-load data when page loads
         document.addEventListener('DOMContentLoaded', function() {
             loadLeaderboardData();
         });
