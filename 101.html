@@ -17,7 +17,6 @@
             background: linear-gradient(to bottom, #000000, #0a0a2a, #000000);
             color: #fff;
             overflow-x: hidden;
-            position: relative;
             min-height: 100vh;
         }
 
@@ -68,12 +67,9 @@
         }
 
         .logo {
-            display: flex;
-            align-items: center;
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            overflow: hidden;
             margin-right: 10px;
         }
 
@@ -135,7 +131,6 @@
         .course-title h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: #fff;
         }
 
         .course-title .divider {
@@ -160,7 +155,6 @@
         .structure-heading {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            color: #fff;
             text-align: center;
         }
 
@@ -193,7 +187,6 @@
         .week-number {
             font-size: 1.8rem;
             margin-bottom: 1rem;
-            color: #fff;
         }
 
         .week-topics {
@@ -224,7 +217,6 @@
         .content-heading {
             font-size: 2rem;
             margin-bottom: 2rem;
-            color: #fff;
             text-align: center;
         }
 
@@ -232,7 +224,7 @@
             display: flex;
             gap: 20px;
             margin-top: 30px;
-            min-height: 500px;
+            min-height: 600px;
         }
 
         .week-sidebar {
@@ -267,72 +259,74 @@
             flex-direction: column;
         }
 
-        .tab-header {
-            display: flex;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 8px 8px 0 0;
+        .content-grid {
+            display: grid;
+            grid-template-columns: auto 1fr 1fr 1fr;
+            gap: 1px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
             overflow: hidden;
         }
 
-        .content-tab {
-            padding: 15px 30px;
-            cursor: pointer;
-            background-color: rgba(0, 0, 0, 0.5);
-            transition: all 0.2s ease;
-            text-align: center;
-            flex: 1;
-        }
-
-        .content-tab:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .content-tab.active {
+        .grid-header {
             background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 20px;
+            font-weight: bold;
+            text-align: center;
             color: #fdcf58;
-            border-bottom: 2px solid #fdcf58;
+            font-size: 1.1rem;
         }
 
-        .tab-content {
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 0 0 8px 8px;
-            padding: 25px;
-            min-height: 400px;
-            flex: 1;
+        .grid-header:first-child {
+            text-align: left;
         }
 
-        .task-items {
-            display: flex;
-            gap: 20px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-
-        .task-item {
+        .day-cell {
             background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 8px;
-            padding: 20px;
-            flex: 1;
-            min-width: 250px;
+            padding: 15px 20px;
+            font-weight: bold;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .task-item h3 {
-            color: #fff;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        .task-item p {
+        .content-cell {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px 20px;
             color: #d4d4d4;
-            font-size: 0.9rem;
-            line-height: 1.5;
+            line-height: 1.4;
+            font-size: 0.95rem;
+        }
+
+        .content-cell h4 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .content-cell p {
+            margin-bottom: 10px;
+        }
+
+        .content-cell ul {
+            margin-left: 15px;
+        }
+
+        .content-cell li {
+            margin-bottom: 5px;
+        }
+
+        .content-cell a {
+            color: #77b5fe;
+            text-decoration: none;
+        }
+
+        .content-cell a:hover {
+            color: #fdcf58;
+            text-decoration: underline;
         }
 
         /* Decorative Terms */
         .ml-terms {
-            position: relative;
             padding: 2rem 0;
-            overflow: hidden;
             text-align: center;
             color: rgba(255, 255, 255, 0.3);
             font-size: 1.2rem;
@@ -362,6 +356,33 @@
 
         .social-icons a:hover {
             color: #fdcf58;
+        }
+
+        .week-nav-item.coming-soon {
+            color: #888 !important;
+        }
+
+        .week-nav-item.coming-soon::after {
+            content: " (Coming Soon)";
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .week-nav-item[data-week="Leaderboard"] {
+            background: linear-gradient(135deg, #fdcf58, #f4b942);
+            color: #252d35 !important;
+            text-align: center;
+            font-weight: bold;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(253, 207, 88, 0.3);
+            border: 2px solid #fdcf58;
+        }
+
+        .week-nav-item[data-week="Leaderboard"]:hover {
+            background: linear-gradient(135deg, #f4b942, #e6a83a);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(253, 207, 88, 0.4);
         }
 
         /* Mobile Responsive */
@@ -408,9 +429,27 @@
                 margin-bottom: 20px;
             }
             
-            .content-tab {
-                padding: 10px 15px;
-                font-size: 0.9rem;
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .grid-header:not(:first-child) {
+                display: none;
+            }
+            
+            .day-cell {
+                grid-column: 1;
+                background-color: rgba(0, 0, 0, 0.7);
+                color: #fdcf58;
+                text-align: center;
+                margin-top: 10px;
+                border-radius: 4px;
+            }
+            
+            .content-cell {
+                margin-bottom: 10px;
+                border-radius: 4px;
             }
         }
     </style>
@@ -457,6 +496,7 @@
                     <div class="week-topic">Early Universe</div>
                     <div class="week-topic">Dark Matter</div>
                     <div class="week-topic">Dark Energy</div>
+                    <div class="week-topic">Python Basics</div>
                 </div>
                 <p class="week-description">This week we'll discover the Big Bang story, learn about invisible dark forces shaping our universe, and explore cosmic mysteries. Plus, we'll introduce you to Python programming - the essential tool astronomers use for data analysis and research.</p>
             </div>
@@ -466,7 +506,7 @@
                 <div class="week-topics">
                     <div class="week-topic">Stars</div>
                     <div class="week-topic">Stellar Evolution</div>
-                    <div class="week-topic">Linear Regression</div>
+                    <div class="week-topic">Intro to Machine Learning</div>
                 </div>
                 <p class="week-description">This week we'll explore how stars are born, live, and die spectacularly - creating neutron stars and black holes along the way. We will also learn machine learning basics - how computers can find patterns in astronomical data automatically.</p>
             </div>
@@ -477,6 +517,7 @@
                     <div class="week-topic">Radio Astronomy</div>
                     <div class="week-topic">Spectroscopy</div>
                     <div class="week-topic">Observational Tools</div>
+                    <div class="week-topic">Linear Regression</div>
                 </div>
                 <p class="week-description">This week familarizes you with telescopes beyond what your eyes see and gravitational waves. We shall also learn linear regression - a powerful method to find relationships between different cosmic measurements.</p>
             </div>
@@ -518,38 +559,86 @@
                 <div class="week-nav-item" data-week="Week 4">Week 4</div>
                 <div class="week-nav-item" data-week="Project">Project</div>
                 <div class="week-nav-item" data-week="Additional Materials">Additional Materials</div>
+                <a href="leaderboard.html" style="text-decoration: none; color: #252d35"><div class="week-nav-item" data-week="Leaderboard">LEADERBOARD</div></a>
             </div>
             
             <div class="content-main">
-                <div class="tab-header" id="tab-header">
-                    <div class="content-tab active" data-tab="contents">Contents</div>
-                    <div class="content-tab" data-tab="task1">Theoretical</div>
-                    <div class="content-tab" data-tab="task2">Computational</div>
-                </div>
-                
-                <div class="tab-content" id="tab-content">
-                    <h3>Week 1: The Universe's Story</h3>
-                    <p>Welcome to the first week of Astronomy 101! This week we'll explore from Big Bang to Today and learn Python.</p>
+                <div class="content-grid" id="content-grid">
+                    <div class="grid-header">Day</div>
+                    <div class="grid-header">Contents</div>
+                    <div class="grid-header">Theoretical</div>
+                    <div class="grid-header">Computational</div>
                     
-                    <div class="task-items">
-                        <div class="task-item">
-                            <h3>Lecture Materials</h3>
-                            <p>• The Big Bang & Early Universe<br>
-                            • Building the Cosmic Web<br>
-                            • Dark Matter<br>
-                            • Dark Energy</p>
-                        </div>
-                        <div class="task-item">
-                            <h3>Reading Assignment</h3>
-                            <p>• The First Three Minutes<br>
-                            • Universe 101: Big Bang Theory<br>
-                            • What is Dark Energy ?<br>
-                            • Dark Matter Explained</p>
-                        </div>
-                        <div class="task-item">
-                            <h3>Computational Activity</h3>
-                            <p>Learn Python a programming language widely used in astronomy for data analysis, telescope control, image processing, and modeling celestial phenomena due to its simplicity and extensive scientific libraries.</p>
-                        </div>
+                    <div class="day-cell">Day 1</div>
+                    <div class="content-cell">
+                        <h4>Getting Started with Python & Introduction to the Universe</h4>
+                        <p>Setting up a Python development environment with Anaconda and learning the basics of Jupyter Notebook for interactive programming. Introduction to the Python language and the Big Bang theory.</p>
+                    </div>
+                    <div class="content-cell">
+                        <h4>Big Bang Theory</h4>
+                        <ul>
+                            <li>The First Three Minutes</li>
+                            <li>Cosmic Microwave Background</li>
+                            <li>Nucleosynthesis</li>
+                            <li>Timeline of the Universe</li>
+                        </ul>
+                    </div>
+                    <div class="content-cell">
+                        <h4>Python Setup & Basics</h4>
+                        <ul>
+                            <li><a href="#">Anaconda Installation Guide</a></li>
+                            <li><a href="#">Jupyter Notebook Tutorial</a></li>
+                            <li><a href="#">Python Basics (Variables, Data Types)</a></li>
+                            <li>Practice Exercises</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="day-cell">Day 2</div>
+                    <div class="content-cell">
+                        <h4>Dark Matter & Dark Energy</h4>
+                        <p>Exploring the invisible components of our universe that make up 95% of everything we know. Learn about galaxy rotation curves and cosmic acceleration.</p>
+                    </div>
+                    <div class="content-cell">
+                        <h4>Invisible Universe</h4>
+                        <ul>
+                            <li>Galaxy Rotation Curves</li>
+                            <li>Gravitational Lensing</li>
+                            <li>Cosmic Acceleration</li>
+                            <li>Dark Energy Evidence</li>
+                        </ul>
+                    </div>
+                    <div class="content-cell">
+                        <h4>Data Structures in Python</h4>
+                        <ul>
+                            <li>Lists and Arrays</li>
+                            <li>Dictionaries and Sets</li>
+                            <li>NumPy Introduction</li>
+                            <li><a href="#">Practice Notebook</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="day-cell">Day 3</div>
+                    <div class="content-cell">
+                        <h4>Cosmic Web & Large Scale Structure</h4>
+                        <p>Understanding how matter is distributed throughout the universe on the largest scales, forming a cosmic web of filaments and voids.</p>
+                    </div>
+                    <div class="content-cell">
+                        <h4>Universe Architecture</h4>
+                        <ul>
+                            <li>Galaxy Clusters</li>
+                            <li>Cosmic Filaments</li>
+                            <li>Cosmic Voids</li>
+                            <li>Structure Formation</li>
+                        </ul>
+                    </div>
+                    <div class="content-cell">
+                        <h4>Data Visualization</h4>
+                        <ul>
+                            <li>Matplotlib Basics</li>
+                            <li>Plotting Cosmic Data</li>
+                            <li>3D Visualizations</li>
+                            <li><a href="#">Visualization Exercises</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -613,107 +702,540 @@
 
         // Course Content Data
         const weekData = {
-            "Week 1": {
-                title: "The Universe's Story",
-                description: "Welcome to the first week of Astronomy 101! This week we'll explore from Big Bang to Today and learn Python.",
-                tasks: [
-                    {
-                        title: "Lecture Materials",
-                        content: "• The Big Bang & Early Universe<br>• Building the Cosmic Web<br>• Dark Matter<br>• Dark Energy"
+            "Week 1": [
+                {
+                    day: "Day 1",
+                    content: "Getting Started with Python & Introduction to the Universe",
+                    description: "Setting up a Python development environment and learning the basics for interactive programming. Introduction to the Python language and the Big Bang theory.",
+                    theoretical: {
+                        title: "Big Bang Theory",
+                        items: ["The Beginning of Everything", "The First Few Minutes", "Evidence of The Big Bang", "Timeline So Far"]
                     },
-                    {
-                        title: "Reading Assignment",
-                        content: "• \"The First Three Minutes\" on Astrobites<br>• NASA's \"Universe 101: Big Bang Theory\"<br>• \"What is Dark Energy?\" on Space.com<br>• \"Dark Matter Explained\" by NASA Science"
-                    },
-                    {
-                        title: "Computational Activity",
-                        content: "Learn Python a programming language widely used in astronomy for data analysis, telescope control, image processing, and modeling celestial phenomena due to its simplicity and extensive scientific libraries."
+                    computational: {
+                        title: "Python from Scratch (Part I)",
+                        items: ["Setup VSCode & Python", "Download VSCode", "Download Python", "Python Basics (Watch uptil 01:06:33)"]
                     }
-                ]
-            },
-            "Additional Materials": {
-                title: "Supplementary Resources",
-                description: "Explore these additional resources to deepen your understanding of astronomy beyond the core curriculum.",
-                tasks: [
-                    {
-                        title: "Advanced Readings",
-                        content: "• \"Black Holes and Time Warps\" by Kip Thorne<br>• \"Cosmos\" by Carl Sagan<br>• \"A Brief History of Time\" by Stephen Hawking<br>• \"The Elegant Universe\" by Brian Greene"
+                },
+                {
+                    day: "Day 2",
+                    content: "End of Beginning",
+                    description: "The most crucial evidence of the Big Bang - CMB. How the first elements formed which lead to formation of other elements and completing the basics of Python and moving onto advanced topics",
+                    theoretical: {
+                        title: "After-Party of The Big Bang",
+                        items: ["Timelapse of The Universe", "Cosmic Microwave Background", "Nucleosynthesis"]
                     },
-                    {
-                        title: "Digital Resources",
-                        content: "• Stellarium (Free planetarium software)<br>• NASA's Eyes on the Solar System<br>• WorldWide Telescope<br>• Aladin Sky Atlas"
-                    },
-                    {
-                        title: "Recommended Organizations",
-                        content: "• International Astronomical Union<br>• SETI Institute<br>• The Planetary Society<br>• Local astronomy clubs and observatories"
+                    computational: {
+                        title: "Python from Scratch (Part II)",
+                        items: ["Python Basics (Complete the video)", "Lists, Sets and Tuples", "Dictionaries"]
                     }
-                ]
-            }
+                },
+                {
+                    day: "Day 3",
+                    content: "Gravity! Gravity! Gravity!",
+                    description: "Exploring how galaxies form, understanding the immense forces that sculpt these celestial cities. Gain an overview of Numpy which you will be using extensively in ML.",
+                    theoretical: {
+                        title: "Galactic Genesis",
+                        items: ["Formation of Stars, Galaxies & Clusters", "Our Home Supercluster", "Mechanisms of Galaxy Formation"]
+                    },
+                    computational: {
+                        title: "Data Manipulation (Part I)",
+                        items: ["NumPy Introduction", "NumPy Notebook"]
+                    }
+                },
+                {
+                    day: "Day 4",
+                    content: "Cosmic Web & Large Scale Structure",
+                    description: "Understanding how matter is distributed throughout the universe on the largest scales, forming a cosmic web of filaments and voids. Learn about Pandas - not the animal but the Python library.",
+                    theoretical: {
+                        title: "Universe Architecture",
+                        items: ["Cosmic Web", "Cosmic Voids", "Mapping The Cosmic Web"]
+                    },
+                    computational: {
+                        title: "Data Manipulation (Part II)",
+                        items: ["Pandas Introduction", "Pandas Notebook"]
+                    }
+                },
+                {
+                    day: "Day 5",
+                    content: "Dark Matter & Dark Energy",
+                    description: "Exploring the invisible components of our universe that make up 95% of everything we know. Learn about galaxy rotation curves and cosmic acceleration. Ironically, learn Data VISUALIZATION along side",
+                    theoretical: {
+                        title: "Invisible Universe",
+                        items: ["Why Dark Matter & Energy ?", "What is Dark Matter & Dark Energy ?", "Shining Light on Dark Matter & Energy"]
+                    },
+                    computational: {
+                        title: "Data Visualization (Part I)",
+                        items: ["Matplotlib Basics", "Matplotlib Beyond Basics", "Matplotlib Notebook"]
+                    }
+                },
+                {
+                    day: "Day 6",
+                    content: "If the Old Rules Don't Quite Fit",
+                    description: "When galaxies spin too fast, maybe gravity needs a tweak, not invisible matter.",
+                    theoretical: {
+                        title: "Alternate to an Invisible Universe",
+                        items: ["Some More Dark Matter & Dark Energy", "M.O.N.D"]
+                    },
+                    computational: {
+                        title: "Data Visualization (Part II)",
+                        items: ["Seaborn (Lec.19 to Lec.23)"]
+                    }
+                },
+                {
+                    day: "Day 7",
+                    content: "Tasks",
+                    description: "These will be marked and considered for your Leaderboard Ranks ",
+                    theoretical: {
+                        title: "Live on 15th June (Sunday)",
+                        items: []
+                    },
+                    computational: {
+                        title: "Live on 15th June (Sunday)",
+                        items: []
+                    }
+                }
+                
+            ],
+            "Week 2": [
+                {
+                    day: "Day 1",
+                    content: "Stellar Birth & Nuclear Fusion",
+                    description: "Explore how stars form from cosmic dust and gas, and how nuclear fusion powers the stars throughout their lives.",
+                    theoretical: {
+                        title: "Star Formation",
+                        items: ["Molecular Clouds", "Protostar Development", "Nuclear Fusion Process", "Main Sequence Stars"]
+                    },
+                    computational: {
+                        title: "Introduction to Machine Learning",
+                        items: ["What is Machine Learning?", "Types of Learning", "Scikit-learn Basics", "First ML Model"]
+                    }
+                },
+                {
+                    day: "Day 2",
+                    content: "Stellar Evolution & Death",
+                    description: "Follow the complete lifecycle of stars from main sequence to their spectacular deaths as supernovae, neutron stars, or black holes.",
+                    theoretical: {
+                        title: "Stellar Lifecycle",
+                        items: ["Red Giant Phase", "White Dwarf Formation", "Supernovae Explosions", "Neutron Stars & Black Holes"]
+                    },
+                    computational: {
+                        title: "Linear Regression Basics",
+                        items: ["Correlation Analysis", "Simple Linear Regression", "Model Evaluation", "Stellar Mass-Luminosity Relation"]
+                    }
+                },
+                {
+                    day: "Day 3",
+                    content: "Binary Systems & Exoplanets",
+                    description: "Discover binary star systems and how they help us detect planets around other stars using various detection methods.",
+                    theoretical: {
+                        title: "Binary Stars & Planets",
+                        items: ["Binary Star Evolution", "Exoplanet Detection", "Transit Method", "Habitable Zones"]
+                    },
+                    computational: {
+                        title: "Advanced Regression",
+                        items: ["Multiple Linear Regression", "Polynomial Regression", "Model Validation", "Exoplanet Data Analysis"]
+                    }
+                }
+            ],
+            "Week 3": [
+                {
+                    day: "Day 1",
+                    content: "Radio Astronomy & SETI",
+                    description: "Explore the invisible radio universe and learn how radio telescopes reveal cosmic phenomena invisible to optical telescopes.",
+                    theoretical: {
+                        title: "Radio Universe",
+                        items: ["Radio Wave Basics", "Radio Telescopes", "Pulsars", "SETI Projects"]
+                    },
+                    computational: {
+                        title: "Signal Processing",
+                        items: ["Fourier Transforms", "Frequency Analysis", "Noise Reduction", "Radio Data Processing"]
+                    }
+                },
+                {
+                    day: "Day 2",
+                    content: "Spectroscopy & Chemical Analysis",
+                    description: "Learn how astronomers decode starlight to determine the chemical composition, temperature, and motion of celestial objects.",
+                    theoretical: {
+                        title: "Light & Spectra",
+                        items: ["Electromagnetic Spectrum", "Absorption Lines", "Doppler Effect", "Chemical Fingerprints"]
+                    },
+                    computational: {
+                        title: "Spectral Analysis",
+                        items: ["Data Preprocessing", "Peak Detection", "Line Identification", "Redshift Calculations"]
+                    }
+                },
+                {
+                    day: "Day 3",
+                    content: "Gravitational Waves",
+                    description: "Discover the newest window to the universe through gravitational wave astronomy and what LIGO has revealed.",
+                    theoretical: {
+                        title: "Spacetime Ripples",
+                        items: ["Einstein's Predictions", "LIGO Detectors", "Black Hole Mergers", "Neutron Star Collisions"]
+                    },
+                    computational: {
+                        title: "Time Series Analysis",
+                        items: ["Signal Detection", "Noise Filtering", "Pattern Recognition", "Gravitational Wave Data"]
+                    }
+                }
+            ],
+            "Week 4": [
+                {
+                    day: "Day 1",
+                    content: "Galaxy Types & Evolution",
+                    description: "Explore the vast diversity of galaxies in our universe and how they formed and evolved over cosmic time.",
+                    theoretical: {
+                        title: "Galactic Zoo",
+                        items: ["Spiral Galaxies", "Elliptical Galaxies", "Irregular Galaxies", "Galaxy Formation"]
+                    },
+                    computational: {
+                        title: "Classification Basics",
+                        items: ["What is Classification?", "Decision Trees", "k-Nearest Neighbors", "Galaxy Classification"]
+                    }
+                },
+                {
+                    day: "Day 2",
+                    content: "Active Galactic Nuclei & Black Holes",
+                    description: "Study supermassive black holes at galaxy centers and the incredible phenomena they create.",
+                    theoretical: {
+                        title: "Cosmic Monsters",
+                        items: ["Supermassive Black Holes", "Accretion Disks", "Quasars", "Jets and Outflows"]
+                    },
+                    computational: {
+                        title: "Advanced Classification",
+                        items: ["Support Vector Machines", "Random Forest", "Model Evaluation", "AGN Classification Project"]
+                    }
+                },
+                {
+                    day: "Day 3",
+                    content: "Cosmic Mysteries & Future",
+                    description: "Explore the biggest unsolved questions in astronomy and what future missions might reveal.",
+                    theoretical: {
+                        title: "Open Questions",
+                        items: ["Dark Matter Nature", "Dark Energy Mystery", "Fermi Paradox", "Future Space Missions"]
+                    },
+                    computational: {
+                        title: "Model Ensemble & Validation",
+                        items: ["Cross-validation", "Model Comparison", "Feature Importance", "Final Project Prep"]
+                    }
+                }
+            ],
+            "Project": [
+                {
+                    day: "Week 1",
+                    content: "Project Planning & Team Formation",
+                    description: "Form teams, select research topics, and develop project proposals with clear objectives and methodologies.",
+                    theoretical: {
+                        title: "Research Methods",
+                        items: ["Scientific Method", "Literature Review", "Hypothesis Formation", "Project Scope"]
+                    },
+                    computational: {
+                        title: "Project Setup",
+                        items: ["GitHub Repository", "Data Collection Plan", "Analysis Framework", "Timeline Creation"]
+                    }
+                },
+                {
+                    day: "Week 2",
+                    content: "Data Analysis & Implementation",
+                    description: "Execute your research plan, analyze astronomical data, and implement machine learning models.",
+                    theoretical: {
+                        title: "Data Interpretation",
+                        items: ["Statistical Significance", "Error Analysis", "Bias Recognition", "Result Validation"]
+                    },
+                    computational: {
+                        title: "Implementation",
+                        items: ["Data Processing", "Model Training", "Visualization Creation", "Code Documentation"]
+                    }
+                },
+                {
+                    day: "Week 3",
+                    content: "Presentation Preparation & Peer Review",
+                    description: "Prepare final presentations, conduct peer reviews, and refine project conclusions.",
+                    theoretical: {
+                        title: "Scientific Communication",
+                        items: ["Abstract Writing", "Figure Design", "Conclusion Drawing", "Future Work"]
+                    },
+                    computational: {
+                        title: "Presentation Tools",
+                        items: ["Jupyter Slides", "Interactive Plots", "Code Demonstration", "GitHub Pages"]
+                    }
+                }
+            ],
+            "Additional Materials": [
+                {
+                    day: "Resources",
+                    content: "Supplementary Learning Materials",
+                    description: "Additional resources, textbooks, online courses, and tools for continued learning in astronomy and data science.",
+                    theoretical: {
+                        title: "Recommended Reading",
+                        items: ["Astrophysics Textbooks", "Research Papers", "Online Courses", "Documentaries"]
+                    },
+                    computational: {
+                        title: "Tools & Libraries",
+                        items: ["AstroPy", "Advanced NumPy", "TensorFlow", "Observatory APIs"]
+                    }
+                },
+                {
+                    day: "Practice",
+                    content: "Extra Exercises & Challenges",
+                    description: "Additional coding challenges and astronomical problems to reinforce learning and build practical skills.",
+                    theoretical: {
+                        title: "Problem Sets",
+                        items: ["Orbital Mechanics", "Stellar Parameters", "Galaxy Properties", "Cosmological Calculations"]
+                    },
+                    computational: {
+                        title: "Coding Challenges",
+                        items: ["Data Mining", "Image Processing", "Time Series", "Machine Learning Projects"]
+                    }
+                },
+                {
+                    day: "Community",
+                    content: "Astronomy Communities & Opportunities",
+                    description: "Connect with the broader astronomy community through conferences, clubs, and research opportunities.",
+                    theoretical: {
+                        title: "Professional Development",
+                        items: ["Career Paths", "Graduate Programs", "Research Opportunities", "Internships"]
+                    },
+                    computational: {
+                        title: "Open Source Projects",
+                        items: ["Citizen Science", "GitHub Contributions", "Data Competitions", "Hackathons"]
+                    }
+                }
+            ]
         };
 
-        // Course Navigation Functionality
-        const weekNavItems = document.querySelectorAll('.week-nav-item');
-        const tabContent = document.getElementById('tab-content');
-        const tabItems = document.querySelectorAll('.content-tab');
-        let currentWeek = "Week 1";
-        let currentTab = "contents";
-
-        function updateContent() {
-            const week = weekData[currentWeek];
+        // Week Navigation Functionality
+        function renderWeekContent(weekName) {
+            const contentGrid = document.getElementById('content-grid');
             
-            if (currentWeek !== "Additional Materials") {
-                tabContent.innerHTML = `
-                    <h3>${currentWeek}: ${week ? week.title : 'Coming Soon'}</h3>
-                    <p>Coming Soon...</p>
+            // Clear existing content except headers
+            contentGrid.innerHTML = `
+                <div class="grid-header">Day</div>
+                <div class="grid-header">Contents</div>
+                <div class="grid-header">Theoretical</div>
+                <div class="grid-header">Computational</div>
+            `;
+            
+            // Check if it's Week 1, if not show "Coming Soon"
+            if (weekName !== 'Week 1' && weekName !== 'Leaderboard') {
+                // Create coming soon message
+                const comingSoonRow = document.createElement('div');
+                comingSoonRow.style.gridColumn = '1 / -1'; // Span all columns
+                comingSoonRow.className = 'content-cell';
+                comingSoonRow.style.textAlign = 'center';
+                comingSoonRow.style.padding = '3rem';
+                comingSoonRow.style.fontSize = '1.5rem';
+                comingSoonRow.style.color = '#fdcf58';
+                comingSoonRow.innerHTML = `
+                    <h2 style="color: #fdcf58; margin-bottom: 1rem;">Coming Soon!</h2>
+                    <p style="color: #d4d4d4;">This week's content will be available soon. Stay tuned!</p>
                 `;
+                contentGrid.appendChild(comingSoonRow);
                 return;
             }
+            
+            // If it's Week 1, show the normal content
+            const weekContent = weekData[weekName];
+            if (!weekContent) return;
+            
+            // Add week content (rest of the existing code remains the same)
+            weekContent.forEach(dayData => {
+                // Day cell
+                const dayCell = document.createElement('div');
+                dayCell.className = 'day-cell';
+                dayCell.textContent = dayData.day;
+                contentGrid.appendChild(dayCell);
+                
+                // Content cell
+                const contentCell = document.createElement('div');
+                contentCell.className = 'content-cell';
+                contentCell.innerHTML = `
+                    <h4>${dayData.content}</h4>
+                    <p>${dayData.description}</p>
+                `;
+                contentGrid.appendChild(contentCell);
+                
+                // Theoretical cell
+                const theoreticalCell = document.createElement('div');
+                theoreticalCell.className = 'content-cell';
+                const theoreticalItems = dayData.theoretical.items.map(item => 
+                    `<li><a href="#" onclick="openYouTubeVideo('${item.replace(/'/g, "\\'")}', 'theoretical')" class="video-link">${item}</a></li>`
+                ).join('');
+                theoreticalCell.innerHTML = `
+                    <h4>${dayData.theoretical.title}</h4>
+                    <ul>${theoreticalItems}</ul>
+                `;
+                contentGrid.appendChild(theoreticalCell);
+                
+                // Computational cell
+                const computationalCell = document.createElement('div');
+                computationalCell.className = 'content-cell';
+                const computationalItems = dayData.computational.items.map(item => 
+                    `<li><a href="#" onclick="openYouTubeVideo('${item.replace(/'/g, "\\'")}', 'computational')" class="video-link">${item}</a></li>`
+                ).join('')
+                computationalCell.innerHTML = `
+                    <h4>${dayData.computational.title}</h4>
+                    <ul>${computationalItems}</ul>
+                `;
+                contentGrid.appendChild(computationalCell);
+            });
+        }
 
-            if (currentTab === "contents") {
-                tabContent.innerHTML = `
-                    <h3>${week.title}</h3>
-                    <p>${week.description}</p>
+        // Week sidebar navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const weekNavItems = document.querySelectorAll('.week-nav-item');
+            
+            // Add coming-soon class to non-Week 1 items
+            weekNavItems.forEach(item => {
+                const weekName = item.getAttribute('data-week');
+                if (weekName !== 'Week 1' && weekName !== 'Leaderboard') {
+                    item.classList.add('coming-soon');
+                }
+                
+                item.addEventListener('click', function() {
+                    // Remove active class from all items
+                    weekNavItems.forEach(navItem => navItem.classList.remove('active'));
                     
-                    <div class="task-items">
-                        ${week.tasks.map(task => `
-                            <div class="task-item">
-                                <h3>${task.title}</h3>
-                                <p>${task.content}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
+                    // Add active class to clicked item
+                    this.classList.add('active');
+                    
+                    // Render content for selected week
+                    const weekName = this.getAttribute('data-week');
+                    renderWeekContent(weekName);
+                });
+            });
+            
+            // Initialize with Week 1 content
+            renderWeekContent('Week 1');
+        });
+
+        const youtubeLinks = {
+            // Week 1 - Theoretical
+            'The Beginning of Everything': 'https://www.youtube.com/watch?v=wNDGgL73ihY',
+            'Evidence of The Big Bang': 'https://www.youtube.com/watch?v=xtrYF_hxxUM',
+            'The First Few Minutes': 'https://www.physicsoftheuniverse.com/topics_bigbang_timeline.html',
+            'Universe So Far': 'https://science.nasa.gov/universe/overview/',
+        
+            'Timelapse of The Universe': 'https://www.youtube.com/watch?v=TBikbn5XJhg',
+            'Cosmic Microwave Background': 'https://www.youtube.com/watch?v=3tCMd1ytvWg',
+            'Nucleosynthesis': 'https://www.youtube.com/watch?v=lInXZ6I3u_I',
+            
+            'Formation of Stars, Galaxies & Clusters': 'https://www.youtube.com/watch?v=n4vvuzIWOTE',
+            'Our Home Supercluster': 'https://www.youtube.com/watch?v=rENyyRwxpHo',
+            'Mechanisms of Galaxy Formation': 'https://science.nasa.gov/universe/galaxies/evolution/',
+
+            'Cosmic Web': 'https://www.youtube.com/watch?v=Pgz93gSoXlw',
+            'Cosmic Voids': 'https://www.youtube.com/watch?v=Y4RtcJ_tWy4',
+            'Mapping The Cosmic Web': 'https://structures.uni-heidelberg.de/blog/posts/2022_12_cw/',
+
+            'Why Dark Matter & Energy ?': 'https://www.youtube.com/watch?v=8-t-1EkOhAE',
+            'What is Dark Matter & Dark Energy ?': 'https://www.youtube.com/watch?v=QAa2O_8wBUQ',
+            'Shining Light on Dark Matter & Energy': 'https://www.space.com/20930-dark-matter.html',
+
+            'Some More Dark Matter & Dark Energy': 'https://www.youtube.com/watch?v=thxknsmN9yk',
+            'M.O.N.D': 'https://www.youtube.com/watch?v=zZYHPSONxqI',
+            
+            // Week 1 - Computational
+            "Setup VSCode & Python": "https://www.youtube.com/watch?v=zk5qOQBvuK4",
+            "Download VSCode": "https://code.visualstudio.com/download",
+            "Download Python": "https://www.python.org/downloads/",
+            'Python Basics (Watch uptil 01:06:33)': 'https://youtu.be/K5KVEU3aaeQ',
+
+            'Python Basics (Complete the video)': 'https://youtu.be/K5KVEU3aaeQ?t=3998',
+            'Lists, Sets and Tuples': 'https://www.youtube.com/watch?v=gOMW_n2-2Mw',
+            'Dictionaries': 'https://www.youtube.com/watch?v=MZZSMaEAC2g',
+
+            
+            'NumPy Introduction': 'https://www.youtube.com/watch?v=QUT1VHiLmmI',
+            'NumPy Notebook': 'https://www.kaggle.com/code/orhansertkaya/numpy-tutorial-for-beginners#Computation-on-NumPy-Arrays:-Universal-Functions',
+
+            'Pandas Introduction': 'https://www.youtube.com/watch?v=2uvysYbKdjM',
+            'Pandas Notebook': 'https://www.kaggle.com/code/ybifoundation/pandas-basic-functions',
+            
+            'Matplotlib Basics': 'https://www.youtube.com/watch?v=UO98lJQ3QGI',
+            'Matplotlib Beyond Basics': 'https://www.youtube.com/watch?v=nKxLfUrkLE8',
+            'Matplotlib Notebook': 'https://www.kaggle.com/code/prashant111/matplotlib-tutorial-for-beginners',
+
+            'Seaborn (Lec.19 to Lec.23)': 'https://www.youtube.com/watch?v=G0ICwVsH8MQ&list=PL9n0l8rSshSnragNblKDBsT8Xu3otp3jA&index=19',
+            
+            // You can add more videos for other weeks when they become available
+            // Week 2 examples:
+            'Star Formation': 'https://www.youtube.com/watch?v=YbdwTwB8jtc',
+            'Nuclear Fusion Process': 'https://www.youtube.com/watch?v=yy7UdqKhk_c',
+            'What is Machine Learning?': 'https://www.youtube.com/watch?v=ukzFI9rgwfU',
+            
+            // Add your own YouTube links here...
+            // 'Topic Name': 'https://www.youtube.com/watch?v=VIDEO_ID',
+        };
+
+        // Function to open YouTube videos
+        function openYouTubeVideo(itemName, itemType) {
+            event.preventDefault();
+            
+            // Get the YouTube link for this item
+            const youtubeUrl = youtubeLinks[itemName];
+            
+            if (youtubeUrl) {
+                // Open YouTube video in new tab
+                window.open(youtubeUrl, '_blank');
+                
+                // Optional: Log for analytics
+                console.log(`Opening video for: ${itemName} (${itemType})`);
             } else {
-                tabContent.innerHTML = `
-                    <h3>Coming Soon</h3>
-                    <p>Detailed activities will be available soon.</p>
-                `;
+                // If no video is found, show a message
+                alert(`Video for "${itemName}" will be available soon!\n\nPlease check back later.`);
+                
+                // Optional: You can redirect to a general search
+                // const searchQuery = encodeURIComponent(itemName + ' astronomy tutorial');
+                // window.open(`https://www.youtube.com/results?search_query=${searchQuery}`, '_blank');
             }
         }
 
-        // Week Navigation
-        weekNavItems.forEach(item => {
-            item.addEventListener('click', () => {
-                weekNavItems.forEach(navItem => navItem.classList.remove('active'));
-                item.classList.add('active');
-                currentWeek = item.dataset.week;
-                currentTab = "contents";
-                tabItems.forEach(tab => {
-                    tab.classList.toggle('active', tab.dataset.tab === "contents");
-                });
-                updateContent();
-            });
-        });
-
-        // Tab Navigation
-        tabItems.forEach(item => {
-            item.addEventListener('click', () => {
-                tabItems.forEach(tab => tab.classList.remove('active'));
-                item.classList.add('active');
-                currentTab = item.dataset.tab;
-                updateContent();
-            });
-        });
+        // ALTERNATIVE: If you want to embed videos instead of opening in new tabs
+        function embedYouTubeVideo(itemName, itemType) {
+            event.preventDefault();
+            
+            const youtubeUrl = youtubeLinks[itemName];
+            
+            if (youtubeUrl) {
+                // Extract video ID from YouTube URL
+                const videoId = youtubeUrl.split('v=')[1]?.split('&')[0];
+                
+                if (videoId) {
+                    // Create embedded video modal
+                    const modal = document.createElement('div');
+                    modal.style.cssText = `
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0,0,0,0.8);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 9999;
+                    `;
+                    
+                    modal.innerHTML = `
+                        <div style="position: relative; width: 80%; max-width: 800px;">
+                            <button onclick="this.parentElement.parentElement.remove()" 
+                                    style="position: absolute; top: -40px; right: 0; background: #fdcf58; border: none; 
+                                        color: black; padding: 10px 15px; cursor: pointer; border-radius: 5px;">
+                                Close ✕
+                            </button>
+                            <iframe width="100%" height="450" 
+                                    src="https://www.youtube.com/embed/${videoId}" 
+                                    frameborder="0" allowfullscreen>
+                            </iframe>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(modal);
+                }
+            } else {
+                alert(`Video for "${itemName}" will be available soon!`);
+            }
+        }
     </script>
 </body>
 </html>
