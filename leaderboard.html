@@ -214,17 +214,21 @@
             align-items: end;
             gap: 20px;
             margin-bottom: 2rem;
+            height: 300px; /* Set a fixed height for the podium */
         }
 
         .podium-place {
             background: rgba(0, 0, 0, 0.6);
-            border-radius: 12px;
+            border-radius: 12px 12px 0 0; /* Only round top corners */
             padding: 1.5rem;
             text-align: center;
             min-width: 200px;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
         }
 
         .podium-place::before {
@@ -238,8 +242,10 @@
         }
 
         .podium-place.first {
-            transform: scale(1.1);
+            height: 250px;
+            transform: none;
             border: 2px solid #FFD700;
+            order: 2; /* Center position */
         }
 
         .podium-place.first::before {
@@ -247,7 +253,9 @@
         }
 
         .podium-place.second {
+            height: 200px;
             border: 2px solid #C0C0C0;
+            order: 1; /* Left position */
         }
 
         .podium-place.second::before {
@@ -255,12 +263,14 @@
         }
 
         .podium-place.third {
+            height: 150px;
             border: 2px solid #CD7F32;
+            order: 3; /* Right position */
         }
 
         .podium-place.third::before {
             background: linear-gradient(90deg, transparent, #CD7F32, transparent);
-        }
+        }  
 
         .podium-rank {
             font-size: 3rem;
@@ -455,6 +465,14 @@
             .podium-container {
                 flex-direction: column;
                 align-items: center;
+                height: auto; /* Remove fixed height on mobile */
+            }
+
+            .podium-place.first,
+            .podium-place.second,
+            .podium-place.third {
+                height: auto; /* Reset heights on mobile */
+                order: initial; /* Reset order on mobile */
             }
 
             .podium-place.first {
