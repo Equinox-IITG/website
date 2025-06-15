@@ -553,8 +553,8 @@
         
         <div class="course-layout">
             <div class="week-sidebar" id="week-sidebar">
-                <div class="week-nav-item active" data-week="Week 1">Week 1</div>
-                <div class="week-nav-item" data-week="Week 2">Week 2</div>
+                <div class="week-nav-item" data-week="Week 1">Week 1</div>
+                <div class="week-nav-item active" data-week="Week 2">Week 2</div>
                 <div class="week-nav-item" data-week="Week 3">Week 3</div>
                 <div class="week-nav-item" data-week="Week 4">Week 4</div>
                 <div class="week-nav-item" data-week="Project">Project</div>
@@ -799,41 +799,80 @@
             "Week 2": [
                 {
                     day: "Day 1",
-                    content: "Stellar Birth & Nuclear Fusion",
-                    description: "Explore how stars form from cosmic dust and gas, and how nuclear fusion powers the stars throughout their lives.",
+                    content: "Stellar Birth",
+                    description: "Explore how stars form from cosmic dust and gas, and how nuclear fusion powers the stars throughout their lives. Jump into Machine Learning basics and understand types of learning.",
                     theoretical: {
                         title: "Star Formation",
-                        items: ["Molecular Clouds", "Protostar Development", "Nuclear Fusion Process", "Main Sequence Stars"]
+                        items: ["Protostar Development", "T Tauri Phase", "A Star is Born"]
                     },
                     computational: {
                         title: "Introduction to Machine Learning",
-                        items: ["What is Machine Learning?", "Types of Learning", "Scikit-learn Basics", "First ML Model"]
+                        items: ["What is Machine Learning? (Lec.1 to Lec.3)", "Supervised & Unsupervised Learning (Lec.4 to Lec.7)", "Intro to Jupyter Notebooks (Lec.8)"]
                     }
                 },
                 {
                     day: "Day 2",
                     content: "Stellar Evolution & Death",
-                    description: "Follow the complete lifecycle of stars from main sequence to their spectacular deaths as supernovae, neutron stars, or black holes.",
+                    description: "Follow the complete lifecycle of stars from main sequence to their spectacular deaths as supernovae, neutron stars, or black holes. Dive into Linear Regression, Cost Function, and Gradient Descent",
                     theoretical: {
                         title: "Stellar Lifecycle",
-                        items: ["Red Giant Phase", "White Dwarf Formation", "Supernovae Explosions", "Neutron Stars & Black Holes"]
+                        items: ["Life Cycle of a Star", "Supernovae Explosions", "Neutron Stars", "Black Holes", "Shortfilm"]
                     },
                     computational: {
                         title: "Linear Regression Basics",
-                        items: ["Correlation Analysis", "Simple Linear Regression", "Model Evaluation", "Stellar Mass-Luminosity Relation"]
+                        items: ["Cost Function in Linear Regression (Lec.9 to Lec.14)", "Gradient Descent (Lec.15 to Lec.20)"]
                     }
                 },
                 {
                     day: "Day 3",
-                    content: "Binary Systems & Exoplanets",
-                    description: "Discover binary star systems and how they help us detect planets around other stars using various detection methods.",
+                    content: "Binary Systems",
+                    description: "Discover binary star systems and how they help us detect planets around other stars using various detection methods. Real world datasets do not have a single variable so we learn multivariate regression.",
                     theoretical: {
-                        title: "Binary Stars & Planets",
-                        items: ["Binary Star Evolution", "Exoplanet Detection", "Transit Method", "Habitable Zones"]
+                        title: "Binary Stars",
+                        items: ["What are Binary Stars ?", "Binary and Multiple Stars", "How do Binary Star Systems Work ?", "Detecting Binary Stars"]
                     },
                     computational: {
                         title: "Advanced Regression",
-                        items: ["Multiple Linear Regression", "Polynomial Regression", "Model Validation", "Exoplanet Data Analysis"]
+                        items: ["Multivariate Regression (Lec.21 to Lec.24)", "Going Deeper Into Regression (Lec.25 to Lec.30)"]
+                    }
+                },
+                {
+                    day: "Day 4",
+                    content: "Classifying the Stars",
+                    description: "Learn how to classify stars by luminosity, temperature, and evolutionary stage, giving you the power to understand their entire life cycles. Use scikit-learn to boost your ML journey and reduce the burden of writing raw codes",
+                    theoretical: {
+                        title: "Understanding Stellar Evolution",
+                        items: ["An Intro to Classification", "Hertzsprung-Russell Diagram", "Visualizing the H-R Diagram"]
+                    },
+                    computational: {
+                        title: "import scikit-learn as sklearn",
+                        items: ["Intro to Scikit-Learn", "Linear Regression Using Sklearn"]
+                    }
+                },
+                {
+                    day: "Day 5",
+                    content: "Exoplanets",
+                    description: "Discover the diverse worlds beyond our solar system, from their varied types to the conditions that could support life. Study Logistic Regression which ironically is a classification model.",
+                    theoretical: {
+                        title: "Space Tinder for Astrophysicists",
+                        items: ["What is an Exoplanet ?", "Exoplanet Detection", "Hunting for Planets Using ML", "Goldilocks Zone"]
+                    },
+                    computational: {
+                        title: "Logistic Regression",
+                        items: ["Intro to Classification (Lec.31)", "Basics of Logistic Regression (lec.32 to Lec.36)", "Logistic Regression from Scratch"]
+                    }
+                },
+                {
+                    day: "Day 6 & 7",
+                    content: "Tasks",
+                    description: "These will be marked and considered for your Leaderboard Ranks ",
+                    theoretical: {
+                        title: "Live on 21 June (Saturday)",
+                        items: []
+                    },
+                    computational: {
+                        title: "Live on 21 June (Saturday)",
+                        items: []
                     }
                 }
             ],
@@ -1016,7 +1055,7 @@
             `;
             
             // Check if it's Week 1, if not show "Coming Soon"
-            if (weekName !== 'Week 1' && weekName !== 'Leaderboard') {
+            if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Leaderboard') {
                 // Create coming soon message
                 const comingSoonRow = document.createElement('div');
                 comingSoonRow.style.gridColumn = '1 / -1'; // Span all columns
@@ -1087,7 +1126,7 @@
             // Add coming-soon class to non-Week 1 items
             weekNavItems.forEach(item => {
                 const weekName = item.getAttribute('data-week');
-                if (weekName !== 'Week 1' && weekName !== 'Leaderboard') {
+                if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Leaderboard') {
                     item.classList.add('coming-soon');
                 }
                 
@@ -1105,7 +1144,7 @@
             });
             
             // Initialize with Week 1 content
-            renderWeekContent('Week 1');
+            renderWeekContent('Week 2');
         });
 
         const youtubeLinks = {
@@ -1114,58 +1153,88 @@
             'Evidence of The Big Bang': 'https://www.youtube.com/watch?v=xtrYF_hxxUM',
             'The First Few Minutes': 'https://www.physicsoftheuniverse.com/topics_bigbang_timeline.html',
             'Timeline So Far': 'https://science.nasa.gov/universe/overview/',
-        
-            'Timelapse of The Universe': 'https://www.youtube.com/watch?v=TBikbn5XJhg',
-            'Cosmic Microwave Background': 'https://www.youtube.com/watch?v=3tCMd1ytvWg',
-            'Nucleosynthesis': 'https://www.youtube.com/watch?v=lInXZ6I3u_I',
-            
-            'Formation of Stars, Galaxies & Clusters': 'https://www.youtube.com/watch?v=n4vvuzIWOTE',
-            'Our Home Supercluster': 'https://www.youtube.com/watch?v=rENyyRwxpHo',
-            'Mechanisms of Galaxy Formation': 'https://science.nasa.gov/universe/galaxies/evolution/',
-
-            'Cosmic Web': 'https://www.youtube.com/watch?v=Pgz93gSoXlw',
-            'Cosmic Voids': 'https://www.youtube.com/watch?v=Y4RtcJ_tWy4',
-            'Mapping The Cosmic Web': 'https://structures.uni-heidelberg.de/blog/posts/2022_12_cw/',
-
-            'Why Dark Matter & Energy ?': 'https://www.youtube.com/watch?v=8-t-1EkOhAE',
-            'What is Dark Matter & Dark Energy ?': 'https://www.youtube.com/watch?v=QAa2O_8wBUQ',
-            'Shining Light on Dark Matter & Energy': 'https://www.space.com/20930-dark-matter.html',
-
-            'Some More Dark Matter & Dark Energy': 'https://www.youtube.com/watch?v=thxknsmN9yk',
-            'M.O.N.D': 'https://www.youtube.com/watch?v=zZYHPSONxqI',
-            
-            // Week 1 - Computational
             "Setup VSCode & Python": "https://www.youtube.com/watch?v=zk5qOQBvuK4",
             "Download VSCode": "https://code.visualstudio.com/download",
             "Download Python": "https://www.python.org/downloads/",
             'Python Basics (Watch uptil 01:06:33)': 'https://youtu.be/K5KVEU3aaeQ',
-
+        
+            'Timelapse of The Universe': 'https://www.youtube.com/watch?v=TBikbn5XJhg',
+            'Cosmic Microwave Background': 'https://www.youtube.com/watch?v=3tCMd1ytvWg',
+            'Nucleosynthesis': 'https://www.youtube.com/watch?v=lInXZ6I3u_I',
             'Python Basics (Complete the video)': 'https://youtu.be/K5KVEU3aaeQ?t=3998',
             'Lists, Sets and Tuples': 'https://www.youtube.com/watch?v=gOMW_n2-2Mw',
             'Dictionaries': 'https://www.youtube.com/watch?v=MZZSMaEAC2g',
-
             
+            'Formation of Stars, Galaxies & Clusters': 'https://www.youtube.com/watch?v=n4vvuzIWOTE',
+            'Our Home Supercluster': 'https://www.youtube.com/watch?v=rENyyRwxpHo',
+            'Mechanisms of Galaxy Formation': 'https://science.nasa.gov/universe/galaxies/evolution/',
             'NumPy Introduction': 'https://www.youtube.com/watch?v=QUT1VHiLmmI',
             'NumPy Notebook': 'https://www.kaggle.com/code/orhansertkaya/numpy-tutorial-for-beginners#Computation-on-NumPy-Arrays:-Universal-Functions',
 
+            'Cosmic Web': 'https://www.youtube.com/watch?v=Pgz93gSoXlw',
+            'Cosmic Voids': 'https://www.youtube.com/watch?v=Y4RtcJ_tWy4',
+            'Mapping The Cosmic Web': 'https://structures.uni-heidelberg.de/blog/posts/2022_12_cw/',
             'Pandas Introduction': 'https://www.youtube.com/watch?v=2uvysYbKdjM',
             'Pandas Notebook': 'https://www.kaggle.com/code/ybifoundation/pandas-basic-functions',
-            
+
+            'Why Dark Matter & Energy ?': 'https://www.youtube.com/watch?v=8-t-1EkOhAE',
+            'What is Dark Matter & Dark Energy ?': 'https://www.youtube.com/watch?v=QAa2O_8wBUQ',
+            'Shining Light on Dark Matter & Energy': 'https://www.space.com/20930-dark-matter.html',
             'Matplotlib Basics': 'https://www.youtube.com/watch?v=UO98lJQ3QGI',
             'Matplotlib Beyond Basics': 'https://www.youtube.com/watch?v=nKxLfUrkLE8',
             'Matplotlib Notebook': 'https://www.kaggle.com/code/prashant111/matplotlib-tutorial-for-beginners',
 
+            'Some More Dark Matter & Dark Energy': 'https://www.youtube.com/watch?v=thxknsmN9yk',
+            'M.O.N.D': 'https://www.youtube.com/watch?v=zZYHPSONxqI',
             'Seaborn (Lec.19 to Lec.23)': 'https://www.youtube.com/watch?v=G0ICwVsH8MQ&list=PL9n0l8rSshSnragNblKDBsT8Xu3otp3jA&index=19',
-
+            
             'Theoretical Quiz (20 Points)': 'https://docs.google.com/forms/d/e/1FAIpQLSd6HWQPQ49aPfXjbpIO3LknxN8_ulBFwXRK17uE9LTdsQ5peg/viewform?usp=sharing&ouid=117088161639434263896',
             'Computational Quiz (20 Points)': 'https://docs.google.com/forms/d/e/1FAIpQLSdz6j-rArO4LW6jNZUDAqQmsD--8kp5Be7eMoYB7f90SnoLxA/viewform?usp=sharing&ouid=117088161639434263896',
             'Task 2 (10 Points)': 'https://docs.google.com/forms/d/e/1FAIpQLSeiQJzvIVl82DIhuj5XYAphH7P8rsJDlcQA_o86VZS8ivqYVQ/viewform?usp=sharing&ouid=117088161639434263896',
-            // You can add more videos for other weeks when they become available
-            // Week 2 :
-            'Star Formation': 'https://www.youtube.com/watch?v=YbdwTwB8jtc',
-            'Nuclear Fusion Process': 'https://www.youtube.com/watch?v=yy7UdqKhk_c',
-            'What is Machine Learning?': 'https://www.youtube.com/watch?v=ukzFI9rgwfU',
             
+            
+
+            
+            // Week 2 - Theoretical
+            'Protostar Development': 'https://www.youtube.com/watch?v=a-rUtp7Alh8',
+            'T Tauri Phase':'https://www.youtube.com/watch?v=TcRJYC5mvPI',
+            'A Star is Born': 'https://www.youtube.com/watch?v=Q7MG-LahuX4',
+            'What is Machine Learning? (Lec.1 to Lec.3)': 'https://www.youtube.com/watch?v=vStJoetOxJg&list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI&index=1',
+            'Supervised & Unsupervised Learning (Lec.4 to Lec.7)': 'https://www.youtube.com/watch?v=sca5rQ9x1cA&list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI&index=4',
+            'Intro to Jupyter Notebooks (Lec.8)': 'https://www.youtube.com/watch?v=6dTL76DWYQU&list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI&index=8',
+
+            'Life Cycle of a Star': 'https://www.youtube.com/watch?v=4xIQGbYur9Q',
+            'Supernovae Explosions': 'https://www.youtube.com/watch?v=xYxyTZG7APQ',
+            'Neutron Stars': 'https://www.youtube.com/watch?v=fFeV8WxIZLk',
+            'Black Holes': 'https://www.youtube.com/watch?v=e-P5IFTqB98',
+            'Shortfilm': 'https://www.youtube.com/watch?v=kCrmN8C5uH0',
+            'Cost Function in Linear Regression (Lec.9 to Lec.14)': 'https://www.youtube.com/watch?v=dLc-lfEEYss&list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI&index=9',
+            'Gradient Descent (Lec.15 to Lec.20)': 'https://www.youtube.com/watch?v=WtlvKq_zxPI&list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI&index=15',
+
+            'What are Binary Stars ?': 'https://www.space.com/22509-binary-stars.html ',
+            'Binary and Multiple Stars': 'https://www.youtube.com/watch?v=pIFiCLhJmig',
+            'How do Binary Star Systems Work ?': 'https://www.youtube.com/watch?v=XdsAds-IBUg',
+            'Detecting Binary Stars': 'https://quantumredpill.wordpress.com/2013/02/14/binary-stars/',
+            'Multivariate Regression (Lec.21 to Lec.24)': 'https://www.youtube.com/watch?v=jXg0vU0y1ak&list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI&index=21',
+            'Going Deeper Into Regression (Lec.25 to Lec.30)': 'https://www.youtube.com/watch?v=YVtP5UGdgXg&list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI&index=25',
+            'Linear Regression from Scratch': 'https://www.kaggle.com/code/fareselmenshawii/linear-regression-from-scratch',
+
+            'An Intro to Classification': 'https://www.youtube.com/watch?v=k3InmWSeGxk',
+            'Hertzsprung-Russell Diagram': 'https://www.youtube.com/watch?v=Y5VU3Mp6abI',
+            'Visualizing the H-R Diagram': 'https://www.youtube.com/watch?v=jiSN95WX1NA',
+            'Intro to Scikit-Learn':'https://www.youtube.com/watch?v=rvVkVsG49uU',
+            'Linear Regression Using Sklearn': 'https://www.youtube.com/watch?v=8jazNUpO3lQ',
+
+            'What is an Exoplanet ?': 'https://www.youtube.com/watch?v=0ZOhJe_7GrE',
+            'Exoplanet Detection': 'https://www.youtube.com/watch?v=STsI6IbPbGQ',
+            'Hunting for Planets Using ML': 'https://blog.google/technology/ai/hunting-planets-machine-learning/',
+            'Goldilocks Zone' : 'https://www.youtube.com/watch?v=J04YN9azln8',
+            'Intro to Classification (Lec.31)': 'https://www.youtube.com/watch?v=p-ltr1C7u2o&list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI&index=32',
+            'Basics of Logistic Regression (lec.32 to Lec.36)': 'https://www.youtube.com/watch?v=xuTiAW0OR40&list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI&index=32',
+            'Logistic Regression from Scratch': 'https://www.kaggle.com/code/arush207/basic-implementation-of-logistic-regression',
+
+
+
             // Add your own YouTube links here...
             // 'Topic Name': 'https://www.youtube.com/watch?v=VIDEO_ID',
         };
