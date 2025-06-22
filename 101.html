@@ -506,7 +506,8 @@
                 <div class="week-topics">
                     <div class="week-topic">Stars</div>
                     <div class="week-topic">Stellar Evolution</div>
-                    <div class="week-topic">Intro to Machine Learning</div>
+                    <div class="week-topic">Linear Regression</div>
+                    <div class="week-topic">Logistic Regression</div>
                 </div>
                 <p class="week-description">This week we'll explore how stars are born, live, and die spectacularly - creating neutron stars and black holes along the way. We will also learn machine learning basics - how computers can find patterns in astronomical data automatically.</p>
             </div>
@@ -517,9 +518,10 @@
                     <div class="week-topic">Radio Astronomy</div>
                     <div class="week-topic">Spectroscopy</div>
                     <div class="week-topic">Observational Tools</div>
-                    <div class="week-topic">Linear Regression</div>
+                    <div class="week-topic">Evaluation Metrics</div>
+                    <div class="week-topic">Validation</div>
                 </div>
-                <p class="week-description">This week familarizes you with telescopes beyond what your eyes see and gravitational waves. We shall also learn linear regression - a powerful method to find relationships between different cosmic measurements.</p>
+                <p class="week-description">This week familarizes you with telescopes beyond what your eyes see and gravitational waves. We shall learn to evaluate how accurate our Machine Learning models are using some metrics and validation processes.</p>
             </div>
             
             <div class="week-card">
@@ -554,8 +556,8 @@
         <div class="course-layout">
             <div class="week-sidebar" id="week-sidebar">
                 <div class="week-nav-item" data-week="Week 1">Week 1</div>
-                <div class="week-nav-item active" data-week="Week 2">Week 2</div>
-                <div class="week-nav-item" data-week="Week 3">Week 3</div>
+                <div class="week-nav-item" data-week="Week 2">Week 2</div>
+                <div class="week-nav-item active" data-week="Week 3">Week 3</div>
                 <div class="week-nav-item" data-week="Week 4">Week 4</div>
                 <div class="week-nav-item" data-week="Project">Project</div>
                 <div class="week-nav-item" data-week="Additional Materials">Additional Materials</div>
@@ -879,44 +881,84 @@
             "Week 3": [
                 {
                     day: "Day 1",
-                    content: "Radio Astronomy & SETI",
-                    description: "Explore the invisible radio universe and learn how radio telescopes reveal cosmic phenomena invisible to optical telescopes.",
+                    content: "Our Cosmic Eyes",
+                    description: "Explore the invisible radio universe and learn how radio telescopes reveal cosmic phenomena invisible to optical telescopes.  Learn about the problem of overfitting and underfitting in ML.",
                     theoretical: {
                         title: "Radio Universe",
-                        items: ["Radio Wave Basics", "Radio Telescopes", "Pulsars", "SETI Projects"]
+                        items: ["Motivation", "Why Radio Astronomy ?", "Why are Radio Telescopes Built on Ground ?", "Understanding Radio Telescopes"]
                     },
                     computational: {
-                        title: "Signal Processing",
-                        items: ["Fourier Transforms", "Frequency Analysis", "Noise Reduction", "Radio Data Processing"]
+                        title: "Regularization",
+                        items: ["Bias & Variance", "Overfitting (Lec.37 to lec.41)", "L2 Regularization", "L1 Regularization"]
                     }
                 },
                 {
                     day: "Day 2",
-                    content: "Spectroscopy & Chemical Analysis",
-                    description: "Learn how astronomers decode starlight to determine the chemical composition, temperature, and motion of celestial objects.",
+                    content: "Radio Telescopes",
+                    description: "Understand the working of a radio telescope in depth and learn their importance in the field of astronomy. Given a dataset learn how to train and test your ML model from the same dataset.",
                     theoretical: {
-                        title: "Light & Spectra",
-                        items: ["Electromagnetic Spectrum", "Absorption Lines", "Doppler Effect", "Chemical Fingerprints"]
+                        title: "Not Just Big Dishes",
+                        items: ["How do Radio Telescopes Work ?", "Technicals of a Radio Telescope", "DIY Radio Telescope"]
                     },
                     computational: {
-                        title: "Spectral Analysis",
-                        items: ["Data Preprocessing", "Peak Detection", "Line Identification", "Redshift Calculations"]
+                        title: "Validation Techniques",
+                        items: ["Train-Test Split", "Cross Validation"]
                     }
                 },
                 {
                     day: "Day 3",
-                    content: "Gravitational Waves",
-                    description: "Discover the newest window to the universe through gravitational wave astronomy and what LIGO has revealed.",
+                    content: "Spectroscopy",
+                    description: "Learn how astronomers decode starlight to determine the chemical composition, temperature, and motion of celestial objects. Understand how we evaluate wether the ML model we have built is good or needs improvement.",
                     theoretical: {
-                        title: "Spacetime Ripples",
-                        items: ["Einstein's Predictions", "LIGO Detectors", "Black Hole Mergers", "Neutron Star Collisions"]
+                        title: "Light & Spectra",
+                        items: ["Let There Be Light", "Absorption Spectra", "Doppler Effect"]
                     },
                     computational: {
-                        title: "Time Series Analysis",
-                        items: ["Signal Detection", "Noise Filtering", "Pattern Recognition", "Gravitational Wave Data"]
+                        title: "Evaluation Metrics (Part I)",
+                        items: ["Complete Guide to Evaluation Metrics", "ROC Curve & AUC", "Confusion Matrix"]
+                    }
+                },
+                {
+                    day: "Day 4",
+                    content: "Telescopes",
+                    description: "From the most ancient telescopes to the J.W.S.T discover how telescopes evolved over time. Learn how to implement the evaluation metrics learnt by you.",
+                    theoretical: {
+                        title: "Magnified",
+                        items: ["From Galileo to Hubble", "Working of a Basic Telescope", "Space Telescopes"]
+                    },
+                    computational: {
+                        title: "Evaluation Metrics (Part II)",
+                        items: ["Implementation"]
+                    }
+                },
+                {
+                    day: "Day 5",
+                    content: "Observational Techniques",
+                    description: "Dive into some real life techniques used to detect different celestial objects and understand their properties",
+                    theoretical: {
+                        title: "Hide & Seek",
+                        items: ["Distance of a Star", "Pulsar Detection", "How are Black Holes Found ?", "Gravitational Waves"]
+                    },
+                    computational: {
+                        title: "Self-Implementation",
+                        items: ["Code It"]
+                    }
+                },
+                {
+                    day: "Day 6 & 7",
+                    content: "Tasks",
+                    description: "These will be marked and considered for your Leaderboard Ranks ",
+                    theoretical: {
+                        title: "Live on Saturday (28th June)",
+                        items: []
+                    },
+                    computational: {
+                        title: "Live on Saturday (28th June)",
+                        items: []
                     }
                 }
             ],
+                
             "Week 4": [
                 {
                     day: "Day 1",
@@ -1055,7 +1097,7 @@
             `;
             
             // Check if it's Week 1, if not show "Coming Soon"
-            if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Leaderboard') {
+            if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Week 3' && weekName !== 'Leaderboard') {
                 // Create coming soon message
                 const comingSoonRow = document.createElement('div');
                 comingSoonRow.style.gridColumn = '1 / -1'; // Span all columns
@@ -1126,7 +1168,7 @@
             // Add coming-soon class to non-Week 1 items
             weekNavItems.forEach(item => {
                 const weekName = item.getAttribute('data-week');
-                if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Leaderboard') {
+                if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Week 3' && weekName !== 'Leaderboard') {
                     item.classList.add('coming-soon');
                 }
                 
@@ -1144,11 +1186,11 @@
             });
             
             // Initialize with Week 1 content
-            renderWeekContent('Week 2');
+            renderWeekContent('Week 3');
         });
 
         const youtubeLinks = {
-            // Week 1 - Theoretical
+            // Week 1
             'The Beginning of Everything': 'https://www.youtube.com/watch?v=wNDGgL73ihY',
             'Evidence of The Big Bang': 'https://www.youtube.com/watch?v=xtrYF_hxxUM',
             'The First Few Minutes': 'https://www.physicsoftheuniverse.com/topics_bigbang_timeline.html',
@@ -1195,7 +1237,7 @@
             
 
             
-            // Week 2 - Theoretical
+            // Week 2
             'Protostar Development': 'https://www.youtube.com/watch?v=a-rUtp7Alh8',
             'T Tauri Phase':'https://www.youtube.com/watch?v=TcRJYC5mvPI',
             'A Star is Born': 'https://www.youtube.com/watch?v=Q7MG-LahuX4',
@@ -1237,6 +1279,43 @@
             'Task 1 (50 Points)': 'https://docs.google.com/forms/d/e/1FAIpQLSeG6rkiI_oJ1PxW9DxjJFvHg0FC9UjXsfrOmI3nGapEsXEK8Q/viewform?usp=sharing&ouid=117088161639434263896',
             
 
+
+
+
+            // Week 3 
+            'Motivation': 'https://www.youtube.com/watch?v=duVvbDxW7Sw',
+            'Why Radio Astronomy ?': 'https://www.universetoday.com/articles/radio-astronomy-why-study-it-what-can-it-teach-us-about-finding-life-beyond-earth',
+            'Why are Radio Telescopes Built on Ground ?': 'https://equinox-iitg.github.io/Website/WARTBOG.pdf',
+            'Understanding Radio Telescopes': 'https://www.youtube.com/watch?v=nFEgRt2EH1g',
+            'Overfitting (Lec.37 to lec.41)': 'https://www.youtube.com/watch?v=8upNQi-40Q8&list=PLkDaE6sCZn6FNC6YRfRQc_FbeQrF8BwGI&index=37',
+            'Bias & Variance': 'https://www.youtube.com/watch?v=EuBBz3bI-aA',
+            'L2 Regularization': 'https://www.youtube.com/watch?v=Q81RR3yKn30',
+            'L1 Regularization': 'https://www.youtube.com/watch?v=NGf0voTMlcs',
+
+
+            'How do Radio Telescopes Work ?': 'https://www.youtube.com/watch?v=vwd7rAQtYy8',
+            'Technicals of a Radio Telescope': 'https://equinox-iitg.github.io/Website/WORT.pdf',
+            'DIY Radio Telescope': 'https://www.youtube.com/watch?v=8h-eb12TtdU',
+            'Complete Guide to Evaluation Metrics': 'https://medium.com/analytics-vidhya/complete-guide-to-machine-learning-evaluation-metrics-615c2864d916',
+            'ROC Curve & AUC': 'https://www.youtube.com/watch?v=4jRBRDbJemM',
+
+            'Let There Be Light': 'https://www.youtube.com/watch?v=IXxZRZxafEQ',
+            'Absorption Spectra': 'https://www.youtube.com/watch?v=crWBFuUW6kI',
+            'Doppler Effect': 'https://equinox-iitg.github.io/Website/DSL.pdf',
+            'Implementation': 'https://www.youtube.com/watch?v=85dtiMz9tSo',
+
+            'From Galileo to Hubble': 'https://www.youtube.com/watch?v=603Uq8HKIQ0',
+            'Space Telescopes': 'https://www.youtube.com/watch?v=csIry_3pbDU',
+            'Working of a Basic Telescope': 'https://www.youtube.com/watch?v=mYhy7eaazIk',
+            'Train-Test Split': 'https://www.youtube.com/watch?v=fwY9Qv96DJY',
+            'Cross Validation': 'https://www.youtube.com/watch?v=fSytzGwwBVw',
+            'Confusion Matrix': 'https://www.youtube.com/watch?v=Kdsp6soqA7o',
+
+            'Distance of a Star': 'https://www.youtube.com/watch?v=Op3AYaJc0Xw',
+            'Pulsar Detection': 'https://www.youtube.com/watch?v=vQOnj73fmoU',
+            'How are Black Holes Found ?':'https://www.youtube.com/watch?v=avZ-aEEYpiI',
+            'Gravitational Waves': 'https://www.youtube.com/watch?v=s06_jRK939I',
+            'Code It': 'https://www.kaggle.com/discussions/general/426426',
 
 
             // Add your own YouTube links here...
