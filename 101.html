@@ -529,6 +529,7 @@
                 <div class="week-topics">
                     <div class="week-topic">Cosmic Diversity</div>
                     <div class="week-topic">Celestial Identification</div>
+                    <div class="week-topic">Simulations</div>
                     <div class="week-topic">Classification Models</div>
                 </div>
                 <p class="week-description">This week covers different cosmic objects and explore the biggest unsolved mysteries astronomers face today. We will learn in depth about classification algorithms - letting computers automatically sort stars, galaxies, and planets from observational data.</p>
@@ -557,8 +558,8 @@
             <div class="week-sidebar" id="week-sidebar">
                 <div class="week-nav-item" data-week="Week 1">Week 1</div>
                 <div class="week-nav-item" data-week="Week 2">Week 2</div>
-                <div class="week-nav-item active" data-week="Week 3">Week 3</div>
-                <div class="week-nav-item" data-week="Week 4">Week 4</div>
+                <div class="week-nav-item" data-week="Week 3">Week 3</div>
+                <div class="week-nav-item active" data-week="Week 4">Week 4</div>
                 <div class="week-nav-item" data-week="Project">Project</div>
                 <div class="week-nav-item" data-week="Additional Materials">Additional Materials</div>
                 <a href="leaderboard.html" style="text-decoration: none; color: #252d35"><div class="week-nav-item" data-week="Leaderboard">LEADERBOARD</div></a>
@@ -958,48 +959,87 @@
                     }
                 }
             ],
-                
             "Week 4": [
                 {
                     day: "Day 1",
                     content: "Galaxy Types & Evolution",
-                    description: "Explore the vast diversity of galaxies in our universe and how they formed and evolved over cosmic time.",
+                    description: "Explore the vast diversity of galaxies in our universe and how they formed and evolved over cosmic time. Dive deep into k-Nearest Neighbours (KNN) and its importance and implementation.",
                     theoretical: {
                         title: "Galactic Zoo",
-                        items: ["Spiral Galaxies", "Elliptical Galaxies", "Irregular Galaxies", "Galaxy Formation"]
+                        items: ["Galaxy Formation", "Types of Galaxies", "Spiral Galaxies", "Irregular Galaxies"]
                     },
                     computational: {
-                        title: "Classification Basics",
-                        items: ["What is Classification?", "Decision Trees", "k-Nearest Neighbors", "Galaxy Classification"]
+                        title: "KNN",
+                        items: ["k-Nearest Neighbours (Video)", "k-Nearest Neighbours (Blog)", "Implementation of KNN"]
                     }
                 },
                 {
                     day: "Day 2",
-                    content: "Active Galactic Nuclei & Black Holes",
-                    description: "Study supermassive black holes at galaxy centers and the incredible phenomena they create.",
+                    content: "Search for Thanos",
+                    description: "Study the exploration of life beyond Earth: from microbial beginnings to alien civilizations. Look into Naive Bayes Algorithms, a supervised learning algorithm which is based on Bayes Theorem.",
                     theoretical: {
-                        title: "Cosmic Monsters",
-                        items: ["Supermassive Black Holes", "Accretion Disks", "Quasars", "Jets and Outflows"]
+                        title: "Are We Alone ?",
+                        items: ["Astrobiology", "Fermi Paradox I", "Fermi Paradox II"]
                     },
                     computational: {
-                        title: "Advanced Classification",
-                        items: ["Support Vector Machines", "Random Forest", "Model Evaluation", "AGN Classification Project"]
+                        title: "Naive Bayes Algorithms",
+                        items: ["Naive Bayes", "Gaussian Naive Bayes", "Implementation of NB"]
                     }
                 },
                 {
                     day: "Day 3",
-                    content: "Cosmic Mysteries & Future",
-                    description: "Explore the biggest unsolved questions in astronomy and what future missions might reveal.",
+                    content: "Playing God with Galaxies",
+                    description: "When we can't observe, we code. Witness the universe born in simulations. Understand Support Vector Machine (SVM) and their importance in classification problems.",
                     theoretical: {
-                        title: "Open Questions",
-                        items: ["Dark Matter Nature", "Dark Energy Mystery", "Fermi Paradox", "Future Space Missions"]
+                        title: "Coding the Cosmos",
+                        items: ["Intro to Simulations"]
                     },
                     computational: {
-                        title: "Model Ensemble & Validation",
-                        items: ["Cross-validation", "Model Comparison", "Feature Importance", "Final Project Prep"]
+                        title: "Support Vector Machines I",
+                        items: ["SVM - I", "SVM - II", "SVM - III"]
+                    }
+                },
+                {
+                    day: "Day 4",
+                    content: "If you don't have questions you have not learnt it right - Feynman.",
+                    description: "The course comes to an end from theoretical stand point, please feel free to ask questions however dumb they may sound. Learn the implementation of SVM.",
+                    theoretical: {
+                        title: "Open Questions",
+                        items: ["Doubts"]
+                    },
+                    computational: {
+                        title: "Support Vector Machines II",
+                        items: ["SVM (Blog)", "Implementation of SVM"]
+                    }
+                },
+                {
+                    day: "Day 5",
+                    content: "End of Beginning",
+                    description: "We have come to end of the Astronomy Essentials course by Equinox and it's time for you'll to apply the knowledge you acquired fromm this course.",
+                    theoretical: {
+                        title: "Open Questions",
+                        items: ["Outro - Summary"]
+                    },
+                    computational: {
+                        title: "Large Language Model",
+                        items: ["Motivation for LLM"]
+                    }
+                },
+                {
+                    day: "Day 6 & 7",
+                    content: "Tasks",
+                    description: "These will be marked and considered for your Leaderboard Ranks ",
+                    theoretical: {
+                        title: "Live on 5th July (Saturday)",
+                        items: []
+                    },
+                    computational: {
+                        title: "Live on 5th July (Saturday)",
+                        items: []
                     }
                 }
-            ],
+            ],              
+            
             "Project": [
                 {
                     day: "Week 1",
@@ -1097,7 +1137,7 @@
             `;
             
             // Check if it's Week 1, if not show "Coming Soon"
-            if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Week 3' && weekName !== 'Leaderboard') {
+            if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Week 3' && weekName !== 'Week 4' && weekName !== 'Leaderboard') {
                 // Create coming soon message
                 const comingSoonRow = document.createElement('div');
                 comingSoonRow.style.gridColumn = '1 / -1'; // Span all columns
@@ -1168,7 +1208,7 @@
             // Add coming-soon class to non-Week 1 items
             weekNavItems.forEach(item => {
                 const weekName = item.getAttribute('data-week');
-                if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Week 3' && weekName !== 'Leaderboard') {
+                if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Week 3' && weekName !== 'Week 4' && weekName !== 'Leaderboard') {
                     item.classList.add('coming-soon');
                 }
                 
@@ -1186,7 +1226,7 @@
             });
             
             // Initialize with Week 1 content
-            renderWeekContent('Week 3');
+            renderWeekContent('Week 4');
         });
 
         const youtubeLinks = {
@@ -1320,9 +1360,33 @@
             'Task 1 (50_Points)': 'https://docs.google.com/forms/d/e/1FAIpQLSeU6aqxRkiHskmy7lvj7eQYc4EBOdZg_CoOtD-FRljSYmTyFQ/viewform?usp=dialog',
             'Mini PS (100 Points)': 'https://docs.google.com/forms/d/e/1FAIpQLSdGrb4ueuNBauF8tfZGVCBTpKjoGKwmb5gB9UuiZLY5SS4-mA/viewform?usp=dialog',
 
+            // Week 4
+            'Galaxy Formation': 'https://www.youtube.com/watch?v=kif4ON6QOPE',
+            'Types of Galaxies': 'https://www.youtube.com/watch?v=8tKUvuurqsY',
+            'Spiral Galaxies': 'https://www.youtube.com/watch?v=phn0bXbcZYY',
+            'Irregular Galaxies':'https://www.youtube.com/watch?v=94TNdC5v5Yo',
+            'k-Nearest Neighbours (Video)':'https://www.youtube.com/watch?v=HVXime0nQeI',
+            'k-Nearest Neighbours (Blog)':'https://medium.com/swlh/k-nearest-neighbor-ca2593d7a3c4',
+            'Implementation of KNN':'https://www.youtube.com/watch?v=CQveSaMyEwM',
+            
+            'Astrobiology':'https://www.youtube.com/watch?v=cl_YuKk9mzg',
+            'Fermi Paradox I':'https://www.youtube.com/watch?v=sNhhvQGsMEc',
+            'Fermi Paradox II': 'https://www.youtube.com/watch?v=1fQkVqno-uI',
+            'Naive Bayes':'https://www.youtube.com/watch?v=O2L2Uv9pdDA',
+            'Gaussian Naive Bayes':'https://www.youtube.com/watch?v=H3EjCKtlVog',
+            'Implementation of NB':'https://www.youtube.com/watch?v=nHIUYwN-5rM',
 
-            // Add your own YouTube links here...
-            // 'Topic Name': 'https://www.youtube.com/watch?v=VIDEO_ID',
+            'Intro to Simulations':'https://www.youtube.com/watch?v=HTfwhmHVpqM',
+            'SVM - I': 'https://www.youtube.com/watch?v=efR1C6CvhmE',
+            'SVM - II': 'https://www.youtube.com/watch?v=Toet3EiSFcM',
+            'SVM - III': 'https://www.youtube.com/watch?v=Qc5IyLW_hns',
+
+            'Doubts':'https://forms.gle/Eur8Fp5phBMsED3S8',
+            'SVM (Blog)':'https://www.analyticsvidhya.com/blog/2021/06/support-vector-machine-better-understanding/',
+            'Implementation of SVM':'https://www.youtube.com/watch?v=FB5EdxAGxQg',
+
+            'Outro - Summary':'https://www.youtube.com/watch?v=hQjF0-T45dQ',
+            'Motivation for LLM':'https://www.youtube.com/watch?v=LPZh9BOjkQs',
         };
 
         // Function to open YouTube videos
