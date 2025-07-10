@@ -559,7 +559,7 @@
                 <div class="week-nav-item" data-week="Week 1">Week 1</div>
                 <div class="week-nav-item" data-week="Week 2">Week 2</div>
                 <div class="week-nav-item" data-week="Week 3">Week 3</div>
-                <div class="week-nav-item active" data-week="Week 4">Week 4</div>
+                <div class="week-nav-item" data-week="Week 4">Week 4</div>
                 <div class="week-nav-item" data-week="Project">Project</div>
                 <div class="week-nav-item" data-week="Additional Materials">Additional Materials</div>
                 <a href="leaderboard.html" style="text-decoration: none; color: #252d35"><div class="week-nav-item" data-week="Leaderboard">LEADERBOARD</div></a>
@@ -1136,7 +1136,6 @@
                 <div class="grid-header">Computational</div>
             `;
             
-            // Check if it's Week 1, if not show "Coming Soon"
             if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Week 3' && weekName !== 'Week 4' && weekName !== 'Leaderboard') {
                 // Create coming soon message
                 const comingSoonRow = document.createElement('div');
@@ -1205,7 +1204,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             const weekNavItems = document.querySelectorAll('.week-nav-item');
             
-            // Add coming-soon class to non-Week 1 items
             weekNavItems.forEach(item => {
                 const weekName = item.getAttribute('data-week');
                 if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Week 3' && weekName !== 'Week 4' && weekName !== 'Leaderboard') {
@@ -1226,7 +1224,7 @@
             });
             
             // Initialize with Week 1 content
-            renderWeekContent('Week 4');
+            renderWeekContent('Week 1');
         });
 
         const youtubeLinks = {
