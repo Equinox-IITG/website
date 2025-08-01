@@ -1041,84 +1041,6 @@
             
             "Project": [
                 {
-                    day: "Week 1",
-                    content: "Project Planning & Team Formation",
-                    description: "Form teams, select research topics, and develop project proposals with clear objectives and methodologies.",
-                    theoretical: {
-                        title: "Research Methods",
-                        items: ["Scientific Method", "Literature Review", "Hypothesis Formation", "Project Scope"]
-                    },
-                    computational: {
-                        title: "Project Setup",
-                        items: ["GitHub Repository", "Data Collection Plan", "Analysis Framework", "Timeline Creation"]
-                    }
-                },
-                {
-                    day: "Week 2",
-                    content: "Data Analysis & Implementation",
-                    description: "Execute your research plan, analyze astronomical data, and implement machine learning models.",
-                    theoretical: {
-                        title: "Data Interpretation",
-                        items: ["Statistical Significance", "Error Analysis", "Bias Recognition", "Result Validation"]
-                    },
-                    computational: {
-                        title: "Implementation",
-                        items: ["Data Processing", "Model Training", "Visualization Creation", "Code Documentation"]
-                    }
-                },
-                {
-                    day: "Week 3",
-                    content: "Presentation Preparation & Peer Review",
-                    description: "Prepare final presentations, conduct peer reviews, and refine project conclusions.",
-                    theoretical: {
-                        title: "Scientific Communication",
-                        items: ["Abstract Writing", "Figure Design", "Conclusion Drawing", "Future Work"]
-                    },
-                    computational: {
-                        title: "Presentation Tools",
-                        items: ["Jupyter Slides", "Interactive Plots", "Code Demonstration", "GitHub Pages"]
-                    }
-                }
-            ],
-            "Additional Materials": [
-                {
-                    day: "Resources",
-                    content: "Supplementary Learning Materials",
-                    description: "Additional resources, textbooks, online courses, and tools for continued learning in astronomy and data science.",
-                    theoretical: {
-                        title: "Recommended Reading",
-                        items: ["Astrophysics Textbooks", "Research Papers", "Online Courses", "Documentaries"]
-                    },
-                    computational: {
-                        title: "Tools & Libraries",
-                        items: ["AstroPy", "Advanced NumPy", "TensorFlow", "Observatory APIs"]
-                    }
-                },
-                {
-                    day: "Practice",
-                    content: "Extra Exercises & Challenges",
-                    description: "Additional coding challenges and astronomical problems to reinforce learning and build practical skills.",
-                    theoretical: {
-                        title: "Problem Sets",
-                        items: ["Orbital Mechanics", "Stellar Parameters", "Galaxy Properties", "Cosmological Calculations"]
-                    },
-                    computational: {
-                        title: "Coding Challenges",
-                        items: ["Data Mining", "Image Processing", "Time Series", "Machine Learning Projects"]
-                    }
-                },
-                {
-                    day: "Community",
-                    content: "Astronomy Communities & Opportunities",
-                    description: "Connect with the broader astronomy community through conferences, clubs, and research opportunities.",
-                    theoretical: {
-                        title: "Professional Development",
-                        items: ["Career Paths", "Graduate Programs", "Research Opportunities", "Internships"]
-                    },
-                    computational: {
-                        title: "Open Source Projects",
-                        items: ["Citizen Science", "GitHub Contributions", "Data Competitions", "Hackathons"]
-                    }
                 }
             ]
         };
@@ -1135,22 +1057,6 @@
                 <div class="grid-header">Computational</div>
             `;
             
-            if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Week 3' && weekName !== 'Week 4' && weekName !== 'Project' && weekName !== 'Leaderboard') {
-                // Create coming soon message
-                const comingSoonRow = document.createElement('div');
-                comingSoonRow.style.gridColumn = '1 / -1'; // Span all columns
-                comingSoonRow.className = 'content-cell';
-                comingSoonRow.style.textAlign = 'center';
-                comingSoonRow.style.padding = '3rem';
-                comingSoonRow.style.fontSize = '1.5rem';
-                comingSoonRow.style.color = '#fdcf58';
-                comingSoonRow.innerHTML = `
-                    <h2 style="color: #fdcf58; margin-bottom: 1rem;">Coming Soon!</h2>
-                    <p style="color: #d4d4d4;">This week's content will be available soon. Stay tuned!</p>
-                `;
-                contentGrid.appendChild(comingSoonRow);
-                return;
-            }
             
             // If it's Week 1, show the normal content
             const weekContent = weekData[weekName];
