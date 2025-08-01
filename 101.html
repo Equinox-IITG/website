@@ -560,8 +560,7 @@
                 <div class="week-nav-item" data-week="Week 2">Week 2</div>
                 <div class="week-nav-item" data-week="Week 3">Week 3</div>
                 <div class="week-nav-item" data-week="Week 4">Week 4</div>
-                <div class="week-nav-item" data-week="Project">Project</div>
-                <div class="week-nav-item" data-week="Additional Materials">Additional Materials</div>
+                <a href="projects.html" style="text-decoration: none;"><div class="week-nav-item" data-week="Project">Project</div></a>
                 <a href="leaderboard.html" style="text-decoration: none; color: #252d35"><div class="week-nav-item" data-week="Leaderboard">LEADERBOARD</div></a>
             </div>
             
@@ -1136,7 +1135,7 @@
                 <div class="grid-header">Computational</div>
             `;
             
-            if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Week 3' && weekName !== 'Week 4' && weekName !== 'Leaderboard') {
+            if (weekName !== 'Week 1' && weekName !== 'Week 2' && weekName !== 'Week 3' && weekName !== 'Week 4' && weekName !== 'Project' && weekName !== 'Leaderboard') {
                 // Create coming soon message
                 const comingSoonRow = document.createElement('div');
                 comingSoonRow.style.gridColumn = '1 / -1'; // Span all columns
